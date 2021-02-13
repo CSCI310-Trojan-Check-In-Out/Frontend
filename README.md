@@ -25,3 +25,6 @@
 8. Click the green arrow run button on the top to run your program
 9. Wait a few minutes for the emulator to start running
     1. If it doesn't run the program, try rebooting the device and clicking the green arrow run button again.
+    
+# Programming Language and Framework
+- React Native & Typescript
