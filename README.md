@@ -15,8 +15,10 @@
     1. Open an existing Android Studio Project
     2. Choose '/Frontend/android'
     3. Click on AVD Manager icon
-        15. Check out [this documentation](https://reactnative.dev/docs/environment-setup) and search "AVD Manager" if you don't know where that is
-    4. Select "Create Virtual Device...", then pick any Phone from the list and click "Next", then select the Q API Level 29 image.
+        1. Check out [this documentation](https://reactnative.dev/docs/environment-setup) and search "AVD Manager" if you don't know where that is
+    4. Select "Create Virtual Device..."
+        1. then pick any Phone from the list and click "Next"
+        2. then select the Q API Level 29 image.
 6. Go back and cd into your directory "/Frontend"
     1. Run "***react-native start***" in your terminal
 7. Go back to your project in android studio
