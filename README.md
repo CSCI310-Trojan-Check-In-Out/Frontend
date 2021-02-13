@@ -1,5 +1,5 @@
 # Frontend Setup
-1. Follow instructions on [this documentation](https://reactnative.dev/docs/environment-setup) to install necessary environment (click **macOS** or **Windows**, then click **Android**)
+1. Follow instructions on [the official documentation](https://reactnative.dev/docs/environment-setup) to install necessary environment (click **macOS** or **Windows**, then click **Android**)
     1. For Mac: 
         1. Install **Node** & **Watchman** & **Java Development Kit** & **Android Studio** & **Android SDK**
         2. Then ***Configure the ANDROID_HOME environment variable***
@@ -15,7 +15,7 @@
     1. Open an existing Android Studio Project
     2. Choose '/Frontend/android'
     3. Click on AVD Manager icon
-        1. Check out [this documentation](https://reactnative.dev/docs/environment-setup) and search "AVD Manager" if you don't know where that is
+        1. Check out [the official documentation](https://reactnative.dev/docs/environment-setup) and search "AVD Manager" if you don't know where that is
     4. Select "Create Virtual Device..."
         1. then pick any Phone from the list and click "Next"
         2. then select the Q API Level 29 image.
