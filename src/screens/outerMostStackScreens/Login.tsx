@@ -7,6 +7,8 @@ import {
   StyleSheet,
   Button,
 } from 'react-native';
+import CommonStyle from '../../style/common.style';
+import Theme from '../../style/theme.style';
 
 export default function Login({navigation}: {navigation: any}) {
   return (
@@ -23,23 +25,24 @@ export default function Login({navigation}: {navigation: any}) {
         <Text style={{fontWeight: 'bold', fontSize: 40}}>Welcome Back!</Text>
 
         {/* inputs */}
-        <View style={{width: '80%'}}>
-          <TextInput style={styles.inputBoxStyle} value={'email'}></TextInput>
+        <View style={{width: Theme.CONTAINER_WIDTH_LARGE}}>
+          <TextInput style={CommonStyle.inputBoxStyle} value={'email'} />
           <TextInput
             secureTextEntry={true}
-            style={styles.inputBoxStyle}
-            value={'password'}></TextInput>
+            style={CommonStyle.inputBoxStyle}
+            value={'password'}
+          />
         </View>
 
         <View
           style={{
-            width: '70%',
+            width: Theme.CONTAINER_WIDTH_MEDIUM,
             height: '20%',
             justifyContent: 'space-evenly',
           }}>
           <Button
             title={'Sign In'}
-            color="rgba(153, 0, 0, 1)"
+            color={Theme.RED_PRIMARY}
             onPress={() => {
               navigation.navigate('TabNavigator');
             }}
@@ -47,7 +50,7 @@ export default function Login({navigation}: {navigation: any}) {
 
           <Button
             title={'Sign Up'}
-            color="rgba(255, 204, 0, 1)"
+            color={Theme.YELLOW_PRIMARY}
             onPress={() => {
               navigation.navigate('SignUp');
             }}
@@ -58,12 +61,4 @@ export default function Login({navigation}: {navigation: any}) {
   );
 }
 
-const styles = StyleSheet.create({
-  inputBoxStyle: {
-    borderRadius: 30,
-    padding: 20,
-    height: 60,
-    backgroundColor: 'rgba(220, 220, 220, 1)',
-    margin: 10,
-  },
-});
+const styles = StyleSheet.create({});
