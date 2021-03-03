@@ -13,6 +13,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function SignUp({navigation}: {navigation: any}) {
   const [isStudent, setIsStudent] = useState<boolean>(true);
+  const [fullName, setFullName] = useState<string>('');
+  const [uscID, setUscID] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [major, setMajor] = useState<string>('');
 
   return (
     <>
@@ -31,10 +35,10 @@ export default function SignUp({navigation}: {navigation: any}) {
 
         {/* inputs */}
         <View style={{width: Theme.CONTAINER_WIDTH_LARGE}}>
-          <TextInput style={CommonStyle.inputBoxStyle} value={'email'} />
-          <TextInput style={CommonStyle.inputBoxStyle} value={'email'} />
-          <TextInput style={CommonStyle.inputBoxStyle} value={'email'} />
-          <TextInput style={CommonStyle.inputBoxStyle} value={'major'} />
+          <TextInput style={CommonStyle.inputBoxStyle} onChangeText={setFullName} value={fullName} placeholder={"FULL NAME"}/>
+          <TextInput style={CommonStyle.inputBoxStyle} onChangeText={setUscID} value={uscID} placeholder={"USC ID"}/>
+          <TextInput style={CommonStyle.inputBoxStyle} onChangeText={setEmail} value={email} placeholder={"USC EMAIL"}/>
+          <TextInput style={CommonStyle.inputBoxStyle} onChangeText={setMajor} value={major} placeholder={"MAJOR"}/>
         </View>
 
         <View
