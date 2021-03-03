@@ -35,7 +35,6 @@ export default function SignUp({navigation}: {navigation: any}) {
 
         <View>
           <Text>I am a </Text>
-          
         </View>
         <View
           style={{
