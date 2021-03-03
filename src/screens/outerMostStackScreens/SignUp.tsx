@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -9,7 +9,11 @@ import {
 } from 'react-native';
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 export default function SignUp({navigation}: {navigation: any}) {
+  const [isStudent, setIsStudent] = useState<boolean>(true);
+
   return (
     <>
       <View
@@ -33,8 +37,56 @@ export default function SignUp({navigation}: {navigation: any}) {
           <TextInput style={CommonStyle.inputBoxStyle} value={'major'} />
         </View>
 
-        <View>
-          <Text>I am a </Text>
+        <View
+          style={{
+            marginTop: 15,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexDirection: 'row',
+            width: '40%',
+          }}>
+          <Text style={{fontSize: Theme.FONT_SIZE_MEDIUM}}>I am a: </Text>
+          <View
+            style={{
+              display: 'flex',
+              height: 60,
+              justifyContent: 'space-around',
+            }}>
+            <View>
+              <TouchableOpacity
+                onPress={() => setIsStudent(true)}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <Ionicons
+                  name={
+                    !isStudent ? 'radio-button-off-sharp' : 'radio-button-on'
+                  }
+                  size={17}></Ionicons>
+                <Text style={{marginLeft: 10}}>STUDENT</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <TouchableOpacity
+                onPress={() => setIsStudent(false)}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <Ionicons
+                  name={
+                    isStudent ? 'radio-button-off-sharp' : 'radio-button-on'
+                  }
+                  size={17}></Ionicons>
+                <Text style={{marginLeft: 10}}>MANAGER</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
         <View
           style={{
