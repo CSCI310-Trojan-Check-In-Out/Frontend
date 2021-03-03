@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Theme from './theme.style';
+
 export default StyleSheet.create({
   inputBoxStyle: {
     borderRadius: 30,
@@ -9,22 +10,22 @@ export default StyleSheet.create({
     margin: 10,
   },
   title: {fontWeight: 'bold', fontSize: Theme.FONT_SIZE_LARGE},
-  locationBoxContainer:{
+  locationBoxContainer: {
     borderRadius: 40,
-    display:"flex",
-    alignItems:"center",
-    justifyContent:"center",
-    backgroundColor: "white",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
     height: 250,
-    width: 250
+    width: 250,
   },
   outerContainerStyle: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height:"100%",
-    width:"80%",
-    alignSelf:"center"
+    height: '100%',
+    width: '80%',
+    alignSelf: 'center',
   },
 });

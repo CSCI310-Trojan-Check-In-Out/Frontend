@@ -14,7 +14,6 @@ import {useSignUp} from '../../hooks/useSignUp';
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import commonStyle from '../../style/common.style';
 
 export default function SignUp({navigation}: {navigation: any}) {
   const [
@@ -41,7 +40,7 @@ export default function SignUp({navigation}: {navigation: any}) {
           height: '70%',
         }}>
         {/* title */}
-        <Text style={commonStyle.title}>
+        <Text style={CommonStyle.locationBoxContainer}>
           Connect Your USC Account
         </Text>
 
