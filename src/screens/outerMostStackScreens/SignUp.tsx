@@ -7,16 +7,28 @@ import {
   StyleSheet,
   Button,
 } from 'react-native';
+// logics
+import {useSignUp} from '../../hooks/useSignUp';
+
+// stylings
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import commonStyle from '../../style/common.style';
 
 export default function SignUp({navigation}: {navigation: any}) {
-  const [isStudent, setIsStudent] = useState<boolean>(true);
-  const [fullName, setFullName] = useState<string>('');
-  const [uscID, setUscID] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [major, setMajor] = useState<string>('');
+  const [
+    isStudent,
+    setIsStudent,
+    fullName,
+    setFullName,
+    uscID,
+    setUscID,
+    email,
+    setEmail,
+    major,
+    setMajor,
+  ] = useSignUp();
 
   return (
     <>
@@ -29,16 +41,36 @@ export default function SignUp({navigation}: {navigation: any}) {
           height: '70%',
         }}>
         {/* title */}
-        <Text style={{fontWeight: 'bold', fontSize: Theme.FONT_SIZE_LARGE}}>
+        <Text style={commonStyle.title}>
           Connect Your USC Account
         </Text>
 
         {/* inputs */}
         <View style={{width: Theme.CONTAINER_WIDTH_LARGE}}>
-          <TextInput style={CommonStyle.inputBoxStyle} onChangeText={setFullName} value={fullName} placeholder={"FULL NAME"}/>
-          <TextInput style={CommonStyle.inputBoxStyle} onChangeText={setUscID} value={uscID} placeholder={"USC ID"}/>
-          <TextInput style={CommonStyle.inputBoxStyle} onChangeText={setEmail} value={email} placeholder={"USC EMAIL"}/>
-          <TextInput style={CommonStyle.inputBoxStyle} onChangeText={setMajor} value={major} placeholder={"MAJOR"}/>
+          <TextInput
+            style={CommonStyle.inputBoxStyle}
+            onChangeText={setFullName}
+            value={fullName}
+            placeholder={'FULL NAME'}
+          />
+          <TextInput
+            style={CommonStyle.inputBoxStyle}
+            onChangeText={setUscID}
+            value={uscID}
+            placeholder={'USC ID'}
+          />
+          <TextInput
+            style={CommonStyle.inputBoxStyle}
+            onChangeText={setEmail}
+            value={email}
+            placeholder={'USC EMAIL'}
+          />
+          <TextInput
+            style={CommonStyle.inputBoxStyle}
+            onChangeText={setMajor}
+            value={major}
+            placeholder={'MAJOR'}
+          />
         </View>
 
         <View
