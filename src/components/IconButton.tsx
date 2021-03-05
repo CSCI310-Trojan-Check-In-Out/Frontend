@@ -1,28 +1,37 @@
 import React from 'react';
-import {StyleSheet,View, Text, Icon, TouchableOpacity} from 'react-native';
+import {StyleSheet,View, Text, TouchableOpacity} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 export default function IconButton({iconName, text}) {
 
   return <>
-  <TouchableOpacity>
-  <View>
-  <Icon
-    name={iconName}
-    style={styles.icon}/>
-  <Text style={styles.text}>{text}</Text>
-</View>
-</TouchableOpacity>
+  <TouchableOpacity style={styles.background}>
+    <Ionicons
+      name={iconName}
+      size={45}
+      style={styles.icon}/>
+    
+    <Text style={styles.text}>{text}</Text>
+   
+  </TouchableOpacity>
 </>;
 }
 
-const styles = StyleSheet({
+const styles = StyleSheet.create({
+  background:{
+    width:150,
+    height: 75,
+    backgroundColor:'#9D2235',
+    borderRadius:20,
+    justifyContent:'center',
+    alignItems:'center',
+  },
   icon:{
-    height: 25,
-    width: 25,
+    color:'#fff',  
   },
   text:{
-    fontSize: 18,
-    color: '#FAFAFA',
-    marginLeft: 10,
-    marginTop: 2,
+    fontSize: 15,
+    fontWeight:'bold',
+    color: '#fff',
   }
 });
