@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, Modal, Text, View} from 'react-native';
 import commonStyle from '../../style/common.style';
 
 import CommonStyle from '../../style/common.style';
@@ -11,6 +11,7 @@ export default function Home({}) {
 
   return (
     <View style={CommonStyle.outerContainerStyle}>
+      <Modal />
       {/*  title */}
       <Text style={CommonStyle.title}>
         {checkedIn ? 'You Are Checked In At' : 'Scan QR Code to Check In'}

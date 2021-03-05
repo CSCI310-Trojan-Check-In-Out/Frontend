@@ -32,13 +32,7 @@ export default function SignUp({navigation}: {navigation: any}) {
   return (
     <>
       <View
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          flexDirection: 'column',
-          alignItems: 'center',
-          height: '70%',
-        }}>
+        style={CommonStyle.outerContainerStyle}>
         {/* title */}
         <Text style={CommonStyle.locationBoxContainer}>
           Connect Your USC Account

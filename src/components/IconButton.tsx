@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Icon, TouchableOpacity} from 'react-native';
+
 export default function IconButton({iconName, text}) {
   return (
     <>
