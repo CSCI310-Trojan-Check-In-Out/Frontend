@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Modal, Text, View} from 'react-native';
-
+import Camera from '../../components/camera/Camera'
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
 
@@ -18,7 +18,8 @@ export default function Home({}) {
 
       {/* building */}
       <View style={[CommonStyle.locationBoxContainer, {margin: 30}]}>
-        <Text>Computer Science Building</Text>
+        <Camera></Camera>
+        {/* <Text>Computer Science Building</Text> */}
       </View>
 
       <View style={{width: '40%', backgroundColor: 'white'}}>
