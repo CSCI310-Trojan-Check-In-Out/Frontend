@@ -22,10 +22,11 @@ export default StyleSheet.create({
   outerContainerStyle: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     height: '100%',
-    width: '80%',
+    width: '100%',
     alignSelf: 'center',
+    flex: 1,
   },
 });
