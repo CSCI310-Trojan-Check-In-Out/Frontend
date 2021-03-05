@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   title: {fontWeight: 'bold', fontSize: Theme.FONT_SIZE_LARGE},
   locationBoxContainer: {
-    borderRadius: 40,
+    borderRadius: 50,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
