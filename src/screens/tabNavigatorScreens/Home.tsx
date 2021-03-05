@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
 import {ActivityIndicator, Button, Modal, Text, View} from 'react-native';
+
+// components
 import Camera from '../../components/camera/Camera';
+import ScanLoadingSpinner from '../../components/home/student/ScanLoadingSpinner';
+import HomeButton from '../../components/home/student/HomeButton';
+
+// Style
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
 
@@ -10,7 +16,10 @@ export default function Home({}) {
   const [scanning, setScanning] = useState<boolean>(false);
 
   function scanQRCode(QRCode) {
-    console.log(QRCode);
+    if (QRCode.length > 0 && QRCode[0].format != 'None') {
+      console.log(QRCode[0].data);
+      setScanning(false);
+    }
   }
 
   function handleButton() {
@@ -38,28 +47,13 @@ export default function Home({}) {
           <Text>Computer Science Building</Text>
         )}
       </View>
-      {scanning ? (
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            marginBottom: 20,
-          }}>
-          <ActivityIndicator size={40} color={'black'} />
-        </View>
-      ) : null}
+      <ScanLoadingSpinner scanning={scanning} />
 
-      <View style={{width: '40%', backgroundColor: 'white'}}>
-        <Button
-          title={
-            checkedIn ? 'check out' : scanning ? 'Scanning...' : 'Quick Scan'
-          }
-          color={Theme.RED_PRIMARY}
-          onPress={handleButton}
-        />
-      </View>
+      <HomeButton
+        checkedIn={checkedIn}
+        scanning={scanning}
+        handleButton={handleButton}
+      />
     </View>
   );
 }
