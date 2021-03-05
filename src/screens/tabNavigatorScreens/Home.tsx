@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Modal, Text, View} from 'react-native';
-import commonStyle from '../../style/common.style';
-
+import Camera from '../../components/camera/Camera';
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
 
@@ -11,15 +10,19 @@ export default function Home({}) {
 
   return (
     <View style={CommonStyle.outerContainerStyle}>
-      <Modal />
+      {/* <Modal /> */}
       {/*  title */}
       <Text style={CommonStyle.title}>
         {checkedIn ? 'You Are Checked In At' : 'Scan QR Code to Check In'}
       </Text>
 
       {/* building */}
-      <View style={[commonStyle.locationBoxContainer, {margin: 30}]}>
-        <Text>Computer Science Building</Text>
+      <View style={[CommonStyle.locationBoxContainer, {margin: 30}]}>
+        {!checkedIn ? (
+          <Camera></Camera>
+        ) : (
+          <Text>Computer Science Building</Text>
+        )}
       </View>
 
       <View style={{width: '40%', backgroundColor: 'white'}}>
