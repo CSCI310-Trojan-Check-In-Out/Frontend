@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Login from '../screens/outerMostStackScreens/Login';
 import SignUp from '../screens/outerMostStackScreens/SignUp';
 
-import TabNavigator from '../navigators/TabNavigator'
+import TabNavigator from '../navigators/TabNavigator';
 
 const Stack = createStackNavigator();
 

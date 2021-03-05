@@ -25,7 +25,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    width: '80%',
+    width: '100%',
     alignSelf: 'center',
+    flex: 1,
   },
 });
