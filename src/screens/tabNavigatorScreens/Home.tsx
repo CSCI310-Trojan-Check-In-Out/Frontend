@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Modal, Text, View} from 'react-native';
+import {ActivityIndicator, Button, Modal, Text, View} from 'react-native';
 import Camera from '../../components/camera/Camera';
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
@@ -27,7 +27,6 @@ export default function Home({}) {
       <Text style={CommonStyle.title}>
         {checkedIn ? 'You Are Checked In At' : 'Scan QR Code to Check In'}
       </Text>
-
       {/* building */}
       <View style={[CommonStyle.locationBoxContainer, {margin: 30}]}>
         {!checkedIn ? (
@@ -39,10 +38,24 @@ export default function Home({}) {
           <Text>Computer Science Building</Text>
         )}
       </View>
+      {scanning ? (
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            marginBottom: 20,
+          }}>
+          <ActivityIndicator size={40} color={'black'} />
+        </View>
+      ) : null}
 
       <View style={{width: '40%', backgroundColor: 'white'}}>
         <Button
-          title={checkedIn ? 'check out' : 'Quick Scan'}
+          title={
+            checkedIn ? 'check out' : scanning ? 'Scanning...' : 'Quick Scan'
+          }
           color={Theme.RED_PRIMARY}
           onPress={handleButton}
         />
