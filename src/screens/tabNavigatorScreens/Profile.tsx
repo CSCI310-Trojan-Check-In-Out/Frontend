@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import IconButton from '../../components/IconButton';
+import ChangePassword from '../profile/ChangePassword';
 export default function Profile({id, name, uscid, major}) { {/*id from database, different from uscid*/}
   return (
     <>
