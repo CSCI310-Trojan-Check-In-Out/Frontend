@@ -31,12 +31,12 @@ export default function SignUp({navigation}: {navigation: any}) {
 
   return (
     <>
-      <View
-        style={CommonStyle.outerContainerStyle}>
+      <View style={CommonStyle.outerContainerStyle}>
         {/* title */}
-        <Text style={CommonStyle.locationBoxContainer}>
-          Connect Your USC Account
-        </Text>
+        <Text style={CommonStyle.title}>Connect Your USC Account</Text>
+        <View style={CommonStyle.locationBoxContainer}>
+          <Text>Profile Pic</Text>
+        </View>
 
         {/* inputs */}
         <View style={{width: Theme.CONTAINER_WIDTH_LARGE}}>
@@ -120,7 +120,7 @@ export default function SignUp({navigation}: {navigation: any}) {
         <View
           style={{
             width: Theme.CONTAINER_WIDTH_MEDIUM,
-            height: '20%',
+            height: '10%',
             justifyContent: 'space-evenly',
           }}>
           <Button

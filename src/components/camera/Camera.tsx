@@ -4,29 +4,28 @@ import {RNCamera} from 'react-native-camera';
 
 interface Props extends PropsWithChildren<any> {
   useDefaultCameraBtn: boolean;
-  takePicture?: Function | null;
+  scanQRCode?: Function | null;
+  isScanning: boolean;
 }
 
-export default function Camera({useDefaultCameraBtn}: Props) {
+export default function Camera({
+  useDefaultCameraBtn,
+  scanQRCode,
+  isScanning = false,
+}: Props) {
   const takePicture = async function (camera) {
     const options = {quality: 0.5, base64: true};
     const data = await camera.takePictureAsync(options);
-    //  eslint-disable-next-line
     console.log(data.uri);
     return true;
   };
-  var camera = useRef<RNCamera | null>(null)
+
   return (
     <>
       <View style={styles.container}>
         <RNCamera
           style={styles.preview}
           ratio={'16:9'}
-          // ref={
-          //   (cam) => {
-          //     camera = cam;
-          //   }}
-          // }
           type={RNCamera.Constants.Type.back}
           // flashMode={RNCamera.Constants.FlashMode.on}
           androidCameraPermissionOptions={{
@@ -36,7 +35,9 @@ export default function Camera({useDefaultCameraBtn}: Props) {
             buttonNegative: 'Cancel',
           }}
           onGoogleVisionBarcodesDetected={({barcodes}) => {
-            console.log(barcodes);
+            if (scanQRCode && isScanning) {
+              scanQRCode(barcodes);
+            }
           }}
           androidRecordAudioPermissionOptions={{
             title: 'Permission to use audio recording',
@@ -44,10 +45,8 @@ export default function Camera({useDefaultCameraBtn}: Props) {
             buttonPositive: 'Ok',
             buttonNegative: 'Cancel',
           }}>
-
-          
           {({camera, status, recordAudioPermissionStatus}) => {
-            return (
+            return useDefaultCameraBtn ? (
               <View
                 style={{
                   flex: 0,
@@ -55,13 +54,13 @@ export default function Camera({useDefaultCameraBtn}: Props) {
                   justifyContent: 'center',
                 }}>
                 <TouchableOpacity
-                  onPress={() => takePicture(camera)}
+                  onPress={() => test(takePicture, camera)}
                   style={styles.capture}>
                   <Text style={{fontSize: 14}}> SNAP </Text>
                 </TouchableOpacity>
               </View>
-            );
-          }} 
+            ) : null;
+          }}
         </RNCamera>
       </View>
     </>
@@ -91,5 +90,4 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 20,
   },
-
 });

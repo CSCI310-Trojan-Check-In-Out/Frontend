@@ -7,7 +7,19 @@ import Theme from '../../style/theme.style';
 export default function Home({}) {
   const [checkedIn, setCheckedIn] = useState<boolean>(false);
   const [showConfirmPopup, setShowConfirmPopup] = useState<boolean>(false);
+  const [scanning, setScanning] = useState<boolean>(false);
 
+  function scanQRCode(QRCode) {
+    console.log(QRCode);
+  }
+
+  function handleButton() {
+    if (checkedIn) {
+      setCheckedIn(false);
+    } else {
+      setScanning(!scanning);
+    }
+  }
   return (
     <View style={CommonStyle.outerContainerStyle}>
       {/* <Modal /> */}
@@ -19,7 +31,10 @@ export default function Home({}) {
       {/* building */}
       <View style={[CommonStyle.locationBoxContainer, {margin: 30}]}>
         {!checkedIn ? (
-          <Camera></Camera>
+          <Camera
+            useDefaultCameraBtn={false}
+            scanQRCode={scanQRCode}
+            isScanning={scanning}></Camera>
         ) : (
           <Text>Computer Science Building</Text>
         )}
@@ -29,9 +44,7 @@ export default function Home({}) {
         <Button
           title={checkedIn ? 'check out' : 'Quick Scan'}
           color={Theme.RED_PRIMARY}
-          onPress={() => {
-            setCheckedIn(!checkedIn);
-          }}
+          onPress={handleButton}
         />
       </View>
     </View>
