@@ -1,12 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import IconButton from '../../components/IconButton';
-export default function Profile({id, name, uscid, major}) { {/*id from database, different from uscid*/}
+export default function Profile({id, name, uscid, major}) {
+  {
+    /*id from database, different from uscid*/
+  }
   return (
     <>
       <View>
         <Text>Profile</Text>
-        
+
         <View style={styles.container}>
           <View style={styles.profile}>
             <Image
@@ -29,43 +32,39 @@ export default function Profile({id, name, uscid, major}) { {/*id from database,
           </View>
         </View>
       </View>
-      
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     alignItems: 'center',
   },
-  profile:{
-
-  },
-  profilePicture:{
+  profile: {},
+  profilePicture: {
     width: 270,
     height: 270,
-    flexDirection:'row',
+    flexDirection: 'row',
   },
-  textcontainer:{
+  textcontainer: {
     alignItems: 'center',
-    margin:20,
+    margin: 20,
   },
-  name:{
-    fontSize:30,
-    fontWeight:'bold',
+  name: {
+    fontSize: 30,
+    fontWeight: 'bold',
   },
-  uscid:{
-    fontSize:20,
+  uscid: {
+    fontSize: 20,
   },
-  major:{
-    fontSize:20,
+  major: {
+    fontSize: 20,
   },
-  row:{
-    marginTop:10,
-    marginBottom:10,
-    justifyContent:'space-around',
+  row: {
+    marginTop: 10,
+    marginBottom: 10,
+    justifyContent: 'space-around',
     alignItems: 'center',
-    flexDirection:'row',
+    flexDirection: 'row',
   },
 });
-

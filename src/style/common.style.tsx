@@ -22,7 +22,7 @@ export default StyleSheet.create({
   outerContainerStyle: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     height: '100%',
     width: '100%',
