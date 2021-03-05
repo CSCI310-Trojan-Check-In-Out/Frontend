@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import IconButton from '../../components/IconButton';
-export default function Profile() {
+export default function Profile({id, name, uscid, major}) { {/*id from database, different from uscid*/}
   return (
     <>
       <View>
@@ -11,11 +11,13 @@ export default function Profile() {
           <View style={styles.profile}>
             <Image
               style={styles.profilePicture}
-              source={{uri: ''}}
+              source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
             />
-            <Text style={styles.name}></Text>
-            <Text style={styles.uscid}></Text>
-            <Text style={styles.major}></Text>
+            <View style={styles.textcontainer}>
+              <Text style={styles.name}>Name: {name}</Text>
+              <Text style={styles.uscid}>USCID: {uscid} </Text>
+              <Text style={styles.major}>Major: {major} </Text>
+            </View>
           </View>
           <View style={styles.row}>
             <IconButton iconName={'camera-outline'} text={'Update Photo'} />
@@ -26,11 +28,6 @@ export default function Profile() {
             <IconButton iconName={'key-outline'} text={'Change Password'} />
           </View>
         </View>
-
-
-
-        
-
       </View>
       
     </>
@@ -39,22 +36,29 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   container:{
-
+    alignItems: 'center',
   },
   profile:{
 
   },
   profilePicture:{
-
+    width: 270,
+    height: 270,
+    flexDirection:'row',
+  },
+  textcontainer:{
+    alignItems: 'center',
+    margin:20,
   },
   name:{
-
+    fontSize:30,
+    fontWeight:'bold',
   },
   uscid:{
-
+    fontSize:20,
   },
   major:{
-
+    fontSize:20,
   },
   row:{
     marginTop:10,
@@ -62,7 +66,6 @@ const styles = StyleSheet.create({
     justifyContent:'space-around',
     alignItems: 'center',
     flexDirection:'row',
-
   },
 });
 
