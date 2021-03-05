@@ -38,12 +38,6 @@ export default function Camera({
             if (scanQRCode && isScanning) {
               scanQRCode(barcodes);
             }
-          }}
-          androidRecordAudioPermissionOptions={{
-            title: 'Permission to use audio recording',
-            message: 'We need your permission to use your audio',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
           }}>
           {({camera, status, recordAudioPermissionStatus}) => {
             return useDefaultCameraBtn ? (
