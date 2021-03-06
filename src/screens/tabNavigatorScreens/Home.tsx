@@ -12,7 +12,7 @@ import {
 import Camera from '../../components/camera/Camera';
 import ScanLoadingSpinner from '../../components/home/student/ScanLoadingSpinner';
 import HomeButton from '../../components/home/student/HomeButton';
-
+import ConfirmModal from '../../components/ConfirmModal';
 // Style
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
@@ -22,6 +22,7 @@ export default function Home({navigation}) {
   const [showConfirmPopup, setShowConfirmPopup] = useState<boolean>(false);
   const [scanning, setScanning] = useState<boolean>(false);
 
+  // turn off camera when navigate away
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
       setScanning(false);
@@ -29,6 +30,7 @@ export default function Home({navigation}) {
     return unsubscribe;
   }, [navigation]);
 
+  // do something for QR code
   function scanQRCode(QRCode: string | any[]) {
     if (QRCode.length > 0 && QRCode[0].format !== 'None') {
       console.log(QRCode[0].data);
@@ -36,6 +38,7 @@ export default function Home({navigation}) {
     }
   }
 
+  // logics for home button
   function handleButton() {
     if (checkedIn) {
       setCheckedIn(false);
@@ -51,40 +54,17 @@ export default function Home({navigation}) {
         {checkedIn ? 'You Are Checked In At' : 'Scan QR Code to Check In'}
       </Text>
       {/* building */}
+      <ConfirmModal
+        showModal={showConfirmPopup}
+        setShowModal={setShowConfirmPopup}
+      />
       <View style={[CommonStyle.locationBoxContainer, {margin: 30}]}>
         {!checkedIn && scanning ? (
-          // <Modal transparent={true}>
-          //   <TouchableWithoutFeedback onPress={() => setScanning(false)}>
-          //     <View
-          //       style={{
-          //         width: '100%',
-          //         height: '100%',
-          //         justifyContent: 'center',
-          //         alignItems: 'center',
-          //         backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          //       }}>
-          //       <View
-          //         style={[
-          //           CommonStyle.locationBoxContainer,
-          //           {
-          //             // width: '80%',
-          //             alignSelf: 'center',
-          //             // height: '50%',
-          //             // position: 'relative',
-          //             // display: 'flex',
-          //             alignItems: 'center',
-          //             justifyContent: 'center',
-          //           },
-          //         ]}>
           <Camera
             useDefaultCameraBtn={false}
             scanQRCode={scanQRCode}
             isScanning={scanning}></Camera>
         ) : (
-          //       </View>
-          //     </View>
-          //   </TouchableWithoutFeedback>
-          // </Modal>
           <Text>Computer Science Building</Text>
         )}
       </View>
