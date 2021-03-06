@@ -20,6 +20,7 @@ export default StyleSheet.create({
     width: "80%",
   },
   outerContainerStyle: {
+    marginTop: 30,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
