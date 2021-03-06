@@ -32,4 +32,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
   },
+  text:{
+    fontSize: 15,
+    fontWeight:'bold',
+    color: '#fff',
+  }
 });

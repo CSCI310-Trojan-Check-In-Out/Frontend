@@ -9,7 +9,6 @@ export default function Profile({id, name, uscid, major}) {
     <>
       <View>
         <Text>Profile</Text>
-
         <View style={styles.container}>
           <View style={styles.profile}>
             <Image
