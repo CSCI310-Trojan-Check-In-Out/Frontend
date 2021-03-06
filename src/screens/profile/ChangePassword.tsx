@@ -49,8 +49,8 @@ const [confirmNewPassword, onChangeConfirmNewPassword] = React.useState('');
 const styles = StyleSheet.create({
   titleContainer:{
       alignItems:'center',
-      marginTop:20,
-      marginBottom:20,
+      marginTop:'20%',
+      marginBottom:'15%',
   },
   title:{
     fontSize:35,
@@ -59,10 +59,10 @@ const styles = StyleSheet.create({
   textContainer:{
     alignItems:'center',
     backgroundColor:'#fff',
-    marginLeft:20,
-    marginRight:20,
-    marginTop:10,
-    marginBottom:10,
+    marginLeft:'10%',
+    marginRight:'10%',
+    marginTop:'3%',
+    marginBottom:'3%',
     borderRadius:20,
   },
   textInput:{
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     height: '30%',
     justifyContent: 'space-evenly',
+    marginTop:'5%'
   },
   button:{
     backgroundColor:'#9D2235',

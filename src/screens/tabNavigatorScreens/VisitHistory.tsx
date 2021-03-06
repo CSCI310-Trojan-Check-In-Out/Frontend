@@ -7,7 +7,7 @@ export default function VisitHistory() {
   return (
   <>
   <Text>VisitHistory</Text>
-  <ChangePassword id={'1'}/>
+  <ChangePassword id={'1'} />
   </>
   );
 }
