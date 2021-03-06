@@ -14,8 +14,7 @@ import {
 import CommonStyle from '../style/common.style';
 import Theme from '../style/theme.style';
 
-export default function ConfirmModal({showModal, setShowModal}) {
-  if (!showModal) return null;
+export default function ConfirmModal({setShowModal, QRCode, acceptQRCode, declineQRCode }) {
   return (
     <>
       <Modal transparent={true}>
@@ -34,6 +33,7 @@ export default function ConfirmModal({showModal, setShowModal}) {
                 // width: '80%',
                 alignSelf: 'center',
                 height: '20%',
+                padding: 20,
                 // position: 'relative',
                 flexDirection: 'column',
                 display: 'flex',
@@ -41,7 +41,8 @@ export default function ConfirmModal({showModal, setShowModal}) {
                 justifyContent: 'space-around',
               },
             ]}>
-            <Text >Are you sure you want to check in</Text>
+            <Text>Are you sure you want to check in: </Text>
+            <Text>{QRCode}</Text>
             <View
               style={{
                 display: 'flex',
@@ -53,7 +54,9 @@ export default function ConfirmModal({showModal, setShowModal}) {
                 <Button
                   title={'No'}
                   color={Theme.RED_PRIMARY}
-                  onPress={setShowModal(false)}
+                  onPress={() => {
+                    declineQRCode();
+                  }}
                 />
               </View>
 
@@ -61,7 +64,9 @@ export default function ConfirmModal({showModal, setShowModal}) {
                 <Button
                   title={'Yes'}
                   color={Theme.RED_PRIMARY}
-                  onPress={setShowModal(false)}
+                  onPress={() => {
+                    acceptQRCode();
+                  }}
                 />
               </View>
             </View>
