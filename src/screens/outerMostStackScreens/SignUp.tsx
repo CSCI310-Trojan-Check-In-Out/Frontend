@@ -15,7 +15,7 @@ import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export default function SignUp({navigation}: {navigation: any}) {
   const [
@@ -33,7 +33,7 @@ export default function SignUp({navigation}: {navigation: any}) {
 
   return (
     <>
-      <ScrollView style={{flex:1, height:"100%"}}>
+      <ScrollView style={{flex: 1, height: '100%'}}>
         <SafeAreaView style={CommonStyle.outerContainerStyle}>
           {/* title */}
           <Text style={CommonStyle.title}>Connect Your USC Account</Text>
