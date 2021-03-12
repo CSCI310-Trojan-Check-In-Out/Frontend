@@ -1,18 +1,24 @@
 import React, {PropsWithChildren, PureComponent, useRef} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RNCamera} from 'react-native-camera';
+import {useNavigation} from '@react-navigation/native';
+
+import ImagePicker from 'react-native-image-picker';
 
 interface Props extends PropsWithChildren<any> {
-  useDefaultCameraBtn: boolean;
+  useDefaultCameraBtn?: boolean;
   scanQRCode?: Function | null;
-  isScanning: boolean;
+  isScanning?: boolean;
+  useAlbum?: boolean;
 }
-
 export default function Camera({
-  useDefaultCameraBtn,
-  scanQRCode,
+  useDefaultCameraBtn = true,
+  scanQRCode = null,
   isScanning = false,
+  useAlbum = true,
 }: Props) {
+  const navigation = useNavigation();
+
   const takePicture = async function (camera) {
     const options = {quality: 0.5, base64: true};
     const data = await camera.takePictureAsync(options);
@@ -20,6 +26,25 @@ export default function Camera({
     return true;
   };
 
+  function openAlbum() {
+    const options = {
+      title: 'Load Photo',
+      customButtons: [
+        {name: 'button_id_1', title: 'CustomButton 1'},
+        {name: 'button_id_2', title: 'CustomButton 2'},
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchImageLibrary(options, () => {
+      // setLoading(false);
+      // if (response.uri) {
+      //   setProfileImage(response.uri);
+      // }
+    });
+  }
   return (
     <>
       <View style={styles.container}>
@@ -40,20 +65,49 @@ export default function Camera({
             }
           }}>
           {({camera, status, recordAudioPermissionStatus}) => {
-            return useDefaultCameraBtn ? (
-              <View
-                style={{
-                  flex: 0,
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                }}>
-                <TouchableOpacity
-                  onPress={() => test(takePicture, camera)}
-                  style={styles.capture}>
-                  <Text style={{fontSize: 14}}> SNAP </Text>
-                </TouchableOpacity>
-              </View>
-            ) : null;
+            return (
+              <>
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                    width: '100%',
+                  }}>
+                  {useAlbum ? (
+                    <View
+                      style={{
+                        flex: 0,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignSelf: 'center',
+                      }}>
+                      <TouchableOpacity
+                        onPress={() => openAlbum()}
+                        style={styles.capture}>
+                        <Text style={{fontSize: 14}}> ALBUM </Text>
+                      </TouchableOpacity>
+                    </View>
+                  ) : null}
+
+                  {useDefaultCameraBtn ? (
+                    <View
+                      style={{
+                        flex: 0,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                      }}>
+                      <TouchableOpacity
+                        onPress={() => takePicture(camera)}
+                        style={styles.capture}>
+                        <Text style={{fontSize: 14}}> SNAP </Text>
+                      </TouchableOpacity>
+                    </View>
+                  ) : null}
+                </View>
+              </>
+            );
           }}
         </RNCamera>
       </View>
@@ -67,7 +121,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: '100%',
     width: '100%',
-    borderRadius: 50,
+    borderRadius: 0,
     overflow: 'hidden',
   },
   preview: {

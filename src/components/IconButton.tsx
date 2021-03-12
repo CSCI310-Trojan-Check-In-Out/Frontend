@@ -6,9 +6,15 @@ export default function IconButton({iconName, text}) {
   return (
     <>
       <TouchableOpacity style={styles.background}>
-        <Ionicons name={iconName} size={45} style={styles.icon} />
-
-        <Text style={styles.text}>{text}</Text>
+        <Ionicons name={iconName} size={30} style={styles.icon} />
+        <View
+          style={{
+            display: 'flex',
+            width: '50%',
+            marginLeft: 10
+          }}>
+          <Text style={styles.text}>{text}</Text>
+        </View>
       </TouchableOpacity>
     </>
   );
@@ -19,10 +25,12 @@ const styles = StyleSheet.create({
     width: 150,
     height: 75,
     backgroundColor: '#9D2235',
-    borderRadius: 20,
+    borderRadius: 35,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
+    display: 'flex',
+    flexDirection: 'row',
   },
   icon: {
     color: '#fff',
@@ -32,9 +40,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
   },
-  text:{
+  text: {
     fontSize: 15,
-    fontWeight:'bold',
+    fontWeight: 'bold',
     color: '#fff',
-  }
+  },
 });

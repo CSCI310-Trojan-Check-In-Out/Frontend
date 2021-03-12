@@ -37,7 +37,10 @@ export default function SignUp({navigation}: {navigation: any}) {
         <SafeAreaView style={CommonStyle.outerContainerStyle}>
           {/* title */}
           <Text style={CommonStyle.title}>Connect Your USC Account</Text>
-          <View
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('PhotoSelect');
+            }}
             style={{
               borderRadius: 50,
               display: 'flex',
@@ -48,7 +51,7 @@ export default function SignUp({navigation}: {navigation: any}) {
               width: '80%',
             }}>
             <Text>Profile Pic</Text>
-          </View>
+          </TouchableOpacity>
 
           {/* inputs */}
           <View style={{width: Theme.CONTAINER_WIDTH_LARGE}}>
