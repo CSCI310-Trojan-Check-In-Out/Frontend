@@ -36,7 +36,6 @@ export default function StudentHome({navigation}) {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(showConfirmPopup);
 
     if (currentQRCode) {
       setShowConfirmPopup(true);
@@ -45,9 +44,7 @@ export default function StudentHome({navigation}) {
   // do something for QR code
   function scanQRCode(QRCode: string | any[]) {
     if (QRCode.length > 0 && QRCode[0].format !== 'None' && !updating) {
-      console.log('init');
       updating = true;
-      // console.log(QRCode[0].data);
       setScanning(false);
       setCurrentQRCode(QRCode[0].data);
     }
@@ -83,6 +80,7 @@ export default function StudentHome({navigation}) {
           <Camera
             useDefaultCameraBtn={false}
             scanQRCode={scanQRCode}
+            useAlbum={false}
             isScanning={scanning}></Camera>
         ) : (
           <Text>Computer Science Building</Text>

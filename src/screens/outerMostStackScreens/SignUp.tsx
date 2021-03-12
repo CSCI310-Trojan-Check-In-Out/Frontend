@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   StyleSheet,
+  Image,
   Button,
 } from 'react-native';
 // logics
@@ -16,9 +17,12 @@ import Theme from '../../style/theme.style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
+// import {Image} from 'react-native-svg';
 
 export default function SignUp({navigation}: {navigation: any}) {
   const [
+    image,
+    setImage,
     isStudent,
     setIsStudent,
     fullName,
@@ -39,7 +43,10 @@ export default function SignUp({navigation}: {navigation: any}) {
           <Text style={CommonStyle.title}>Connect Your USC Account</Text>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('PhotoSelect');
+              navigation.navigate('PhotoSelect', {
+                setImage: setImage,
+                test: 'abc',
+              });
             }}
             style={{
               borderRadius: 50,
@@ -50,7 +57,11 @@ export default function SignUp({navigation}: {navigation: any}) {
               height: 300,
               width: '80%',
             }}>
-            <Text>Profile Pic</Text>
+            <Image
+              style={{width: '100%', height: '100%', borderRadius: 50}}
+              source={{uri: image}}
+              resizeMode={'cover'}
+            />
           </TouchableOpacity>
 
           {/* inputs */}

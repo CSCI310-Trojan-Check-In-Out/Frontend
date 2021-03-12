@@ -2,9 +2,7 @@ import React, {useEffect} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 export default function BuildingListItem({building}) {
-  useEffect(() => {
-    console.log(building);
-  }, []);
+
   return (
     <>
       <View

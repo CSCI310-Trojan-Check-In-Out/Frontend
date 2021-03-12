@@ -10,19 +10,24 @@ interface Props extends PropsWithChildren<any> {
   scanQRCode?: Function | null;
   isScanning?: boolean;
   useAlbum?: boolean;
+  setImage?: Function | null;
 }
 export default function Camera({
   useDefaultCameraBtn = true,
   scanQRCode = null,
   isScanning = false,
   useAlbum = true,
+  setImage = null,
 }: Props) {
   const navigation = useNavigation();
 
   const takePicture = async function (camera) {
     const options = {quality: 0.5, base64: true};
     const data = await camera.takePictureAsync(options);
-    console.log(data.uri);
+    if (setImage) {
+      setImage(data.uri);
+    }
+    navigation.goBack();
     return true;
   };
 
@@ -38,11 +43,12 @@ export default function Camera({
         path: 'images',
       },
     };
-    ImagePicker.launchImageLibrary(options, () => {
+    ImagePicker.launchImageLibrary(options, (response) => {
       // setLoading(false);
-      // if (response.uri) {
-      //   setProfileImage(response.uri);
-      // }
+      if (response.uri && setImage) {
+        setImage(response.uri);
+        navigation.goBack();
+      }
     });
   }
   return (

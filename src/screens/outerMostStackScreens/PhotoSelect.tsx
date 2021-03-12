@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -10,10 +10,12 @@ import {
 
 import Camera from '../../components/camera/Camera';
 
-export default function PhotoSelect() {
+export default function PhotoSelect({route, navigation}) {
+  const {setImage} = route.params;
+
   return (
     <>
-      <Camera />
+      <Camera setImage={setImage} />
     </>
   );
 }
