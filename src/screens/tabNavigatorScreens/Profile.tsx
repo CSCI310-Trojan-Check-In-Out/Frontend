@@ -1,10 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import IconButton from '../../components/IconButton';
-export default function Profile({id, name, uscid, major}) {
+export default function Profile({id, name, uscid, major, nevigation}) {
   {
     /*id from database, different from uscid*/
   }
+
+
   return (
     <>
       <View>
@@ -22,12 +24,12 @@ export default function Profile({id, name, uscid, major}) {
             </View>
           </View>
           <View style={styles.row}>
-            <IconButton iconName={'camera-outline'} text={'Update Photo'} />
-            <IconButton iconName={'log-out-outline'} text={'Log out'} />
+            <IconButton id={id} iconName={'camera-outline'} text={'Update Photo' } purpose={'updatePhoto'} nevigation={nevigation} />
+            <IconButton id={id} iconName={'log-out-outline'} text={'Log out'} purpose={'logOut'} nevigation={nevigation}/>
           </View>
           <View style={styles.row}>
-            <IconButton iconName={'close-outline'} text={'Delete Account'} />
-            <IconButton iconName={'key-outline'} text={'Change Password'} />
+            <IconButton id={id} iconName={'close-outline'} text={'Delete Account'} purpose={'deleteAccount'} nevigation={nevigation} />
+            <IconButton id={id} iconName={'key-outline'} text={'Change Password'} purpose={'changePassword'} nevigation={nevigation}/>
           </View>
         </View>
       </View>
