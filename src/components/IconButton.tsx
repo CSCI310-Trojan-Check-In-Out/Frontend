@@ -1,22 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Pressable} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default function IconButton({id, iconName, text,purpose, nevigation}) {
-  const press=(id,purpose)=>{
-      if (purpose==='updatePhoto'){
-        nevigation.nevigate();
-      }
-      else if (purpose==='logOut'){
-        fetch('');
-      }
-      else if (purpose==='deleteAccont'){
-        fetch('');
-      }
-      else{
-        nevigation.nevigate('ChangePassword',{id:id})
-      }
-  }
+
+export default function IconButton({iconName, text,press}) {
+  
   return (
     <>
       <TouchableOpacity style={styles.background} onPress={press}>
