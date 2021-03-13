@@ -5,7 +5,6 @@ export default function LocationSearch() {
   return (
     <>
       <SearchBar></SearchBar>
-      <Text>LocationSearch</Text>
     </>
   );
 }
