@@ -19,11 +19,13 @@ import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
 import QRCode from 'react-native-qrcode-svg';
 
-import StudentHome from './student/StudentHome'
-import ManagerHome from './manager/ManagerHome'
+import StudentHome from './student/StudentHome';
+import ManagerHome from './manager/ManagerHome';
 export default function Home({navigation}) {
-  return <>
+  return (
+    <>
       <StudentHome navigation={navigation}></StudentHome>
       {/* <ManagerHome withQRCode={true}></ManagerHome> */}
-  </>
+    </>
+  );
 }
