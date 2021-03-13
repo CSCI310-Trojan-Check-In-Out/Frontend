@@ -9,6 +9,7 @@ import VisitHistory from '../screens/tabNavigatorScreens/VisitHistory';
 import Profile from '../screens/tabNavigatorScreens/Profile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import ProfileNavigator from './ProfileNavigator';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
@@ -19,7 +20,7 @@ export default function TabNavigator() {
       lazy={true}
       // detachInactiveScreens={true}
       tabBarOptions={{
-        style: {height:50, padding: 5},
+        style: {height: 50, padding: 5},
       }}
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
@@ -44,7 +45,7 @@ export default function TabNavigator() {
       <Tab.Screen name="Home" component={Home} options={{tabBarBadge: 1}} />
       <Tab.Screen name="LocationSearch" component={LocationSearch} />
       <Tab.Screen name="VisitHistory" component={VisitHistory} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={ProfileNavigator} />
     </Tab.Navigator>
   );
 }

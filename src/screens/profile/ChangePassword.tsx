@@ -7,10 +7,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default function ChangePassword({id}) {
+export default function ChangePassword({id, navigation}) {
   const [currentPassword, onChangeCurrentPassword] = React.useState('');
   const [newPassword, onChangeNewPassword] = React.useState('');
   const [confirmNewPassword, onChangeConfirmNewPassword] = React.useState('');
+
+  const navigate = function (action: string) {
+    switch (action) {
+      case 'CANCEL':
+        navigation.navigate('Profile');
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -46,7 +57,9 @@ export default function ChangePassword({id}) {
           <TouchableOpacity style={styles.button}>
             <Text style={styles.textButton}>Done</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            onPress={() => navigate('CANCEL')}
+            style={styles.button}>
             <Text style={styles.textButton}>Cancel</Text>
           </TouchableOpacity>
         </View>

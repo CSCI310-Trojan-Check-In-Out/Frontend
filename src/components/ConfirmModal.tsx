@@ -17,7 +17,7 @@ import Theme from '../style/theme.style';
 export default function ConfirmModal({setShowModal, title,  message, accept, decline }) {
   return (
     <>
-      <Modal transparent={true} visible={setShowModal}>
+      <Modal transparent={true}>
         <View
           style={{
             width: '100%',

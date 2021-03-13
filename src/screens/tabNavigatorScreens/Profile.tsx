@@ -2,58 +2,60 @@ import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import IconButton from '../../components/IconButton';
 import ConfirmModal from '../../components/ConfirmModal';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import CommonStyle from '../../style/common.style';
 
 export default function Profile({name, uscid, major}) {
   {
     /*id from database, different from uscid*/
   }
-  const [showModal,setShowModal]=React.useState(false);
-  const [modalTitle, setModalTitle]=React.useState('');
-  const [modalMessage, setModalMessage]=React.useState('');
+  const [showModal, setShowModal] = React.useState(false);
+  const [modalTitle, setModalTitle] = React.useState('');
+  const [modalMessage, setModalMessage] = React.useState();
+  const [image, setImage] = React.useState<string>(
+    'https://reactnative.dev/img/tiny_logo.png',
+  );
+  const navigation = useNavigation();
 
-  const navigation=useNavigation();
-
-  function decline(){
+  function decline() {
     setShowModal(false);
   }
-  
-  function accept(){
-    fetch('');
+
+  function accept() {
+    // fetch('');
+    setShowModal(false);
   }
 
-  function press(purpose){
-    if (purpose==='updatePhoto'){
-      navigation.navigate('photoAlbum');
-    }
-    else if (purpose==='logOut'){
+  function press(purpose: string) {
+    if (purpose === 'updatePhoto') {
+      navigation.navigate('PhotoSelect', {setImage});
+    } else if (purpose === 'logOut') {
       setModalMessage('Do you want to log out?');
       setShowModal(true);
-    }
-    else if (purpose==='deleteAccount'){
-      setModalMessage('Do you want to delete account?')
+    } else if (purpose === 'deleteAccount') {
+      setModalMessage('Do you want to delete account?');
       setShowModal(true);
-    }
-    else{
+    } else {
       navigation.navigate('ChangePassword');
     }
-}
+  }
+
   return (
     <>
-      <View>
-        <ConfirmModal setShowModal={showModal} 
-        title={modalTitle}
-        message={modalMessage}
-        decline={()=>decline()}
-        accept={()=>accept()}/>
-        
-        <Text>Profile</Text>
+      <View style={CommonStyle.outerContainerStyle}>
+        {showModal ? (
+          <ConfirmModal
+            setShowModal={showModal}
+            title={modalTitle}
+            message={modalMessage}
+            decline={() => decline()}
+            accept={() => accept()}
+          />
+        ) : null}
+
         <View style={styles.container}>
           <View style={styles.profile}>
-            <Image
-              style={styles.profilePicture}
-              source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
-            />
+            <Image style={styles.profilePicture} source={{uri: image}} />
             <View style={styles.textcontainer}>
               <Text style={styles.name}>Name: {name}</Text>
               <Text style={styles.uscid}>USCID: {uscid} </Text>
@@ -61,12 +63,28 @@ export default function Profile({name, uscid, major}) {
             </View>
           </View>
           <View style={styles.row}>
-            <IconButton iconName={'camera-outline'} text={'Update Photo' } press={()=>press('updatePhoto')}  />
-            <IconButton iconName={'log-out-outline'} text={'Log out'} press={()=>press('logOut')} />
+            <IconButton
+              iconName={'camera-outline'}
+              text={'Update Photo'}
+              press={() => press('updatePhoto')}
+            />
+            <IconButton
+              iconName={'log-out-outline'}
+              text={'Log out'}
+              press={() => press('logOut')}
+            />
           </View>
           <View style={styles.row}>
-            <IconButton iconName={'close-outline'} text={'Delete Account'} press={()=>press('deleteAccount')} />
-            <IconButton iconName={'key-outline'} text={'Change Password'} press={()=>press('changePassword')} />
+            <IconButton
+              iconName={'close-outline'}
+              text={'Delete Account'}
+              press={() => press('deleteAccount')}
+            />
+            <IconButton
+              iconName={'key-outline'}
+              text={'Change Password'}
+              press={() => press('changePassword')}
+            />
           </View>
         </View>
       </View>
