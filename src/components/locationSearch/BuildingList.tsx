@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, FlatList} from 'react-native';
 import BuildingListItem from './BuiildingListItem';
-
+import {useNavigation} from '@react-navigation/native'
 export default function BuildingList({buildings}) {
+  const navigation = useNavigation();
   return (
     <>
       <FlatList
@@ -11,7 +12,11 @@ export default function BuildingList({buildings}) {
         renderItem={({item, index}) => {
           return (
             <>
-              <BuildingListItem building={item}></BuildingListItem>
+              <TouchableOpacity onPress={
+                ()=>{navigation.navigate('LocationDetail')}
+              }>
+                <BuildingListItem building={item}></BuildingListItem>
+              </TouchableOpacity>
             </>
           );
         }}

@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/tabNavigatorScreens/Home';
 
 import LocationSearch from '../screens/tabNavigatorScreens/LocationSearch';
-
+import LocationNavigator from './LocationNavigator';
 import VisitHistory from '../screens/tabNavigatorScreens/VisitHistory';
 
 import Profile from '../screens/tabNavigatorScreens/Profile';
@@ -43,7 +43,7 @@ export default function TabNavigator() {
         },
       })}>
       <Tab.Screen name="Home" component={Home} options={{tabBarBadge: 1}} />
-      <Tab.Screen name="LocationSearch" component={LocationSearch} />
+      <Tab.Screen name="LocationSearch" component={LocationNavigator} />
       <Tab.Screen name="VisitHistory" component={VisitHistory} />
       <Tab.Screen name="Profile" component={ProfileNavigator} />
     </Tab.Navigator>

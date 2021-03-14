@@ -29,12 +29,17 @@ export default function Login({navigation}: {navigation: any}) {
 
         {/* inputs */}
         <View style={{width: Theme.CONTAINER_WIDTH_LARGE}}>
-          <TextInput style={CommonStyle.inputBoxStyle} onChangeText={setEmail} value={email} placeholder={"USC EMAIL"}/>
+          <TextInput
+            style={CommonStyle.inputBoxStyle}
+            onChangeText={setEmail}
+            value={email}
+            placeholder={'USC EMAIL'}
+          />
           <TextInput
             secureTextEntry={true}
             onChangeText={setPassword}
             style={CommonStyle.inputBoxStyle}
-            placeholder={"PASSWORD"}
+            placeholder={'PASSWORD'}
             value={password}
           />
         </View>
