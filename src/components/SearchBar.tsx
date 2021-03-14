@@ -18,6 +18,7 @@ export default function CustomSearchBar({placeholder, submitSearch}) {
         borderWidth: 0,
         borderBottomColor: colors.grey4,
         borderTopColor: colors.grey4,
+        marginBottom:'2%',
       }}
     />
   );

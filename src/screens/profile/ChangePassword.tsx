@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 15,
+    paddingLeft:'5%',
   },
   buttonContainer: {
     alignItems: 'center',
