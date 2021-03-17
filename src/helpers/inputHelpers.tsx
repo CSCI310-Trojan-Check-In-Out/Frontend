@@ -10,7 +10,6 @@ export function notEmpty(inputs: string[]) {
   if (inputs.length === 0) {
     return false;
   }
-  console.log(inputs);
   var result = true;
   inputs.forEach((input) => {
     if (!input) {

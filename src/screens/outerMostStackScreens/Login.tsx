@@ -10,8 +10,12 @@ import {
 } from 'react-native';
 
 // tools
-import {emailRegexCheck, notEmpty, alertError} from '../../helpers/inputHelpers';
-
+import {
+  emailRegexCheck,
+  notEmpty,
+  alertError,
+} from '../../helpers/inputHelpers';
+import {signinApi} from '../../api/backendApiCalls';
 // styles
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
@@ -23,7 +27,8 @@ export default function Login({navigation}: {navigation: any}) {
 
   function signin() {
     if (inputCheck()) {
-      navigation.navigate('TabNavigator');
+      signinApi(email, password);
+      // navigation.navigate('TabNavigator');
     }
   }
 
