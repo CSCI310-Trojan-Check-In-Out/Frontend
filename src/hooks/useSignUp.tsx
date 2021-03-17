@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {emailRegexCheck, notEmpty, alertError} from './../helpers/inputHelpers';
 
 export function useSignUp() {
   const [image, setImage] = useState<string>('');
@@ -8,6 +9,9 @@ export function useSignUp() {
   const [email, setEmail] = useState<string>('');
   const [major, setMajor] = useState<string>('');
 
+  function onSubmit() {
+    
+  }
   return [
     image,
     setImage,
