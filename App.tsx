@@ -10,14 +10,16 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import AppNavigator from './src/navigators/AppNavigator';
-import { Text } from 'react-native';
+import {Provider as AppProvider} from './src/context/AppContext';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
   return (
     <>
-      <AppNavigator />
+      <AppProvider>
+        <AppNavigator />
+      </AppProvider>
     </>
   );
 };

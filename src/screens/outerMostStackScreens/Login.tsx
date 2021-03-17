@@ -6,13 +6,38 @@ import {
   TextInput,
   StyleSheet,
   Button,
+  Alert,
 } from 'react-native';
+
+// tools
+import {emailRegexCheck, notEmpty, alertError} from '../../helpers/inputHelpers';
+
+// styles
 import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
 
 export default function Login({navigation}: {navigation: any}) {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
+
+  function signin() {
+    if (inputCheck()) {
+      navigation.navigate('TabNavigator');
+    }
+  }
+
+  function inputCheck() {
+    if (!notEmpty([email, password])) {
+      alertError('field(s) cannot be empty');
+      return false;
+    }
+    if (!emailRegexCheck(email)) {
+      alertError('must be usc email');
+      return false;
+    }
+    return true;
+  }
 
   return (
     <>
@@ -53,9 +78,7 @@ export default function Login({navigation}: {navigation: any}) {
           <Button
             title={'Sign In'}
             color={Theme.RED_PRIMARY}
-            onPress={() => {
-              navigation.navigate('TabNavigator');
-            }}
+            onPress={signin}
           />
 
           <Button
