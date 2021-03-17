@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useContext, useEffect} from 'react';
 import {
   Text,
@@ -29,11 +30,11 @@ export default function Login({navigation}: {navigation: any}) {
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
+    // log in success
     if (state.user) {
-      console.log(state)
-      // navigation.navigate('TabNavigator');
+      navigation.navigate('TabNavigator');
     }
-  }, [state.user, navigation]);
+  }, [state.user]);
 
   function signin() {
     if (inputCheck()) {
@@ -44,7 +45,6 @@ export default function Login({navigation}: {navigation: any}) {
 
   function loginSucceed(userData: any) {
     login(userData);
-    // navigation.navigate('TabNavigator');
   }
   function loginFail() {
     alertError('login failed');

@@ -4,6 +4,7 @@ import {Context as AppContext} from '../context/AppContext';
 
 const ACCOUNT_URL = `${config.URL_ENDPOINT}/account`;
 
+// login
 export function signinApi(
   email: any,
   password: any,
@@ -34,6 +35,24 @@ export function signinApi(
   });
 }
 
+// logout
+// TODO: connect to backend
+export function logoutApi(
+  successCallback: Function,
+  failureCallback: Function | null,
+) {
+  successCallback();
+}
+// delete account
+// TODO: connect to backend
+export function deleteAccountApi(
+  successCallback: Function,
+  failureCallback: Function | null,
+) {
+  successCallback();
+}
+
+// helpers
 function createFormData(data: any[][2]) {
   const formData = new FormData();
   data.forEach((item: any[]) => {

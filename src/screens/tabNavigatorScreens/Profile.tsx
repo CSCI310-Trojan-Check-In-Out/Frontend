@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import IconButton from '../../components/IconButton';
 import ConfirmModal from '../../components/ConfirmModal';
 import {useNavigation} from '@react-navigation/native';
+// tools
+import {logoutApi, deleteAccountApi} from '../../api/backendApiCalls';
+
+// context
+import {Context as AppContext} from '../../context/AppContext';
+
+// style
 import CommonStyle from '../../style/common.style';
 
 export default function Profile({name, uscid, major}) {
   {
     /*id from database, different from uscid*/
   }
+  const {state, logout} = useContext(AppContext);
+  const [purpose, setPurpose] = React.useState('');
   const [showModal, setShowModal] = React.useState(false);
   const [modalTitle, setModalTitle] = React.useState('');
   const [modalMessage, setModalMessage] = React.useState();
@@ -17,16 +26,43 @@ export default function Profile({name, uscid, major}) {
   );
   const navigation = useNavigation();
 
+  useEffect(() => {
+    if (!state.user) {
+      navigation.navigate('Login');
+    }
+  }, [state]);
+
   function decline() {
+    setPurpose('');
     setShowModal(false);
   }
 
   function accept() {
+    switch (purpose) {
+      case 'updatePhoto':
+        break;
+      case 'logOut':
+        logoutApi(logoutSucceed, null);
+        break;
+      case 'deleteAccount':
+        deleteAccountApi(logoutSucceed, null);
+        break;
+      case 'ChangePassword':
+        break;
+      default:
+        break;
+    }
+    setPurpose('');
     // fetch('');
     setShowModal(false);
   }
 
+  function logoutSucceed() {
+    logout();
+  }
+
   function press(purpose: string) {
+    setPurpose(purpose);
     if (purpose === 'updatePhoto') {
       navigation.navigate('PhotoSelect', {setImage});
     } else if (purpose === 'logOut') {
