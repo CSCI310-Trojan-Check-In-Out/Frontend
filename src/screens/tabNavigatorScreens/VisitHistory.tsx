@@ -6,6 +6,7 @@ import SearchBar from '../../components/SearchBar';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function VisitHistory() {
+  const [text, setText]=useState('');
   const [startEnd, setStartEnd] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate]= useState(new Date());
@@ -70,7 +71,7 @@ export default function VisitHistory() {
     setShowMajor(!showMajor);
   }
 
-  function searchStudent(startDate, endDate, buildingName, studentID, major){
+  function searchStudent(text, startDate, endDate, buildingName, studentID, major){
     fetch('');
   }
 
@@ -80,7 +81,7 @@ export default function VisitHistory() {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{'Please search using the searchbar or using the filter buttons below.'}</Text>
         </View>
-        <SearchBar placeholder={'Enter student name:'} />
+        <SearchBar placeholder={'Enter student name:'} query={text} changeText={setText}/>
         <View style={styles.button}>
           <Button color={'#9D2235'} onPress={()=>showDatepicker('start')} title="Choose Start Date" />
         </View>
@@ -135,7 +136,7 @@ export default function VisitHistory() {
           />:null}
         </View>
         <View style={styles.searchButton}>
-        <Button color={'#FFC72C'} onPress={()=>searchStudent(startDate, endDate, buildingName, studentID, major)} title="Search" />
+        <Button color={'#FFC72C'} onPress={()=>searchStudent(text, startDate, endDate, buildingName, studentID, major)} title="Search" />
         </View>
       </View>
       {/* <View style={CommonStyle.outerContainerStyle}> */}
