@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from './config';
 import {Context as AppContext} from '../context/AppContext';
 
-const ACCOUNT_URL = config.URL_ENDPOINT + 'account/';
+const ACCOUNT_URL = `${config.URL_ENDPOINT}/account`;
 
 export function signinApi(
   email: any,
@@ -19,7 +19,7 @@ export function signinApi(
 
   axios({
     method: 'post',
-    url: 'http://192.168.1.165:80/account/login', //ACCOUNT_URL + 'login',
+    url: `${ACCOUNT_URL}/login`, //ACCOUNT_URL + 'login',
     data: form,
     headers: {
       'Content-Type': 'multipart/form-data',

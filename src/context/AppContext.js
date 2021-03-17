@@ -10,7 +10,7 @@ const initialState = {
 const eventReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN:
-      return {...state, events: action.events};
+      return {...state, user: action.payload};
     default:
       return state;
   }

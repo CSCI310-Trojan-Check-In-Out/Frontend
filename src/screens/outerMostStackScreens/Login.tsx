@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -8,6 +8,8 @@ import {
   Button,
   Alert,
 } from 'react-native';
+// context
+import {Context as AppContext} from '../../context/AppContext';
 
 // tools
 import {
@@ -21,15 +23,31 @@ import CommonStyle from '../../style/common.style';
 import Theme from '../../style/theme.style';
 
 export default function Login({navigation}: {navigation: any}) {
+  const {state, login} = useContext(AppContext);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
 
-  function signin() {
-    if (inputCheck()) {
-      signinApi(email, password);
+  useEffect(() => {
+    if (state.user) {
+      console.log(state)
       // navigation.navigate('TabNavigator');
     }
+  }, [state.user, navigation]);
+
+  function signin() {
+    if (inputCheck()) {
+      signinApi(email, password, loginSucceed, loginFail);
+      // navigation.navigate('TabNavigator');
+    }
+  }
+
+  function loginSucceed(userData: any) {
+    login(userData);
+    // navigation.navigate('TabNavigator');
+  }
+  function loginFail() {
+    alertError('login failed');
   }
 
   function inputCheck() {
