@@ -6,10 +6,22 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import DocumentPicker from 'react-native-document-picker';
 
-function handleFilePick() {
-  DocumentPicker.pick({
-    type: [DocumentPicker.types.csv],
-  });
+const [csvUri, setCsvUri]=useState('');
+
+const handleFilePick= async ()=> {
+  try {
+    const res = await DocumentPicker.pick({
+      type: [DocumentPicker.types.csv],
+    });
+  console.log(res.uri);
+
+  } catch (err) {
+    if (DocumentPicker.isCancel(err)) {
+      
+    } else {
+      throw err;
+    }
+  }
 }
 
 export default function LocationSearch() {
