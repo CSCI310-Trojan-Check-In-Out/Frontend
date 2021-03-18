@@ -6,15 +6,18 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import DocumentPicker from 'react-native-document-picker';
 
-const [csvUri, setCsvUri]=useState('');
 
 const handleFilePick= async ()=> {
   try {
     const res = await DocumentPicker.pick({
       type: [DocumentPicker.types.csv],
     });
-  console.log(res.uri);
-
+    console.log(
+      res.uri,
+      res.type, 
+      res.name,
+      res.size
+    );
   } catch (err) {
     if (DocumentPicker.isCancel(err)) {
       
