@@ -8,7 +8,7 @@
  * @format
  */
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {Text} from 'react';
 import AppNavigator from './src/navigators/AppNavigator';
 import {Provider as AppProvider} from './src/context/AppContext';
 

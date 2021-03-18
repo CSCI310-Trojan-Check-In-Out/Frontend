@@ -4,8 +4,8 @@ import Theme from './theme.style';
 export default StyleSheet.create({
   inputBoxStyle: {
     borderRadius: 30,
-    padding: 20,
-    height: 60,
+    paddingHorizontal: 20,
+    height: 50,
     backgroundColor: 'rgba(220, 220, 220, 1)',
     margin: 10,
   },

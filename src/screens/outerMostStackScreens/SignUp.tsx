@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -17,14 +17,19 @@ import Theme from '../../style/theme.style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {Context as AppContext} from '../../context/AppContext';
+import {signupApi} from '../../api/backendApiCalls';
+
 // import {Image} from 'react-native-svg';
 
 export default function SignUp({navigation}: {navigation: any}) {
   const [
     image,
     setImage,
-    isStudent,
-    setIsStudent,
+    password,
+    setPassword,
+    isAdmin,
+    setIsAdmin,
     fullName,
     setFullName,
     uscID,
@@ -33,7 +38,37 @@ export default function SignUp({navigation}: {navigation: any}) {
     setEmail,
     major,
     setMajor,
+    onSubmit,
   ] = useSignUp();
+  const {state, login} = useContext(AppContext);
+
+  useEffect(() => {
+    // log in success
+    if (state.user) {
+      navigation.navigate('TabNavigator');
+    }
+  }, [state.user]);
+
+  function submissionSucceedCallback(
+    imageData,
+    isAdminData,
+    fullNameData,
+    uscIdData,
+    emailData,
+    majorData,
+    passwordData
+  ) {
+    signupApi(
+      imageData,
+      isAdminData,
+      fullNameData,
+      uscIdData,
+      emailData,
+      majorData,
+      passwordData,
+      login,
+    );
+  }
 
   return (
     <>
@@ -45,7 +80,6 @@ export default function SignUp({navigation}: {navigation: any}) {
             onPress={() => {
               navigation.navigate('PhotoSelect', {
                 setImage: setImage,
-                test: 'abc',
               });
             }}
             style={{
@@ -80,15 +114,22 @@ export default function SignUp({navigation}: {navigation: any}) {
             />
             <TextInput
               style={CommonStyle.inputBoxStyle}
+              onChangeText={setMajor}
+              value={major}
+              placeholder={'MAJOR'}
+            />
+            <TextInput
+              style={CommonStyle.inputBoxStyle}
               onChangeText={setEmail}
               value={email}
               placeholder={'USC EMAIL'}
             />
             <TextInput
               style={CommonStyle.inputBoxStyle}
-              onChangeText={setMajor}
-              value={major}
-              placeholder={'MAJOR'}
+              secureTextEntry={true}
+              onChangeText={setPassword}
+              value={password}
+              placeholder={'PASSWORD'}
             />
           </View>
 
@@ -110,7 +151,7 @@ export default function SignUp({navigation}: {navigation: any}) {
               }}>
               <View>
                 <TouchableOpacity
-                  onPress={() => setIsStudent(true)}
+                  onPress={() => setIsAdmin(false)}
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -118,7 +159,7 @@ export default function SignUp({navigation}: {navigation: any}) {
                   }}>
                   <Ionicons
                     name={
-                      !isStudent ? 'radio-button-off-sharp' : 'radio-button-on'
+                      isAdmin ? 'radio-button-off-sharp' : 'radio-button-on'
                     }
                     size={17}></Ionicons>
                   <Text style={{marginLeft: 10}}>STUDENT</Text>
@@ -127,7 +168,7 @@ export default function SignUp({navigation}: {navigation: any}) {
 
               <View>
                 <TouchableOpacity
-                  onPress={() => setIsStudent(false)}
+                  onPress={() => setIsAdmin(true)}
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -135,7 +176,7 @@ export default function SignUp({navigation}: {navigation: any}) {
                   }}>
                   <Ionicons
                     name={
-                      isStudent ? 'radio-button-off-sharp' : 'radio-button-on'
+                      !isAdmin ? 'radio-button-off-sharp' : 'radio-button-on'
                     }
                     size={17}></Ionicons>
                   <Text style={{marginLeft: 10}}>MANAGER</Text>
@@ -153,7 +194,7 @@ export default function SignUp({navigation}: {navigation: any}) {
               title={'Done'}
               color={Theme.RED_PRIMARY}
               onPress={() => {
-                navigation.navigate('TabNavigator');
+                onSubmit(submissionSucceedCallback);
               }}
             />
           </View>

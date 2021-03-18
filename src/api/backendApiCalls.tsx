@@ -4,6 +4,46 @@ import {Context as AppContext} from '../context/AppContext';
 
 const ACCOUNT_URL = `${config.URL_ENDPOINT}/account`;
 
+// sign up
+export function signupApi(
+  image,
+  isAdmin,
+  fullName,
+  uscID,
+  email,
+  major,
+  password,
+  successCallback,
+  failureCallback = null,
+) {
+  const form = createFormData([
+    ['image', image],
+    ['isAdmin', isAdmin],
+    ['fullName', fullName],
+    ['uscId', uscID],
+    ['email', email],
+    ['major', major],
+    ['password', password],
+  ]);
+
+  axios({
+    method: 'post',
+    url: `${ACCOUNT_URL}/register`, //ACCOUNT_URL + 'login',
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }).then((res) => {
+    if (res.status === 200) {
+      const userData = res.data[0];
+      successCallback(userData);
+    }
+    // else {
+    //   failureCallback();
+    // }
+  });
+}
+
 // login
 export function signinApi(
   email: any,
