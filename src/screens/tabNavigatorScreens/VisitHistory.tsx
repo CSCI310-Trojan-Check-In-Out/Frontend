@@ -83,7 +83,8 @@ export default function VisitHistory() {
         </View>
         <SearchBar placeholder={'Enter student name:'} query={text} changeText={setText}/>
         <View style={styles.button}>
-          <Button color={'#9D2235'} onPress={()=>showDatepicker('start')} title="Choose Start Date" />
+          <Button color={'#9D2235'} title="Choose Time Range"></Button>
+          {/* <Button color={'#9D2235'} onPress={()=>showDatepicker('start')} title="Choose Start Date" />
         </View>
         <View style={styles.button}>
           <Button color={'#9D2235'} onPress={()=>showTimepicker('start')} title="Choose Start Time" />
@@ -92,7 +93,7 @@ export default function VisitHistory() {
           <Button color={'#9D2235'} onPress={()=>showDatepicker('end')} title="Choose End Date" />
         </View>
         <View style={styles.button}>
-          <Button color={'#9D2235'} onPress={()=>showTimepicker('end')} title="Choose End Time" />
+          <Button color={'#9D2235'} onPress={()=>showTimepicker('end')} title="Choose End Time" /> */}
         </View>
         {show && (
           <DateTimePicker

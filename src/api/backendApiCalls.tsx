@@ -3,7 +3,8 @@ import config from './config';
 import {Context as AppContext} from '../context/AppContext';
 
 const ACCOUNT_URL = `${config.URL_ENDPOINT}/account`;
-
+const MANAGER_URL = `${config.URL_ENDPOINT}/manager`;
+const STUDENT_URL = `${config.URL_ENDPOINT}/student`;
 // sign up
 export function signupApi(
   image,

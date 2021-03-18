@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useContext} from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -21,11 +21,28 @@ import QRCode from 'react-native-qrcode-svg';
 
 import StudentHome from './student/StudentHome';
 import ManagerHome from './manager/ManagerHome';
+import {Context as AppContext} from '../../context/AppContext';
+
 export default function Home({navigation}) {
+  const {state} = useContext(AppContext);
+
+  useEffect(() => {
+    if (!state.user) {
+      navigation.navigate('Login');
+    }
+  }, [state.user]);
+
+  if (!state.user) {
+    return <></>;
+  }
+
   return (
     <>
-      <StudentHome navigation={navigation}></StudentHome>
-      {/* <ManagerHome withQRCode={true}></ManagerHome> */}
+      {state.user.isAdmin ? (
+        <ManagerHome withQRCode={false}></ManagerHome>
+      ) : (
+        <StudentHome navigation={navigation}></StudentHome>
+      )}
     </>
   );
 }

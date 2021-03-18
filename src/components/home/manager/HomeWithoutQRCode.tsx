@@ -16,7 +16,7 @@ export default function HomeWithoutQRCode() {
         </View>
         <View style={styles.paragraphContainer}>
           <Text style={styles.paragraph}>
-            Press the second icon in the bottom nevigation bar to search for a
+            Press the second icon in the bottom navigation bar to search for a
             building.
           </Text>
         </View>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     marginBottom: '10%',
   },
   paragraph: {
-    fontSize: 25,
-    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 20,
   },
 });

@@ -3,7 +3,7 @@ import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import CommonStyle from '../../style/common.style';
 import {useNavigation} from '@react-navigation/native';
-import UpdateCapacity from '../profile/UpdateCapacity';
+import UpdateCapacity from './UpdateCapacity';
 
 export default function LocationDetail() {
   const navigation = useNavigation();
@@ -16,7 +16,7 @@ export default function LocationDetail() {
 
   return (
     <>
-      <View>
+      <View style={CommonStyle.outerContainerStyle}>
         <View
           style={isManager ? styles.titleContainer1 : styles.titleContainer2}>
           <Text style={styles.title}>{'Search Result'}</Text>
@@ -36,7 +36,7 @@ export default function LocationDetail() {
           {isManager ? (
             <>
               <TouchableOpacity style={styles.button}>
-                <Text style={styles.textButton}>QR Code</Text>
+                <Text style={styles.textButton}>Pin QR Code</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
