@@ -32,7 +32,7 @@ const login = (dispatch) => async (payload) => {
 const logout = (dispatch) => async () => {
   try {
     dispatch({
-      type: LOG_IN,
+      type: LOG_OUT,
       payload: null,
     });
   } catch (error) {

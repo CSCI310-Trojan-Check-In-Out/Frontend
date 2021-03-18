@@ -8,7 +8,7 @@ import UpdateCapacity from '../screens/locationSearch/UpdateCapacity';
 
 const Stack = createStackNavigator();
 
-export default function ProfileNavigator() {
+export default function LocationNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
