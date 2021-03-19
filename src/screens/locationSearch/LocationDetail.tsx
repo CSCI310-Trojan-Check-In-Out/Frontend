@@ -1,5 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Text, View, StyleSheet, Image, TouchableOpacity, Alert} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import CommonStyle from '../../style/common.style';
 import {useNavigation} from '@react-navigation/native';
@@ -7,16 +14,19 @@ import UpdateCapacity from './UpdateCapacity';
 import {getQRCodeApi} from '../../api/backendApiCalls';
 import {Context as AppContext} from '../../context/AppContext';
 
-export default function LocationDetail({route,navigation}) {  
+export default function LocationDetail({route, navigation}) {
   const {state, pinQRCode} = useContext(AppContext);
+  const [QRCode, setQRCode] = useState<string>('sss');
   const [isManager, setIsManager] = useState(true);
   const [image, setImage] = React.useState<string>(
     'https://reactnative.dev/img/tiny_logo.png',
   );
 
+  useEffect(() => {}, []);
   function pinQRCodeSucceed() {
-    getQRCodeApi(route.params.buildingId,pinQRCode);
-    Alert.alert("","Successfully Pinnned QR Code to Home")
+    // getQRCodeApi(route.params.buildingId,pinQRCode);
+    pinQRCode(QRCode);
+    Alert.alert('', 'Successfully Pinnned QR Code to Home');
   }
 
   return (
@@ -40,7 +50,9 @@ export default function LocationDetail({route,navigation}) {
         <View style={styles.buttonContainer}>
           {isManager ? (
             <>
-              <TouchableOpacity style={styles.button} onPress={pinQRCodeSucceed}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={pinQRCodeSucceed}>
                 <Text style={styles.textButton}>Pin QR Code</Text>
               </TouchableOpacity>
               <TouchableOpacity
