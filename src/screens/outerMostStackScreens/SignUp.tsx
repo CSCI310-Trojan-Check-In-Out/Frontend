@@ -59,19 +59,18 @@ export default function SignUp({navigation}: {navigation: any}) {
     majorData,
     passwordData,
   ) {
-    uploadProfilePic(imageData, emailData).then((data) => {
-      console.log(data);
+    uploadProfilePic(imageData, emailData).then((imageUrl) => {
+      signupApi(
+        imageUrl,
+        isAdminData,
+        fullNameData,
+        uscIdData,
+        emailData,
+        majorData,
+        passwordData,
+        login,
+      );
     });
-    // signupApi(
-    //   imageData,
-    //   isAdminData,
-    //   fullNameData,
-    //   uscIdData,
-    //   emailData,
-    //   majorData,
-    //   passwordData,
-    //   login,
-    // );
   }
 
   return (
