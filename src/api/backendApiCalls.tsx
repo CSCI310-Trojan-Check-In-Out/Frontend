@@ -131,18 +131,14 @@ export function getAllLocationsApi(successCallback: Function) {
       successCallback(buildings);
     }
   });
-
-}
-
-export function removeQRCodeApi(
-  successCallback: Function,
-) {
-  successCallback();
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                   Student                                  */
 /* -------------------------------------------------------------------------- */
+
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                                   helpers                                  */

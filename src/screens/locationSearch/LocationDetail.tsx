@@ -20,12 +20,10 @@ export default function LocationDetail({route, navigation}) {
   const [building, setBuilding] = useState(route.params.building);
   const [buildingQRCode, setQRCode] = useState<string>('111');
   const [isManager, setIsManager] = useState(true);
-  const [image, setImage] = React.useState<string>(
-    'https://reactnative.dev/img/tiny_logo.png',
-  );
 
   useEffect(() => {
-    getQRCodeApi(route.params.building.id, setQRCode);
+    // getQRCodeApi(route.params.building.id, setQRCode);
+    setQRCode(String(route.params.building.id));
   }, []);
 
   function pinQRCodeSucceed() {

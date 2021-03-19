@@ -1,6 +1,6 @@
 import CreateAppContext from './CreateAppContext';
 // import {GOOGLE_API_KEY} from 'react-native-dotenv'
-import {LOG_IN, LOG_OUT, PIN_QRCODE,REMOVE_QRCODE} from './actionTypes';
+import {LOG_IN, LOG_OUT, PIN_QRCODE, REMOVE_QRCODE} from './actionTypes';
 
 interface DataStore {
   user: any | null;
@@ -67,7 +67,7 @@ const pinQRCode = (dispatch) => async (payload) => {
   }
 };
 
-const removeQRCode=(dispatch) => async () => {
+const removeQRCode = (dispatch) => async () => {
   try {
     dispatch({
       type: REMOVE_QRCODE,
@@ -84,6 +84,7 @@ export const {Provider, Context} = CreateAppContext(
     login,
     logout,
     pinQRCode,
+    removeQRCode,
   },
   initialState,
 );

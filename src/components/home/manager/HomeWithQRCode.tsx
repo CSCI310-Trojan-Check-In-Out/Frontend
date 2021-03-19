@@ -8,10 +8,6 @@ export default function HomeWithQRCode({pinnedBuilding}) {
   
   const {state, removeQRCode} = useContext(AppContext);
 
-  function removeQRCodeSucceed(){
-    removeQRCodeApi(removeQRCode);
-  }
-
   return (
     <>
       <View style={styles.container}>
@@ -24,7 +20,7 @@ export default function HomeWithQRCode({pinnedBuilding}) {
         <View style={styles.QRCodeContainer}>
           <QRCode value={pinnedBuilding.QRCode} size={200} quietZone={10} />
         </View>
-        <TouchableOpacity style={styles.button} onPress={removeQRCodeSucceed}>
+        <TouchableOpacity style={styles.button} onPress={removeQRCode}>
           <Text style={styles.textButton}>Remove From Pin</Text>
         </TouchableOpacity>
       </View>
