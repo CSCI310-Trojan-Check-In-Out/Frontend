@@ -95,8 +95,10 @@ export default function StudentHome({navigation}) {
             scanQRCode={scanQRCode}
             useAlbum={false}
             isScanning={scanning}></Camera>
+        ) : state.checkedInBuilding ? (
+          <Text> {state.checkedInBuilding.building.name}</Text>
         ) : (
-          <Text>Computer Science Building</Text>
+          <Text>QR Code Scan Area</Text>
         )}
       </View>
       <ScanLoadingSpinner scanning={scanning} />
