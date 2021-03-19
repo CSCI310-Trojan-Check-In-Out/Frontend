@@ -11,14 +11,14 @@ export function useSignUp() {
   const [major, setMajor] = useState<string>('');
 
   function onSubmit(successCallback: Function) {
-    if (!notEmpty([image, fullName, uscID, email, major])) {
-      alertError('field(s) cannot be empty');
-      return;
-    }
-    if (!emailRegexCheck(email)) {
-      alertError('must be usc email');
-      return;
-    }
+    // if (!notEmpty([image, fullName, uscID, email, major])) {
+    //   alertError('field(s) cannot be empty');
+    //   return;
+    // }
+    // if (!emailRegexCheck(email)) {
+    //   alertError('must be usc email');
+    //   return;
+    // }
     successCallback(image, isStudent, fullName, uscID, email, major);
   }
   return [
