@@ -1,11 +1,29 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {Context as AppContext} from '../../context/AppContext';
+// firebase
+import {
+  subscribeBuildingMaximumCapacity,
+  unSubscribeBuildingMaximumCapacity,
+  subscribeBuildingCurrentCapacity,
+  unSubscribeBuildingCurrentCapacity,
+} from '../../api/firebaseApi';
 
 export default function BuildingListItem({building}) {
-  const {state} = useContext(AppContext);
+  // const {state} = useContext(AppContext);
+  const [maximumCapacity, updateMaximumCapacity] = useState(building.capacity);
+  const [currentCapacity, updateCurrentCapacity] = useState(
+    building.current_numbers,
+  );
+
   useEffect(() => {
     // console.log(state);
+    subscribeBuildingMaximumCapacity('123', updateMaximumCapacity);
+    subscribeBuildingCurrentCapacity('buildingId', updateCurrentCapacity);
+    return () => {
+      unSubscribeBuildingMaximumCapacity('123');
+      unSubscribeBuildingCurrentCapacity('buildingId');
+    };
   }, []);
 
   return (
@@ -23,7 +41,7 @@ export default function BuildingListItem({building}) {
           {building.place_name} ({building.abbreviation})
         </Text>
         <Text>
-          Capacity: {building.current_numbers} / {building.capacity}
+          Capacity: {currentCapacity} / {maximumCapacity}
         </Text>
       </View>
     </>
