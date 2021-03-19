@@ -40,6 +40,11 @@ export default function LocationDetail() {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
+                onPress={() => navigation.navigate('VisitorsOfBuilding')}>
+                <Text style={styles.textButton}>See Visitors</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
                 onPress={() => navigation.navigate('UpdateCapacity')}>
                 <Text style={styles.textButton}>Update Capacity</Text>
               </TouchableOpacity>
