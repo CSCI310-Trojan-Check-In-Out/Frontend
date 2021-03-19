@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -9,8 +9,11 @@ import {
   Platform,
 } from 'react-native';
 
-export default function UpdateCapacity({buildingId, buildingName}) {
-  const [currentCapacity, onChangeCapacity] = React.useState(0);
+export default function UpdateCapacity({route, navigation}) {
+  const [currentCapacity, setCurrentCapacity] = useState(
+    route.params.building.current_numbers,
+  );
+  const [building, updateBuilding] = useState(route.params.building);
 
   return (
     <>
@@ -18,14 +21,14 @@ export default function UpdateCapacity({buildingId, buildingName}) {
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{buildingName}</Text>
+          <Text style={styles.title}>{building.place_name}</Text>
         </View>
         <Text style={styles.capacity}>Capacity:</Text>
         <View style={styles.textContainer}>
           <TextInput
             style={styles.textInput}
             keyboardType="numeric"
-            onChangeText={(number) => onChangeCapacity(number)}
+            onChangeText={setCurrentCapacity}
             value={currentCapacity}
           />
         </View>

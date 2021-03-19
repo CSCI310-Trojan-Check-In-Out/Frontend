@@ -13,14 +13,18 @@ export default function BuildingListItem({building}) {
       <View
         style={{
           display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'center',
           borderBottomColor: 'rgba(0, 0, 0, 0.1)',
           borderBottomWidth: 1,
           padding: 10,
         }}>
-        <Text>{building.name}</Text>
-        <Text> ({building.abbreviation})</Text>
+        <Text>
+          {building.place_name} ({building.abbreviation})
+        </Text>
+        <Text>
+          Capacity: {building.current_numbers} / {building.capacity}
+        </Text>
       </View>
     </>
   );

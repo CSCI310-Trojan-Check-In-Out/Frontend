@@ -5,6 +5,11 @@ import {Context as AppContext} from '../context/AppContext';
 const ACCOUNT_URL = `${config.URL_ENDPOINT}/account`;
 const MANAGER_URL = `${config.URL_ENDPOINT}/manager`;
 const STUDENT_URL = `${config.URL_ENDPOINT}/student`;
+
+/* -------------------------------------------------------------------------- */
+/*                                  All users                                 */
+/* -------------------------------------------------------------------------- */
+
 // sign up
 export function signupApi(
   image,
@@ -93,30 +98,50 @@ export function deleteAccountApi(
   successCallback();
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                   manager                                  */
+/* -------------------------------------------------------------------------- */
+
 // pinQRCode
-export function getQRCodeApi(
-  buildingId:any,
-  successCallback: Function){
-    const form = createFormData([
-      ['buildingId', buildingId]
-    ]);
+export function getQRCodeApi(buildingId: any, successCallback: Function) {
+  const form = createFormData([['placeId', buildingId]]);
 
-    axios({
-      method: 'get',
-      url: `${MANAGER_URL}/locationDetails`, 
-      data: form,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    }).then((res) => {
-      if (res.status === 200) {
-        const userData = res.data[0];
-        successCallback(userData);
-      } 
-    });
-  }
+  axios({
+    method: 'post',
+    url: `${MANAGER_URL}/get-qr-code`,
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }).then((res) => {
+    if (res.status === 200) {
+      const QRCode = res.data.rows[0].qr_code_token;
+      successCallback(QRCode);
+    }
+  });
+}
 
-// helpers
+export function getAllLocationsApi(successCallback: Function) {
+  axios({
+    method: 'post',
+    url: `${MANAGER_URL}/list-all-buildings`,
+  }).then((res) => {
+    if (res.status === 200) {
+      const buildings = res.data.rows;
+      successCallback(buildings);
+    }
+  });
+
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Student                                  */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/*                                   helpers                                  */
+/* -------------------------------------------------------------------------- */
+
 function createFormData(data: any[][2]) {
   const formData = new FormData();
   data.forEach((item: any[]) => {

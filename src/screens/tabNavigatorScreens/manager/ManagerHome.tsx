@@ -4,14 +4,12 @@ import HomeWithQRCode from '../../../components/home/manager/HomeWithQRCode';
 import HomeWithoutQRCode from '../../../components/home/manager/HomeWithoutQRCode';
 import CommonStyle from '../../../style/common.style';
 
-export default function ManagerHome({withQRCode}) {
-  
-
+export default function ManagerHome({pinnedBuilding}) {
   return (
     <>
       <View style={CommonStyle.outerContainerStyle}>
-        {withQRCode ? (
-          <HomeWithQRCode buildingName={'SAL'} />
+        {pinnedBuilding ? (
+          <HomeWithQRCode pinnedBuilding={pinnedBuilding} />
         ) : (
           <HomeWithoutQRCode />
         )}

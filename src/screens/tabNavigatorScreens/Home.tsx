@@ -39,7 +39,7 @@ export default function Home({navigation}) {
   return (
     <>
       {state.user.isAdmin ? (
-        <ManagerHome withQRCode={state.pinnedBuilding}></ManagerHome>
+        <ManagerHome pinnedBuilding={state.pinnedBuilding}></ManagerHome>
       ) : (
         <StudentHome navigation={navigation}></StudentHome>
       )}

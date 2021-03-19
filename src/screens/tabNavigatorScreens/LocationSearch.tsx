@@ -5,51 +5,34 @@ import BuildingList from '../../components/locationSearch/BuildingList';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import DocumentPicker from 'react-native-document-picker';
-
-
-const handleFilePick= async ()=> {
-  try {
-    const res = await DocumentPicker.pick({
-      type: [DocumentPicker.types.csv],
-    });
-    console.log(
-      res.uri,
-      res.type, 
-      res.name,
-      res.size
-    );
-  } catch (err) {
-    if (DocumentPicker.isCancel(err)) {
-      
-    } else {
-      throw err;
-    }
-  }
-}
+// api
+import {getAllLocationsApi} from '../../api/backendApiCalls';
 
 export default function LocationSearch() {
-  const initialList = [
-    {
-      name: 'building A',
-      abbreviation: 'BA',
-      id: 1,
-    },
-    {
-      name: 'building B',
-      abbreviation: 'BA',
-      id: 2,
-    },
-  ];
-  const [buildings, setBuildings] = useState<any>(initialList);
+  const [buildings, setBuildings] = useState<any>([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    setBuildings(initialList);
+    getAllLocationsApi(setBuildings);
   }, []);
 
   function searchBuilding(query) {
     fetch('');
   }
+
+  const handleFilePick = async () => {
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.csv],
+      });
+      console.log(res.uri, res.type, res.name, res.size);
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+      } else {
+        throw err;
+      }
+    }
+  };
 
   return (
     <>

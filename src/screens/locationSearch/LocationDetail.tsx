@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import {
   Text,
   View,
@@ -13,23 +13,31 @@ import {useNavigation} from '@react-navigation/native';
 import UpdateCapacity from './UpdateCapacity';
 import {getQRCodeApi} from '../../api/backendApiCalls';
 import {Context as AppContext} from '../../context/AppContext';
+import QRCode from 'react-native-qrcode-svg';
 
 export default function LocationDetail({route, navigation}) {
   const {state, pinQRCode} = useContext(AppContext);
-  const [QRCode, setQRCode] = useState<string>('sss');
+  const [building, setBuilding] = useState(route.params.building);
+  const [buildingQRCode, setQRCode] = useState<string>('111');
   const [isManager, setIsManager] = useState(true);
   const [image, setImage] = React.useState<string>(
     'https://reactnative.dev/img/tiny_logo.png',
   );
 
-
   useEffect(() => {
-    getQRCodeApi(route.params.buildingId, setQRCode);
+    getQRCodeApi(route.params.building.id, setQRCode);
   }, []);
 
   function pinQRCodeSucceed() {
     // getQRCodeApi(route.params.buildingId,pinQRCode);
-    pinQRCode(QRCode);
+    const pinnedBuilding = {
+      building: {
+        id: 1,
+        buildingName: 'building',
+      },
+      QRCode: buildingQRCode,
+    };
+    pinQRCode(pinnedBuilding);
     Alert.alert('', 'Successfully Pinnned QR Code to Home');
   }
 
@@ -41,12 +49,15 @@ export default function LocationDetail({route, navigation}) {
           <Text style={styles.title}>{'Search Result'}</Text>
         </View>
         <View style={styles.profile}>
-          <Image style={styles.profilePicture} source={{uri: image}} />
+          {buildingQRCode ? (
+            <QRCode value={buildingQRCode} size={200} quietZone={10} />
+          ) : null}
+
           <View style={styles.textcontainer}>
-            <Text style={styles.name}>{'BuildingName Placeholder'}</Text>
+            <Text style={styles.name}>{route.params.building.place_name}</Text>
             {isManager ? (
               <Text style={styles.capacity}>
-                Current Capacity: {'10'}/{'20'}
+                Current Capacity: {building.current_numbers}/{building.capacity}
               </Text>
             ) : null}
           </View>
@@ -61,7 +72,9 @@ export default function LocationDetail({route, navigation}) {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('UpdateCapacity')}>
+                onPress={() =>
+                  navigation.navigate('UpdateCapacity', {building: building})
+                }>
                 <Text style={styles.textButton}>Update Capacity</Text>
               </TouchableOpacity>
             </>

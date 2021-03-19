@@ -1,7 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 
-export default function HomeWithQRCode({buildingName}) {
+export default function HomeWithQRCode({pinnedBuilding}) {
   return (
     <>
       <View style={styles.container}>
@@ -9,13 +10,10 @@ export default function HomeWithQRCode({buildingName}) {
           <Text style={styles.title}>Quick Access</Text>
         </View>
         <View style={styles.buildingNameContainer}>
-          <Text style={styles.buildingName}>{buildingName}</Text>
+          <Text style={styles.buildingName}>{pinnedBuilding.buildingName}</Text>
         </View>
         <View style={styles.QRCodeContainer}>
-          <Image
-            style={styles.QRCode}
-            source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
-          />
+          <QRCode value={pinnedBuilding.QRCode} size={200} quietZone={10} />
         </View>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.textButton}>Remove From Pin</Text>
@@ -50,7 +48,7 @@ const styles = StyleSheet.create({
   },
   QRCodeContainer: {},
   QRCode: {
-    width: 270,
+    width: '80%',
     height: 270,
   },
   button: {

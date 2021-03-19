@@ -13,7 +13,7 @@ export default function BuildingList({buildings}) {
           return (
             <>
               <TouchableOpacity onPress={
-                ()=>{navigation.navigate('LocationDetail', {buildingId:item.id})}
+                ()=>{navigation.navigate('LocationDetail', {building:item})}
               }>
                 <BuildingListItem building={item}></BuildingListItem>
               </TouchableOpacity>
