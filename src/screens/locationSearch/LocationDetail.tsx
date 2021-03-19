@@ -22,7 +22,11 @@ export default function LocationDetail({route, navigation}) {
     'https://reactnative.dev/img/tiny_logo.png',
   );
 
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    getQRCodeApi(route.params.buildingId, setQRCode);
+  }, []);
+
   function pinQRCodeSucceed() {
     // getQRCodeApi(route.params.buildingId,pinQRCode);
     pinQRCode(QRCode);
