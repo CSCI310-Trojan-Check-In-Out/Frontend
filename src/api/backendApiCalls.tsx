@@ -134,6 +134,12 @@ export function getAllLocationsApi(successCallback: Function) {
 
 }
 
+export function removeQRCodeApi(
+  successCallback: Function,
+) {
+  successCallback();
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                   Student                                  */
 /* -------------------------------------------------------------------------- */
