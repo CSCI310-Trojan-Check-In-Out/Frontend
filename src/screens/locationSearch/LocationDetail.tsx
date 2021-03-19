@@ -14,6 +14,7 @@ import UpdateCapacity from './UpdateCapacity';
 import {getQRCodeApi} from '../../api/backendApiCalls';
 import {Context as AppContext} from '../../context/AppContext';
 import QRCode from 'react-native-qrcode-svg';
+import { subscribeBuildingCurrentCapacity, subscribeBuildingMaximumCapacity, unSubscribeBuildingCurrentCapacity, unSubscribeBuildingMaximumCapacity } from '../../api/firebaseApi';
 
 export default function LocationDetail({route, navigation}) {
   const {state, pinQRCode} = useContext(AppContext);
@@ -21,9 +22,19 @@ export default function LocationDetail({route, navigation}) {
   const [buildingQRCode, setQRCode] = useState<string>('111');
   const [isManager, setIsManager] = useState(true);
 
+  const [maximumCapacity, updateMaximumCapacity] = useState(building.capacity);
+  const [currentCapacity, updateCurrentCapacity] = useState(
+    building.current_numbers,
+  );
+
   useEffect(() => {
-    // getQRCodeApi(route.params.building.id, setQRCode);
     setQRCode(String(route.params.building.id));
+    subscribeBuildingMaximumCapacity('123', updateMaximumCapacity);
+    subscribeBuildingCurrentCapacity('buildingId', updateCurrentCapacity);
+    return () => {
+      unSubscribeBuildingMaximumCapacity('123');
+      unSubscribeBuildingCurrentCapacity('buildingId');
+    };
   }, []);
 
   function pinQRCodeSucceed() {
@@ -55,7 +66,7 @@ export default function LocationDetail({route, navigation}) {
             <Text style={styles.name}>{route.params.building.place_name}</Text>
             {isManager ? (
               <Text style={styles.capacity}>
-                Current Capacity: {building.current_numbers}/{building.capacity}
+                Current Capacity: {currentCapacity}/{maximumCapacity}
               </Text>
             ) : null}
           </View>
