@@ -1,10 +1,11 @@
 import CreateAppContext from './CreateAppContext';
 // import {GOOGLE_API_KEY} from 'react-native-dotenv'
-import {LOG_IN, LOG_OUT} from './actionTypes';
+import {LOG_IN, LOG_OUT,PIN_QRCODE} from './actionTypes';
 
 const initialState = {
   user: null,
   buildings: null,
+  pinnedBuilding: null,
 };
 
 const eventReducer = (state = initialState, action) => {
@@ -13,6 +14,8 @@ const eventReducer = (state = initialState, action) => {
       return {...state, user: action.payload};
     case LOG_OUT:
       return {...state, user: action.payload};
+    case PIN_QRCODE:
+      return {...state, pinnedBuilding:action.payload}
     default:
       return state;
   }
@@ -40,11 +43,23 @@ const logout = (dispatch) => async () => {
   }
 };
 
+const pinQRCode=(dispatch)=> async(payload)=>{
+  try {
+    dispatch({
+      type: PIN_QRCODE,
+      payload: payload,
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
 export const {Provider, Context} = CreateAppContext(
   eventReducer,
   {
     login,
     logout,
+    pinQRCode,
   },
   initialState,
 );

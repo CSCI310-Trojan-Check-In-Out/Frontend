@@ -5,6 +5,8 @@ import HomeWithoutQRCode from '../../../components/home/manager/HomeWithoutQRCod
 import CommonStyle from '../../../style/common.style';
 
 export default function ManagerHome({withQRCode}) {
+  
+
   return (
     <>
       <View style={CommonStyle.outerContainerStyle}>

@@ -93,6 +93,29 @@ export function deleteAccountApi(
   successCallback();
 }
 
+// pinQRCode
+export function getQRCodeApi(
+  buildingId:any,
+  successCallback: Function){
+    const form = createFormData([
+      ['buildingId', buildingId]
+    ]);
+
+    axios({
+      method: 'get',
+      url: `${MANAGER_URL}/locationDetails`, 
+      data: form,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        const userData = res.data[0];
+        successCallback(userData);
+      } 
+    });
+  }
+
 // helpers
 function createFormData(data: any[][2]) {
   const formData = new FormData();
