@@ -1,14 +1,28 @@
 import CreateAppContext from './CreateAppContext';
 // import {GOOGLE_API_KEY} from 'react-native-dotenv'
-import {LOG_IN, LOG_OUT, DELETE_ACCOUNT, PIN_QRCODE, REMOVE_QRCODE} from './actionTypes';
+import {
+  LOG_IN,
+  LOG_OUT,
+  DELETE_ACCOUNT,
+  PIN_QRCODE,
+  REMOVE_QRCODE,
+  CHECK_IN,
+  CHECK_OUT,
+} from './actionTypes';
 
 interface DataStore {
   user: any | null;
   buildings: any | null;
   pinnedBuilding: PinnedBuilding | null;
+  checkedInBuilding: CheckedInBuilding | null;
 }
 
 interface PinnedBuilding {
+  building: any;
+  QRCode: string;
+}
+
+interface CheckedInBuilding {
   building: any;
   QRCode: string;
 }
@@ -17,6 +31,7 @@ const initialState: DataStore = {
   user: null,
   buildings: null,
   pinnedBuilding: null,
+  checkedInBuilding: null,
 };
 
 const eventReducer = (state = initialState, action) => {
@@ -31,6 +46,10 @@ const eventReducer = (state = initialState, action) => {
       return {...state, pinnedBuilding: action.payload};
     case REMOVE_QRCODE:
       return {...state, pinnedBuilding: action.payload};
+    case CHECK_IN:
+      return {...state, checkedInBuilding: action.payload};
+    case CHECK_OUT:
+      return {...state, checkedInBuilding: action.payload};
     default:
       return state;
   }
@@ -91,6 +110,28 @@ const removeQRCode = (dispatch) => async () => {
   }
 };
 
+const checkin = (dispatch) => async (payload) => {
+  try {
+    dispatch({
+      type: CHECK_IN,
+      payload: payload,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const checkout = (dispatch) => async () => {
+  try {
+    dispatch({
+      type: CHECK_OUT,
+      payload: null,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const {Provider, Context} = CreateAppContext(
   eventReducer,
   {
@@ -99,6 +140,8 @@ export const {Provider, Context} = CreateAppContext(
     deleteAccount,
     pinQRCode,
     removeQRCode,
+    checkin,
+    checkout,
   },
   initialState,
 );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/tabNavigatorScreens/Home';
 
@@ -11,10 +11,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import ProfileNavigator from './ProfileNavigator';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {Context as AppContext} from './../context/AppContext';
 
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
+  const {state} = useContext(AppContext);
+
   return (
     <Tab.Navigator
       lazy={true}
@@ -43,7 +46,9 @@ export default function TabNavigator() {
         },
       })}>
       <Tab.Screen name="Home" component={Home} options={{tabBarBadge: 1}} />
-      <Tab.Screen name="LocationSearch" component={LocationNavigator} />
+      {state.user.isAdmin ? (
+        <Tab.Screen name="LocationSearch" component={LocationNavigator} />
+      ) : null}
       <Tab.Screen name="VisitHistory" component={VisitHistory} />
       <Tab.Screen name="Profile" component={ProfileNavigator} />
     </Tab.Navigator>
