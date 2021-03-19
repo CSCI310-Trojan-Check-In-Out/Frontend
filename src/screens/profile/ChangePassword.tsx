@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React, {useContext} from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,7 +15,7 @@ import {Context as AppContext} from '../../context/AppContext';
 import {changePasswordApi} from '../../api/backendApiCalls';
 
 export default function ChangePassword({id, navigation}) {
-  const [state]=useContext(AppContext);
+  const {state} = useContext(AppContext);
 
   const [currentPassword, onChangeCurrentPassword] = React.useState('');
   const [newPassword, onChangeNewPassword] = React.useState('');
@@ -32,19 +32,27 @@ export default function ChangePassword({id, navigation}) {
     }
   };
 
-  function changePasswordFeedback(feedback){
-    if (feedback){
-      Alert.alert('','Old Password is not correct.');
+  function changePasswordFail(feedback) {
+    if (feedback) {
+      Alert.alert('', feedback);
     }
   }
 
-  function changePasswordSucceed(){
-    if (newPassword!==confirmNewPassword){
-      Alert.alert('', 'New Password has to be uniform.');
-    }
-    else{
-      changePasswordApi(state.user.id,currentPassword,newPassword,
-        confirmNewPassword, changePasswordFeedback, null)
+  function changePasswordSucceed() {
+    Alert.alert('', 'Successfully changed password.');
+  }
+
+  function handleSubmit() {
+    if (newPassword !== confirmNewPassword) {
+      Alert.alert('', 'Your confirm password does not match your new password');
+    } else {
+      changePasswordApi(
+        state.user.id,
+        currentPassword,
+        newPassword,
+        changePasswordSucceed,
+        changePasswordFail,
+      );
     }
   }
 
@@ -79,7 +87,7 @@ export default function ChangePassword({id, navigation}) {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={changePasswordSucceed}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.textButton}>Done</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -114,7 +122,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 15,
-    paddingLeft:'5%',
+    paddingLeft: '5%',
   },
   buttonContainer: {
     alignItems: 'center',
