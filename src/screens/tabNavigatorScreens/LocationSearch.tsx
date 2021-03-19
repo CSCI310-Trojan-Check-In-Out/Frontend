@@ -10,6 +10,7 @@ import {getAllLocationsApi} from '../../api/backendApiCalls';
 
 export default function LocationSearch() {
   const [buildings, setBuildings] = useState<any>([]);
+  const [filteredBuildings, setFilteredBuildings] = useState<any>([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {

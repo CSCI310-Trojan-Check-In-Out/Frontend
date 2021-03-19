@@ -18,8 +18,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Context as AppContext} from '../../context/AppContext';
+// api
 import {signupApi} from '../../api/backendApiCalls';
-
+import {uploadProfilePic} from '../../api/firebaseApi';
 // import {Image} from 'react-native-svg';
 
 export default function SignUp({navigation}: {navigation: any}) {
@@ -56,18 +57,21 @@ export default function SignUp({navigation}: {navigation: any}) {
     uscIdData,
     emailData,
     majorData,
-    passwordData
+    passwordData,
   ) {
-    signupApi(
-      imageData,
-      isAdminData,
-      fullNameData,
-      uscIdData,
-      emailData,
-      majorData,
-      passwordData,
-      login,
-    );
+    uploadProfilePic(imageData, emailData).then((data) => {
+      console.log(data);
+    });
+    // signupApi(
+    //   imageData,
+    //   isAdminData,
+    //   fullNameData,
+    //   uscIdData,
+    //   emailData,
+    //   majorData,
+    //   passwordData,
+    //   login,
+    // );
   }
 
   return (
