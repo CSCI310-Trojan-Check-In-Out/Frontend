@@ -1,6 +1,6 @@
 import CreateAppContext from './CreateAppContext';
 // import {GOOGLE_API_KEY} from 'react-native-dotenv'
-import {LOG_IN, LOG_OUT, PIN_QRCODE, REMOVE_QRCODE} from './actionTypes';
+import {LOG_IN, LOG_OUT, DELETE_ACCOUNT, PIN_QRCODE, REMOVE_QRCODE} from './actionTypes';
 
 interface DataStore {
   user: any | null;
@@ -24,7 +24,9 @@ const eventReducer = (state = initialState, action) => {
     case LOG_IN:
       return {...state, user: action.payload};
     case LOG_OUT:
-      return {...state, user: action.payload};
+      return {initialState};
+    case DELETE_ACCOUNT:
+      return {initialState};
     case PIN_QRCODE:
       return {...state, pinnedBuilding: action.payload};
     case REMOVE_QRCODE:
@@ -49,6 +51,17 @@ const logout = (dispatch) => async () => {
   try {
     dispatch({
       type: LOG_OUT,
+      payload: null,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteAccount = (dispatch) => async () => {
+  try {
+    dispatch({
+      type: DELETE_ACCOUNT,
       payload: null,
     });
   } catch (error) {
@@ -83,6 +96,7 @@ export const {Provider, Context} = CreateAppContext(
   {
     login,
     logout,
+    deleteAccount,
     pinQRCode,
     removeQRCode,
   },

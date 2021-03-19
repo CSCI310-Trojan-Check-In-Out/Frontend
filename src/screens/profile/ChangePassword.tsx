@@ -1,13 +1,22 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {
   StyleSheet,
   Text,
   TextInput,
   View,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 
+// context
+import {Context as AppContext} from '../../context/AppContext';
+
+// tools
+import {changePasswordApi} from '../../api/backendApiCalls';
+
 export default function ChangePassword({id, navigation}) {
+  const [state]=useContext(AppContext);
+
   const [currentPassword, onChangeCurrentPassword] = React.useState('');
   const [newPassword, onChangeNewPassword] = React.useState('');
   const [confirmNewPassword, onChangeConfirmNewPassword] = React.useState('');
@@ -22,6 +31,22 @@ export default function ChangePassword({id, navigation}) {
         break;
     }
   };
+
+  function changePasswordFeedback(feedback){
+    if (feedback){
+      Alert.alert('','Old Password is not correct.');
+    }
+  }
+
+  function changePasswordSucceed(){
+    if (newPassword!==confirmNewPassword){
+      Alert.alert('', 'New Password has to be uniform.');
+    }
+    else{
+      changePasswordApi(state.user.id,currentPassword,newPassword,
+        confirmNewPassword, changePasswordFeedback, null)
+    }
+  }
 
   return (
     <>
@@ -54,7 +79,7 @@ export default function ChangePassword({id, navigation}) {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={changePasswordSucceed}>
             <Text style={styles.textButton}>Done</Text>
           </TouchableOpacity>
           <TouchableOpacity

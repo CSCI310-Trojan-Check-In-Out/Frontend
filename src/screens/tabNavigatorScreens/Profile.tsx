@@ -16,7 +16,7 @@ export default function Profile({name, uscid, major}) {
   {
     /*id from database, different from uscid*/
   }
-  const {state, logout} = useContext(AppContext);
+  const {state, logout, deleteAccount} = useContext(AppContext);
   const [purpose, setPurpose] = React.useState('');
   const [showModal, setShowModal] = React.useState(false);
   const [modalTitle, setModalTitle] = React.useState('');
@@ -42,10 +42,10 @@ export default function Profile({name, uscid, major}) {
       case 'updatePhoto':
         break;
       case 'logOut':
-        logoutApi(logoutSucceed, null);
+        logoutApi(logout, null);
         break;
       case 'deleteAccount':
-        deleteAccountApi(logoutSucceed, null);
+        deleteAccountApi(state.user.id, deleteAccount, null);
         break;
       case 'ChangePassword':
         break;
@@ -57,9 +57,6 @@ export default function Profile({name, uscid, major}) {
     setShowModal(false);
   }
 
-  function logoutSucceed() {
-    logout();
-  }
 
   function press(purpose: string) {
     setPurpose(purpose);

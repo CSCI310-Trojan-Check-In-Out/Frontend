@@ -87,16 +87,74 @@ export function logoutApi(
   successCallback: Function,
   failureCallback: Function | null,
 ) {
-  successCallback();
+
+  axios({
+    method: 'post',
+    url: `${ACCOUNT_URL}/logout`, 
+  }).then((res) => {
+    if (res.status === 200) {
+      successCallback();
+    } 
+  });
 }
 // delete account
 // TODO: connect to backend
 export function deleteAccountApi(
+  id:any,
   successCallback: Function,
   failureCallback: Function | null,
 ) {
-  successCallback();
+  const form = createFormData([
+    ['id', id]
+  ]);
+
+  axios({
+    method: 'post',
+    url: `${ACCOUNT_URL}/deleteAccount`, 
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }).then((res) => {
+    if (res.status === 200) {
+      successCallback();
+    }
+  }); 
 }
+
+// change Password
+export function changePasswordApi(
+  id:any,
+  currentPassword: any,
+  newPassword:any,
+  confirmNewPassword:any,
+  successCallback: Function,
+  failureCallback: Function | null,
+) {
+  const form = createFormData([
+    ['userid', id],
+    ['currentPassword',currentPassword],
+    ['newPassword', newPassword],
+    ['confirmNewPassword',confirmNewPassword]
+  ]);
+
+  axios({
+    method: 'post',
+    url: `${ACCOUNT_URL}/changePassword`, 
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }).then((res) => {
+    if (res.status === 200) {
+      const userData = res.data[0];
+      successCallback(userData);
+    }
+  }); 
+}
+
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                                   manager                                  */
