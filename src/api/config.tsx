@@ -1,4 +1,4 @@
-const localhost = false;
+const localhost = true;
 // http://192.168.1.165
 const LOCAL_IP_ADDRESS = 'http://192.168.1.165';
 const PORT = '80';

@@ -41,7 +41,8 @@ export function signupApi(
     },
   }).then((res) => {
     if (res.status === 200) {
-      const userData = res.data[0];
+      const userData = res.data;
+      console.log(userData);
       successCallback(userData);
     }
     // else {
