@@ -88,30 +88,27 @@ export function logoutApi(
   successCallback: Function,
   failureCallback: Function | null,
 ) {
-
   axios({
     method: 'post',
-    url: `${ACCOUNT_URL}/logout`, 
+    url: `${ACCOUNT_URL}/logout`,
   }).then((res) => {
     if (res.status === 200) {
       successCallback();
-    } 
+    }
   });
 }
 // delete account
 // TODO: connect to backend
 export function deleteAccountApi(
-  id:any,
+  id: any,
   successCallback: Function,
   failureCallback: Function | null,
 ) {
-  const form = createFormData([
-    ['id', id]
-  ]);
+  const form = createFormData([['id', id]]);
 
   axios({
     method: 'post',
-    url: `${ACCOUNT_URL}/deleteAccount`, 
+    url: `${ACCOUNT_URL}/deleteAccount`,
     data: form,
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -120,42 +117,38 @@ export function deleteAccountApi(
     if (res.status === 200) {
       successCallback();
     }
-  }); 
+  });
 }
 
 // change Password
 export function changePasswordApi(
-  id:any,
-  currentPassword: any,
-  newPassword:any,
-  confirmNewPassword:any,
+  id: any,
+  oldPassword: any,
+  newPassword: any,
   successCallback: Function,
-  failureCallback: Function | null,
+  failureCallback: Function,
 ) {
   const form = createFormData([
     ['userid', id],
-    ['currentPassword',currentPassword],
+    ['oldPassword', oldPassword],
     ['newPassword', newPassword],
-    ['confirmNewPassword',confirmNewPassword]
   ]);
 
   axios({
     method: 'post',
-    url: `${ACCOUNT_URL}/changePassword`, 
+    url: `${ACCOUNT_URL}/changePassword`,
     data: form,
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   }).then((res) => {
     if (res.status === 200) {
-      const userData = res.data[0];
-      successCallback(userData);
+      successCallback();
+    } else {
+      failureCallback(res.data);
     }
-  }); 
+  });
 }
-
-
-
 
 /* -------------------------------------------------------------------------- */
 /*                                   manager                                  */
@@ -195,9 +188,6 @@ export function getAllLocationsApi(successCallback: Function) {
 /* -------------------------------------------------------------------------- */
 /*                                   Student                                  */
 /* -------------------------------------------------------------------------- */
-
-
-
 
 /* -------------------------------------------------------------------------- */
 /*                                   helpers                                  */
