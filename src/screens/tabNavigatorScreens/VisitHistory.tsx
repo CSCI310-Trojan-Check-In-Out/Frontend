@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {StyleSheet, Button, Text, View, Platform,TextInput} from 'react-native';
+import {StyleSheet, Button, Text, View, Platform,TextInput, Alert} from 'react-native';
 import ManagerHome from './manager/ManagerHome';
 import CommonStyle from '../../style/common.style';
 import SearchBar from '../../components/SearchBar';
@@ -8,11 +8,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 export default function VisitHistory() {
   const [text, setText]=useState('');
   const [startEnd, setStartEnd] = useState('');
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate]= useState(new Date());
+  const [startDate, setStartDate] = useState(new Date(1900,0,1));
+  const [endDate, setEndDate]= useState(new Date(2100,11,31));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
+  const [showTimeRange, setShowTimeRange]=useState(false);
   const [showBuilding,setShowBuilding]=useState(false);
   const [showStudentID,setShowStudentID]=useState(false);
   const [showMajor,setShowMajor]=useState(false);
@@ -59,6 +60,10 @@ export default function VisitHistory() {
     showMode('time');
   };
 
+  const showTimeRangeInput=()=>{
+    setShowTimeRange(!showTimeRange);
+  }
+
   const showBuildingInput=()=>{
     setShowBuilding(!showBuilding);
   };
@@ -72,6 +77,9 @@ export default function VisitHistory() {
   }
 
   function searchStudent(text, startDate, endDate, buildingName, studentID, major){
+    if (startDate>endDate){
+      Alert.alert('','End period has to be later than start period.');
+    }
     fetch('');
   }
 
@@ -83,18 +91,31 @@ export default function VisitHistory() {
         </View>
         <SearchBar placeholder={'Enter student name:'} query={text} changeText={setText}/>
         <View style={styles.button}>
-          <Button color={'#9D2235'} title="Choose Time Range"></Button>
-          {/* <Button color={'#9D2235'} onPress={()=>showDatepicker('start')} title="Choose Start Date" />
+          <Button color={'#9D2235'} title="Choose Time Range" onPress={showTimeRangeInput}/>
         </View>
-        <View style={styles.button}>
-          <Button color={'#9D2235'} onPress={()=>showTimepicker('start')} title="Choose Start Time" />
-        </View>
-        <View style={styles.button}>
-          <Button color={'#9D2235'} onPress={()=>showDatepicker('end')} title="Choose End Date" />
-        </View>
-        <View style={styles.button}>
-          <Button color={'#9D2235'} onPress={()=>showTimepicker('end')} title="Choose End Time" /> */}
-        </View>
+        
+        {showTimeRange&&(
+        <View>
+          <View style={styles.timeRangeContainer}>
+            <Text style={styles.timeRange}>From {startDate.toISOString().split('T')[0]}, {startDate.toTimeString().split('G')[0]} 
+            to {endDate.toISOString().split('T')[0]}, {endDate.toTimeString().split('G')[0]}</Text>
+          </View>
+          <View style={styles.timeRangeButtonContainer}>
+            <View style={styles.button}>
+              <Button color={'#808080'} onPress={()=>showDatepicker('start')} title="Start Date" />
+            </View>
+            <View style={styles.button}>
+              <Button color={'#808080'} onPress={()=>showTimepicker('start')} title="Start Time" />
+            </View>
+            <View style={styles.button}>
+              <Button color={'#808080'} onPress={()=>showDatepicker('end')} title="End Date" />
+            </View>
+            <View style={styles.button}>
+              <Button color={'#808080'} onPress={()=>showTimepicker('end')} title="End Time" /> 
+            </View>
+          </View> 
+        </View>)}
+
         {show && (
           <DateTimePicker
             testID="dateTimePicker"
@@ -158,6 +179,25 @@ const styles = StyleSheet.create({
   },
   title:{
     fontSize:20,
+    textAlign:'center',
+  },
+  timeRangeContainer:{
+    marginTop:'1%',
+    marginBottom:'1%',
+    marginLeft:'2%',
+    marginRight:'2%',
+  },
+  timeRangeButtonContainer:{
+    paddingLeft:'1%',
+    paddingRight:'1%',
+    marginTop: 10,
+    marginBottom: 10,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  timeRange:{
+    fontSize:15,
     textAlign:'center',
   },
   button:{
