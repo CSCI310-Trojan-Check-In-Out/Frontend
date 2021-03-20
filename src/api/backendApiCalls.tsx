@@ -129,7 +129,7 @@ export function changePasswordApi(
   failureCallback: Function,
 ) {
   const form = createFormData([
-    ['userid', id],
+    ['userId', id],
     ['oldPassword', oldPassword],
     ['newPassword', newPassword],
   ]);
@@ -185,6 +185,32 @@ export function getAllLocationsApi(successCallback: Function) {
   });
 }
 
+export function updateCapacityApi(
+  id: any,
+  currentCapacity: any,
+  successCallback: Function,
+  failureCallback: Function,
+) {
+  const form = createFormData([
+    ['placeId', id],
+    ['capacity',currentCapacity]
+  ]);
+
+  axios({
+    method: 'post',
+    url: `${MANAGER_URL}/update-capacity`,
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }).then((res) => {
+    if (res.status === 200) {
+      successCallback();
+    } else {
+      failureCallback();
+    }
+  });
+}
 /* -------------------------------------------------------------------------- */
 /*                                   Student                                  */
 /* -------------------------------------------------------------------------- */
