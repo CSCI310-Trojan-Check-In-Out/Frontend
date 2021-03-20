@@ -6,6 +6,7 @@ import Profile from '../screens/tabNavigatorScreens/Profile';
 import LocationDetail from '../screens/locationSearch/LocationDetail';
 import UpdateCapacity from '../screens/locationSearch/UpdateCapacity';
 import StudentListScreen from '../screens/locationSearch/StudentListScreen';
+import StudentProfile from '../screens/locationSearch/StudentProfile';
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,12 @@ export default function LocationNavigator() {
         options={{headerShown: false}}
         name="StudentListScreen"
         component={StudentListScreen}
+      />
+
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="StudentProfile"
+        component={StudentProfile}
       />
       {/* <Stack.Screen
         options={{headerShown: false}}

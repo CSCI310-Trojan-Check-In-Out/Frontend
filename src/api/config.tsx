@@ -1,4 +1,4 @@
-const localhost = true;
+const localhost = false;
 // nate
 //const LOCAL_IP_ADDRESS = 'http://192.168.1.165';
 // henry
