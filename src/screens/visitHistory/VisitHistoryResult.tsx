@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useContext} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, FlatList} from 'react-native';
-import VisitorList from '../../components/visitHistory/VisitHistoryList';
+import VisitHistoryList from '../../components/visitHistory/VisitHistoryList';
 import {getUserVisitHistory} from '../../api/backendApiCalls';
 import {Context as AppContext} from '../../context/AppContext';
 

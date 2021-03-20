@@ -91,6 +91,13 @@ export default function LocationDetail({route, navigation}) {
                 }>
                 <Text style={styles.textButton}>Update Capacity</Text>
               </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() =>
+                  navigation.navigate('StudentListScreen', {building: building})
+                }>
+                <Text style={styles.textButton}>View Students</Text>
+              </TouchableOpacity>
             </>
           ) : (
             <TouchableOpacity style={styles.button}>
