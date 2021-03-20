@@ -3,14 +3,19 @@ import {Text, View, StyleSheet, Button} from 'react-native';
 import StudentList from '../../components/studentList/StudentList';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 // api
-import {getAllLocationsApi} from '../../api/backendApiCalls';
+import {getAllStudentsApi} from '../../api/backendApiCalls';
 
-export default function StudentListScreen() {
+export default function StudentListScreen({route,navigation}) {
+  const [building,setBuilding] = useState(route.params.building);
   const [students, setStudents] = useState<any>([]);
+
+  useEffect(() => {
+    getAllStudentsApi(building.id, setStudents);
+  }, []);
 
   return (
     <>
-      <View style={styles.buildingList}>
+      <View style={styles.studentList}>
         <StudentList students={students}/>
       </View>
       
@@ -19,7 +24,7 @@ export default function StudentListScreen() {
 }
 
 const styles = StyleSheet.create({
-  buildingList: {
+  studentList: {
     backgroundColor: '#fff',
     marginTop: '5%',
     marginBottom: '1%',

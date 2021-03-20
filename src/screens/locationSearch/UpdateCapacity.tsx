@@ -32,7 +32,7 @@ export default function UpdateCapacity({route, navigation}) {
       setMessage('Please enter a positive integer!');
     }
     else{
-      updateCapacityApi(route.params.id,currentCapacity,updateCapacity,notification);
+      updateCapacityApi(route.params.building.id,currentCapacity,updateCapacity,notification);
     }
   }
 

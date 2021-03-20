@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#9D2235',
-    width: 200,
-    height: 60,
+    width: 180,
+    height: 50,
     padding: '2%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -170,6 +170,6 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 18,
   },
 });

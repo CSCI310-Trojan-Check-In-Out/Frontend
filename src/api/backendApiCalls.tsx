@@ -186,6 +186,22 @@ export function getAllLocationsApi(successCallback: Function) {
   });
 }
 
+export function getAllStudentsApi(id:any, successCallback: Function) {
+  const form = createFormData([
+    ['placeId', id]
+  ]);
+  axios({
+    method: 'post',
+    data: form,
+    url: `${MANAGER_URL}/list-current-students`,
+  }).then((res) => {
+    if (res.status === 200) {
+      const students = res.data.rows;
+      successCallback(students);
+    }
+  });
+}
+
 export function updateCapacityApi(
   id: any,
   currentCapacity: any,
