@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useContext, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -7,13 +7,34 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
+import {updateCapacityApi} from '../../api/backendApiCalls';
 
 export default function UpdateCapacity({route, navigation}) {
-  const [currentCapacity, setCurrentCapacity] = useState(
-    route.params.building.current_numbers,
-  );
+  const [currentCapacity, setCurrentCapacity] = useState<number>();
   const [building, updateBuilding] = useState(route.params.building);
+  const [message, setMessage]=useState('Please enter a positive integer that is great than the current capacity!');
+
+  function updateCapacity(){
+    setMessage('Capacity successfully updated!');
+  }
+
+  function notification(){
+    setMessage('New Capacity cannot be smaller than the older one!');
+  }
+
+  function updateCapacitySucceed(){
+    if (!currentCapacity){
+      setMessage('Capacity cannot be empty');
+    }
+    else if (isNaN(currentCapacity)||currentCapacity<=0||Math.floor(currentCapacity) != currentCapacity){
+      setMessage('Please enter a positive integer!');
+    }
+    else{
+      updateCapacityApi(route.params.id,currentCapacity,updateCapacity,notification);
+    }
+  }
 
   return (
     <>
@@ -34,14 +55,14 @@ export default function UpdateCapacity({route, navigation}) {
         </View>
         <View style={styles.notificationContainer}>
           <Text style={styles.notification}>
-            Feedback from Backend regarding the number/CSV file
+            {message}
           </Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.textButton}>Upload CSV File</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={updateCapacitySucceed}>
             <Text style={styles.textButton}>Update</Text>
           </TouchableOpacity>
         </View>
