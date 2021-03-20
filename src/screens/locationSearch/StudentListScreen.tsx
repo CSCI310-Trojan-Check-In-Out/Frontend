@@ -15,6 +15,9 @@ export default function StudentListScreen({route,navigation}) {
 
   return (
     <>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{building.place_name}</Text>
+      </View>
       <View style={styles.studentList}>
         <StudentList students={students}/>
       </View>
@@ -24,6 +27,18 @@ export default function StudentListScreen({route,navigation}) {
 }
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    alignItems: 'center',
+    marginTop: '10%',
+    marginBottom: '10%',
+    paddingLeft: '10%',
+    paddingRight: '10%',
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
   studentList: {
     backgroundColor: '#fff',
     marginTop: '5%',
