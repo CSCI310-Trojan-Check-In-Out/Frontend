@@ -38,16 +38,9 @@ export default function LocationSearch() {
   return (
     <>
       <SearchBar
-        placeholder={'Enter a building to search'}
+        placeholder={'Filter search results'}
         changeText={setQuery}
       />
-      <View style={styles.searchButton}>
-        <Button
-          color={'#FFC72C'}
-          onPress={() => searchBuilding(query)}
-          title="Search"
-        />
-      </View>
       <View style={styles.buildingList}>
         <BuildingList buildings={buildings}></BuildingList>
       </View>

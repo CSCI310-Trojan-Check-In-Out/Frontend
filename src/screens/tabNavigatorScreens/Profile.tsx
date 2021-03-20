@@ -57,7 +57,6 @@ export default function Profile({name, uscid, major}) {
     setShowModal(false);
   }
 
-
   function press(purpose: string) {
     setPurpose(purpose);
     if (purpose === 'updatePhoto') {
@@ -90,9 +89,9 @@ export default function Profile({name, uscid, major}) {
           <View style={styles.profile}>
             <Image style={styles.profilePicture} source={{uri: image}} />
             <View style={styles.textcontainer}>
-              <Text style={styles.name}>Name: {name}</Text>
-              <Text style={styles.uscid}>USCID: {uscid} </Text>
-              <Text style={styles.major}>Major: {major} </Text>
+              <Text style={styles.name}>{state.user.username}</Text>
+              <Text style={styles.uscid}>USCID: {state.user.usc_id} </Text>
+              <Text style={styles.major}>Major: {state.user.major} </Text>
             </View>
           </View>
           <View style={styles.row}>
@@ -131,8 +130,9 @@ const styles = StyleSheet.create({
   },
   profile: {},
   profilePicture: {
-    width: 270,
-    height: 270,
+    width: 300,
+    height: 300,
+    borderRadius: 50,
     flexDirection: 'row',
   },
   textcontainer: {
@@ -140,14 +140,14 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   name: {
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontSize: 25,
+    fontWeight: '600',
   },
   uscid: {
-    fontSize: 20,
+    fontSize: 15,
   },
   major: {
-    fontSize: 20,
+    fontSize: 15,
   },
   row: {
     marginTop: 10,

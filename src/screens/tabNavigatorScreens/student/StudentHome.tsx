@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -18,9 +18,11 @@ import ConfirmModal from '../../../components/ConfirmModal';
 import CommonStyle from '../../../style/common.style';
 import Theme from '../../../style/theme.style';
 import QRCode from 'react-native-qrcode-svg';
+import {Context as AppContext} from '../../../context/AppContext';
 
 export default function StudentHome({navigation}) {
-  const [checkedIn, setCheckedIn] = useState<boolean>(false);
+  const {state, checkin, checkout} = useContext(AppContext);
+
   const [showConfirmPopup, setShowConfirmPopup] = useState<boolean>(false);
   const [scanning, setScanning] = useState<boolean>(false);
   const [currentQRCode, setCurrentQRCode] = useState<string>('');
@@ -36,7 +38,6 @@ export default function StudentHome({navigation}) {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
     if (currentQRCode) {
       setShowConfirmPopup(true);
     }
@@ -51,6 +52,15 @@ export default function StudentHome({navigation}) {
   }
 
   function acceptQRCode() {
+    // TODO: dispatch
+    const payload = {
+      building: {
+        id: 1,
+        name: 'building',
+      },
+      QRCode: currentQRCode,
+    };
+    checkin(payload);
     setShowConfirmPopup(false);
     setCurrentQRCode('');
   }
@@ -61,8 +71,9 @@ export default function StudentHome({navigation}) {
   }
   // logics for home button
   function handleButton() {
-    if (checkedIn) {
-      setCheckedIn(false);
+    if (state.checkedInBuilding) {
+      // setCheckedIn(false);
+      checkout();
     } else {
       setScanning(!scanning);
     }
@@ -72,24 +83,28 @@ export default function StudentHome({navigation}) {
       {/* <Modal /> */}
       {/*  title */}
       <Text style={CommonStyle.title}>
-        {checkedIn ? 'You Are Checked In At' : 'Scan QR Code to Check In'}
+        {state.checkedInBuilding
+          ? 'You Are Checked In At'
+          : 'Scan QR Code to Check In'}
       </Text>
 
       <View style={[CommonStyle.locationBoxContainer, {margin: 30}]}>
-        {!checkedIn && scanning ? (
+        {!state.checkedInBuilding && scanning ? (
           <Camera
             useDefaultCameraBtn={false}
             scanQRCode={scanQRCode}
             useAlbum={false}
             isScanning={scanning}></Camera>
+        ) : state.checkedInBuilding ? (
+          <Text> {state.checkedInBuilding.building.name}</Text>
         ) : (
-          <Text>Computer Science Building</Text>
+          <Text>QR Code Scan Area</Text>
         )}
       </View>
       <ScanLoadingSpinner scanning={scanning} />
 
       <HomeButton
-        checkedIn={checkedIn}
+        checkedIn={state.checkedInBuilding}
         scanning={scanning}
         handleButton={handleButton}
       />
@@ -98,9 +113,10 @@ export default function StudentHome({navigation}) {
       {showConfirmPopup ? (
         <ConfirmModal
           setShowModal={setShowConfirmPopup}
-          QRCode={currentQRCode}
-          acceptQRCode={acceptQRCode}
-          declineQRCode={declineQRCode}
+          title={'Check In?'}
+          message={currentQRCode}
+          accept={acceptQRCode}
+          decline={declineQRCode}
         />
       ) : null}
     </View>

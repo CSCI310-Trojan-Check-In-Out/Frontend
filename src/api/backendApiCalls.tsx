@@ -215,6 +215,20 @@ export function updateCapacityApi(
 /*                                   Student                                  */
 /* -------------------------------------------------------------------------- */
 
+export function checkinApi(
+  userId: string,
+  buildingId: string,
+  successCallback: Function,
+  failureCallback: Function,
+) {}
+
+export function checkoutApi(
+  userId: string,
+  buildingId: string,
+  successCallback: Function,
+  failureCallback: Function,
+) {}
+
 /* -------------------------------------------------------------------------- */
 /*                                   helpers                                  */
 /* -------------------------------------------------------------------------- */
