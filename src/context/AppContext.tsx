@@ -1,6 +1,5 @@
 import CreateAppContext from './CreateAppContext';
 // import {GOOGLE_API_KEY} from 'react-native-dotenv'
-<<<<<<< HEAD
 import {
   LOG_IN,
   LOG_OUT,
@@ -10,10 +9,6 @@ import {
   CHECK_IN,
   CHECK_OUT,
 } from './actionTypes';
-=======
-import {LOG_IN, LOG_OUT, DELETE_ACCOUNT, 
-  PIN_QRCODE, REMOVE_QRCODE} from './actionTypes';
->>>>>>> 135ccbf242d27cfa1f0a559171eddf365fe4a05a
 
 interface DataStore {
   user: any | null;
