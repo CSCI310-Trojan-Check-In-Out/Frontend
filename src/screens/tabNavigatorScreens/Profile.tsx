@@ -27,6 +27,7 @@ export default function Profile({name, uscid, major}) {
   const navigation = useNavigation();
 
   useEffect(() => {
+    console.log(state);
     if (!state.user) {
       navigation.navigate('Login');
     }

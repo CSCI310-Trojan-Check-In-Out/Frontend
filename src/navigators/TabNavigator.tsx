@@ -46,14 +46,14 @@ export default function TabNavigator() {
         },
       })}>
       <Tab.Screen name="Home" component={Home} options={{tabBarBadge: 1}} />
-      {state.user?.isAdmin ? (
+      {state.user?.is_admin ? (
         <Tab.Screen name="LocationSearch" component={LocationNavigator} />
       ) : null}
 
-      {state.user?.isAdmin ? (
+      {state.user?.is_admin ? (
         <Tab.Screen name="VisitHistory" component={VisitHistory} />
       ) : (
-        <Tab.Screen name="VisitHistoryResult" component={VisitHistoryResult} />
+        <Tab.Screen name="VisitHistory" component={VisitHistoryResult} />
       )}
 
       <Tab.Screen name="Profile" component={ProfileNavigator} />

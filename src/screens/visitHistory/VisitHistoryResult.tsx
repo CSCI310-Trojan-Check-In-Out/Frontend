@@ -8,7 +8,7 @@ export default function VisitHistoryResult({navigation}) {
   const {state} = useContext(AppContext);
 
 
-  const [history, setHistory] = useState<any>(initialList);
+  const [history, setHistory] = useState<any>([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
