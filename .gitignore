@@ -4,6 +4,7 @@
 
 # Xcode
 #
+*config.tsx
 build/
 *.pbxuser
 !default.pbxuser
