@@ -89,9 +89,9 @@ export default function Profile({name, uscid, major}) {
           <View style={styles.profile}>
             <Image style={styles.profilePicture} source={{uri: image}} />
             <View style={styles.textcontainer}>
-              <Text style={styles.name}>{state.user.username}</Text>
-              <Text style={styles.uscid}>USCID: {state.user.usc_id} </Text>
-              <Text style={styles.major}>Major: {state.user.major} </Text>
+              <Text style={styles.name}>{state.user?.username}</Text>
+              <Text style={styles.uscid}>USCID: {state.user?.usc_id} </Text>
+              <Text style={styles.major}>Major: {state.user?.major} </Text>
             </View>
           </View>
           <View style={styles.row}>

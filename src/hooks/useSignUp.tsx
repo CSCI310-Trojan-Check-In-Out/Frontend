@@ -10,7 +10,7 @@ export function useSignUp() {
   const [email, setEmail] = useState<string>('');
   const [major, setMajor] = useState<string>('');
 
-  function onSubmit(successCallback: Function) {
+  function submitForm(successCallback: Function) {
     if (!notEmpty([image, fullName, uscID, email, major])) {
       alertError('field(s) cannot be empty');
       return;
@@ -19,7 +19,7 @@ export function useSignUp() {
       alertError('must be usc email');
       return;
     }
-    successCallback(image, isStudent, fullName, uscID, email, major);
+    successCallback(image, isStudent, fullName, uscID, email, major, password);
   }
   return [
     image,
@@ -36,6 +36,6 @@ export function useSignUp() {
     setEmail,
     major,
     setMajor,
-    onSubmit,
+    submitForm,
   ];
 }

@@ -24,7 +24,7 @@ export function signupApi(
 ) {
   const form = createFormData([
     ['image', image],
-    ['isAdmin', isAdmin],
+    ['isAdmin', isAdmin ? 1 : 0],
     ['fullName', fullName],
     ['uscId', uscID],
     ['email', email],
@@ -44,10 +44,10 @@ export function signupApi(
       const userData = res.data;
       console.log(userData);
       successCallback(userData);
+    } else {
+      // failureCallback();
+      console.log(res);
     }
-    // else {
-    //   failureCallback();
-    // }
   });
 }
 
@@ -74,7 +74,7 @@ export function signinApi(
     },
   }).then((res) => {
     if (res.status === 200) {
-      const userData = res.data[0];
+      const userData = res.data;
       successCallback(userData);
     } else {
       failureCallback();
@@ -193,7 +193,7 @@ export function updateCapacityApi(
 ) {
   const form = createFormData([
     ['placeId', id],
-    ['capacity',currentCapacity]
+    ['capacity', currentCapacity],
   ]);
 
   axios({

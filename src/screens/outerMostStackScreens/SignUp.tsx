@@ -39,7 +39,7 @@ export default function SignUp({navigation}: {navigation: any}) {
     setEmail,
     major,
     setMajor,
-    onSubmit,
+    submitForm,
   ] = useSignUp();
   const {state, login} = useContext(AppContext);
 
@@ -197,7 +197,7 @@ export default function SignUp({navigation}: {navigation: any}) {
               title={'Done'}
               color={Theme.RED_PRIMARY}
               onPress={() => {
-                onSubmit(submissionSucceedCallback);
+                submitForm(submissionSucceedCallback);
               }}
             />
           </View>
