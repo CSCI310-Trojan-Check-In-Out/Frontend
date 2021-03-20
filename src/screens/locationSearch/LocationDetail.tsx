@@ -14,7 +14,12 @@ import UpdateCapacity from './UpdateCapacity';
 import {getQRCodeApi} from '../../api/backendApiCalls';
 import {Context as AppContext} from '../../context/AppContext';
 import QRCode from 'react-native-qrcode-svg';
-import { subscribeBuildingCurrentCapacity, subscribeBuildingMaximumCapacity, unSubscribeBuildingCurrentCapacity, unSubscribeBuildingMaximumCapacity } from '../../api/firebaseApi';
+import {
+  subscribeBuildingCurrentCapacity,
+  subscribeBuildingMaximumCapacity,
+  unSubscribeBuildingCurrentCapacity,
+  unSubscribeBuildingMaximumCapacity,
+} from '../../api/firebaseApi';
 
 export default function LocationDetail({route, navigation}) {
   const {state, pinQRCode} = useContext(AppContext);

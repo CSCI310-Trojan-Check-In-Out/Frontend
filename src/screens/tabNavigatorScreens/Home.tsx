@@ -38,7 +38,7 @@ export default function Home({navigation}) {
 
   return (
     <>
-      {state.user.isAdmin ? (
+      {state.user?.isAdmin ? (
         <ManagerHome pinnedBuilding={state.pinnedBuilding}></ManagerHome>
       ) : (
         <StudentHome navigation={navigation}></StudentHome>

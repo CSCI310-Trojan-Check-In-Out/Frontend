@@ -5,7 +5,7 @@ import Home from '../screens/tabNavigatorScreens/Home';
 import LocationSearch from '../screens/tabNavigatorScreens/LocationSearch';
 import LocationNavigator from './LocationNavigator';
 import VisitHistory from '../screens/tabNavigatorScreens/VisitHistory';
-
+import VisitHistoryResult from '../screens/visitHistory/VisitHistoryResult';
 import Profile from '../screens/tabNavigatorScreens/Profile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -46,10 +46,16 @@ export default function TabNavigator() {
         },
       })}>
       <Tab.Screen name="Home" component={Home} options={{tabBarBadge: 1}} />
-      {state.user.isAdmin ? (
+      {state.user?.isAdmin ? (
         <Tab.Screen name="LocationSearch" component={LocationNavigator} />
       ) : null}
-      <Tab.Screen name="VisitHistory" component={VisitHistory} />
+
+      {state.user?.isAdmin ? (
+        <Tab.Screen name="VisitHistory" component={VisitHistory} />
+      ) : (
+        <Tab.Screen name="VisitHistoryResult" component={VisitHistoryResult} />
+      )}
+
       <Tab.Screen name="Profile" component={ProfileNavigator} />
     </Tab.Navigator>
   );

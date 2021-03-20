@@ -203,6 +203,27 @@ export function checkoutApi(
   failureCallback: Function,
 ) {}
 
+export function getUserVisitHistory(
+  studentId: string,
+  successCallback: Function,
+) {
+  const form = createFormData([['userId', studentId]]);
+
+  axios({
+    method: 'post',
+    url: `${MANAGER_URL}/search-visit-history`,
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }).then((res) => {
+    if (res.status === 200) {
+      const historyList = res.data.rows;
+      successCallback(historyList);
+    }
+  });
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                   helpers                                  */
 /* -------------------------------------------------------------------------- */
