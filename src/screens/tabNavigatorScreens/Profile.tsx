@@ -3,8 +3,13 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import IconButton from '../../components/IconButton';
 import ConfirmModal from '../../components/ConfirmModal';
 import {useNavigation} from '@react-navigation/native';
+import {uploadProfilePic} from './../../api/firebaseApi';
 // tools
-import {logoutApi, deleteAccountApi} from '../../api/backendApiCalls';
+import {
+  logoutApi,
+  deleteAccountApi,
+  changeProfileImageApi,
+} from '../../api/backendApiCalls';
 
 // context
 import {Context as AppContext} from '../../context/AppContext';
@@ -16,13 +21,15 @@ export default function Profile({name, uscid, major}) {
   {
     /*id from database, different from uscid*/
   }
-  const {state, logout, deleteAccount} = useContext(AppContext);
+  const {state, logout, deleteAccount, changeProfileImage} = useContext(
+    AppContext,
+  );
   const [purpose, setPurpose] = React.useState('');
   const [showModal, setShowModal] = React.useState(false);
   const [modalTitle, setModalTitle] = React.useState('');
   const [modalMessage, setModalMessage] = React.useState();
   const [image, setImage] = React.useState<string>(
-    'https://reactnative.dev/img/tiny_logo.png',
+    state.user?.picture ?? 'https://reactnative.dev/img/tiny_logo.png',
   );
   const navigation = useNavigation();
 
@@ -32,6 +39,14 @@ export default function Profile({name, uscid, major}) {
       navigation.navigate('Login');
     }
   }, [state]);
+
+  useEffect(() => {
+    if (image !== state.user?.picture) {
+      uploadProfilePic(image, state?.user?.email).then((url) => {
+        changeProfileImageApi(url, changeProfileImage);
+      });
+    }
+  }, [image]);
 
   function decline() {
     setPurpose('');

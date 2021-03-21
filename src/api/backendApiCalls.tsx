@@ -165,6 +165,31 @@ export function changePasswordApi(
     });
 }
 
+// change Password
+export function changeProfileImageApi(
+  image: string,
+  successCallback: Function,
+) {
+  const form = createFormData([['profilePicLink', image]]);
+
+  axios({
+    method: 'post',
+    url: `${ACCOUNT_URL}/updateProfilePicture`,
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        successCallback(image);
+      }
+    })
+    .catch((error) => {
+      showError(error);
+    });
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                   manager                                  */
 /* -------------------------------------------------------------------------- */

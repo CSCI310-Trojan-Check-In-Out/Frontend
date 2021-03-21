@@ -8,6 +8,7 @@ import {
   REMOVE_QRCODE,
   CHECK_IN,
   CHECK_OUT,
+  CHANGE_PROFILE_PIC,
 } from './actionTypes';
 
 interface DataStore {
@@ -39,9 +40,9 @@ const eventReducer = (state = initialState, action) => {
     case LOG_IN:
       return {...state, user: action.payload};
     case LOG_OUT:
-      return {initialState};
+      return initialState;
     case DELETE_ACCOUNT:
-      return {initialState};
+      return initialState;
     case PIN_QRCODE:
       return {...state, pinnedBuilding: action.payload};
     case REMOVE_QRCODE:
@@ -50,6 +51,14 @@ const eventReducer = (state = initialState, action) => {
       return {...state, checkedInBuilding: action.payload};
     case CHECK_OUT:
       return {...state, checkedInBuilding: action.payload};
+    case CHANGE_PROFILE_PIC:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          picture: action.payload,
+        },
+      };
     default:
       return state;
   }
@@ -132,6 +141,17 @@ const checkout = (dispatch) => async () => {
   }
 };
 
+const changeProfileImage = (dispatch) => async (payload) => {
+  try {
+    dispatch({
+      type: CHANGE_PROFILE_PIC,
+      payload: payload,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const {Provider, Context} = CreateAppContext(
   eventReducer,
   {
@@ -142,6 +162,7 @@ export const {Provider, Context} = CreateAppContext(
     removeQRCode,
     checkin,
     checkout,
+    changeProfileImage,
   },
   initialState,
 );
