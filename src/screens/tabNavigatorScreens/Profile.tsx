@@ -17,6 +17,7 @@ import {Context as AppContext} from '../../context/AppContext';
 // style
 import CommonStyle from '../../style/common.style';
 
+
 export default function Profile({name, uscid, major}) {
   {
     /*id from database, different from uscid*/

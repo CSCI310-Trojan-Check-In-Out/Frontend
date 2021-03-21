@@ -21,8 +21,6 @@ export default function VisitHistoryItem({history}) {
           padding: 10,
         }}>
         <Text style={styles.name}>{history.name}</Text>
-        <Text>USC ID: {history.id}</Text>
-        <Text>Major: {history.major}</Text>
         <Text>Check in: {history.checkIn}</Text>
         <Text>Check out: {history.checkOut}</Text>
       </View>

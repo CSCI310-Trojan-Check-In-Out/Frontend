@@ -18,6 +18,7 @@ export default function StudentListItem({student}) {
           padding: 10,
         }}>
         <Text style={styles.name}>{student.name}</Text>
+
       </View>
     </>
   );
@@ -25,7 +26,7 @@ export default function StudentListItem({student}) {
 
 const styles = StyleSheet.create({
     name:{
-        fontSize: 15,
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#000',
     }
