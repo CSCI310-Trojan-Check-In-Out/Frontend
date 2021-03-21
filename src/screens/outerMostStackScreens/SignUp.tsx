@@ -18,6 +18,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Context as AppContext} from '../../context/AppContext';
+import DropDownMenu from '../../components/DropDownMenu';
 // api
 import {signupApi} from '../../api/backendApiCalls';
 import {uploadProfilePic} from '../../api/firebaseApi';
@@ -116,12 +117,7 @@ export default function SignUp({navigation}: {navigation: any}) {
               value={uscID}
               placeholder={'USC ID'}
             />
-            <TextInput
-              style={CommonStyle.inputBoxStyle}
-              onChangeText={setMajor}
-              value={major}
-              placeholder={'MAJOR'}
-            />
+            <DropDownMenu setSchool={setMajor}/>
             <TextInput
               style={CommonStyle.inputBoxStyle}
               onChangeText={setEmail}
