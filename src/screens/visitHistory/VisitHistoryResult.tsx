@@ -12,14 +12,14 @@ export default function VisitHistoryResult({navigation}) {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    getUserVisitHistory(state.user.id, setHistory);
+    getUserVisitHistory(setHistory);
   },[]);
 
 
   return (
     <>
       <View style={styles.visitorList}>
-        <VisitHistoryList history={history} />
+        <VisitHistoryList historyList={history} />
       </View>
     </>
   );

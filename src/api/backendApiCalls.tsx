@@ -22,7 +22,6 @@ export function signupApi(
   successCallback,
   failureCallback = null,
 ) {
-  console.log(isAdmin);
   const form = createFormData([
     ['image', image],
     ['isAdmin', isAdmin ? 1 : 0],
@@ -186,10 +185,8 @@ export function getAllLocationsApi(successCallback: Function) {
   });
 }
 
-export function getAllStudentsApi(id:any, successCallback: Function) {
-  const form = createFormData([
-    ['placeId', id]
-  ]);
+export function getAllStudentsApi(id: any, successCallback: Function) {
+  const form = createFormData([['placeId', id]]);
   axios({
     method: 'post',
     data: form,
@@ -246,22 +243,14 @@ export function checkoutApi(
   failureCallback: Function,
 ) {}
 
-export function getUserVisitHistory(
-  studentId: string,
-  successCallback: Function,
-) {
-  const form = createFormData([['userId', studentId]]);
-
+export function getUserVisitHistory(successCallback: Function) {
   axios({
     method: 'post',
-    url: `${MANAGER_URL}/search-visit-history`,
-    data: form,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+    url: `${STUDENT_URL}/pastHistory`,
   }).then((res) => {
     if (res.status === 200) {
-      const historyList = res.data.rows;
+      const historyList = res.data;
+      console.log(res.data)
       successCallback(historyList);
     }
   });

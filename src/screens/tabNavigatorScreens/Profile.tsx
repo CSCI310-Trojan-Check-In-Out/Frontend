@@ -46,7 +46,7 @@ export default function Profile({name, uscid, major}) {
         logoutApi(logout, null);
         break;
       case 'deleteAccount':
-        deleteAccountApi(state.user.id, deleteAccount, null);
+        deleteAccountApi(state.user?.id, deleteAccount, null);
         break;
       case 'ChangePassword':
         break;

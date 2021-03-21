@@ -47,7 +47,7 @@ export default function ChangePassword({id, navigation}) {
       Alert.alert('', 'Your confirm password does not match your new password');
     } else {
       changePasswordApi(
-        state.user.id,
+        state.user?.id,
         currentPassword,
         newPassword,
         changePasswordSucceed,
