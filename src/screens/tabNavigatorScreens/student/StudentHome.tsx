@@ -19,6 +19,7 @@ import CommonStyle from '../../../style/common.style';
 import Theme from '../../../style/theme.style';
 import QRCode from 'react-native-qrcode-svg';
 import {Context as AppContext} from '../../../context/AppContext';
+import {checkinApi} from '../../../api/backendApiCalls';
 
 export default function StudentHome({navigation}) {
   const {state, checkin, checkout} = useContext(AppContext);
@@ -60,9 +61,17 @@ export default function StudentHome({navigation}) {
       },
       QRCode: currentQRCode,
     };
-    checkin(payload);
+    checkinApi(currentQRCode, checkinSuccessCallBack, checkinFailureCallBack);
+  }
+
+  function checkinSuccessCallBack(building) {
+    checkin(building);
     setShowConfirmPopup(false);
     setCurrentQRCode('');
+  }
+
+  function checkinFailureCallBack(message) {
+    Alert.alert('', message);
   }
 
   function declineQRCode() {
