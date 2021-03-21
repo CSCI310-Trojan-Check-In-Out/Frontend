@@ -59,6 +59,7 @@ export default function SignUp({navigation}: {navigation: any}) {
     majorData,
     passwordData,
   ) {
+    
     uploadProfilePic(imageData, emailData).then((imageUrl) => {
       signupApi(
         imageUrl,

@@ -1,4 +1,4 @@
-import React, {useState,useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -14,25 +14,34 @@ import {updateCapacityApi} from '../../api/backendApiCalls';
 export default function UpdateCapacity({route, navigation}) {
   const [currentCapacity, setCurrentCapacity] = useState<number>();
   const [building, updateBuilding] = useState(route.params.building);
-  const [message, setMessage]=useState('Please enter a positive integer that is great than the current capacity!');
+  const [message, setMessage] = useState(
+    'Please enter a positive integer that is great than the current capacity!',
+  );
 
-  function updateCapacity(){
+  function updateCapacity() {
     setMessage('Capacity successfully updated!');
   }
 
-  function notification(){
+  function notification() {
     setMessage('New Capacity cannot be smaller than the older one!');
   }
 
-  function updateCapacitySucceed(){
-    if (!currentCapacity){
+  function updateCapacitySucceed() {
+    if (!currentCapacity) {
       setMessage('Capacity cannot be empty');
-    }
-    else if (isNaN(currentCapacity)||currentCapacity<=0||Math.floor(currentCapacity) != currentCapacity){
+    } else if (
+      isNaN(currentCapacity) ||
+      currentCapacity <= 0 ||
+      Math.floor(currentCapacity) != currentCapacity
+    ) {
       setMessage('Please enter a positive integer!');
-    }
-    else{
-      updateCapacityApi(route.params.building.id,currentCapacity,updateCapacity,notification);
+    } else {
+      updateCapacityApi(
+        route.params.building.id,
+        currentCapacity,
+        updateCapacity,
+        notification,
+      );
     }
   }
 
@@ -54,15 +63,15 @@ export default function UpdateCapacity({route, navigation}) {
           />
         </View>
         <View style={styles.notificationContainer}>
-          <Text style={styles.notification}>
-            {message}
-          </Text>
+          <Text style={styles.notification}>{message}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.textButton}>Upload CSV File</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={updateCapacitySucceed}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={updateCapacitySucceed}>
             <Text style={styles.textButton}>Update</Text>
           </TouchableOpacity>
         </View>
