@@ -234,7 +234,9 @@ export function checkinApi(
   buildingId: string,
   successCallback: Function,
   failureCallback: Function,
-) {}
+) {
+  
+}
 
 export function checkoutApi(
   userId: string,
