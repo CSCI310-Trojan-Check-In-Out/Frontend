@@ -228,7 +228,7 @@ export function getAllLocationsApi(successCallback: Function) {
   })
     .then((res) => {
       if (res.status === 200) {
-        const buildings = res.data.rows;
+        const buildings = res.data;
         successCallback(buildings);
       }
     })

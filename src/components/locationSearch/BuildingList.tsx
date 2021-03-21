@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, FlatList} from 'react-native';
 import BuildingListItem from './BuiildingListItem';
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation} from '@react-navigation/native';
+
 export default function BuildingList({buildings}) {
   const navigation = useNavigation();
   return (

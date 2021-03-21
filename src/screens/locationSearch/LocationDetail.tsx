@@ -33,23 +33,20 @@ export default function LocationDetail({route, navigation}) {
   );
 
   useEffect(() => {
-    setQRCode(String(route.params.building.id));
-    subscribeBuildingMaximumCapacity('123', updateMaximumCapacity);
-    subscribeBuildingCurrentCapacity('buildingId', updateCurrentCapacity);
+    setQRCode(String(route.params.building.qr_code_token));
+    subscribeBuildingMaximumCapacity(building.id, updateMaximumCapacity);
+    subscribeBuildingCurrentCapacity(building.id, updateCurrentCapacity);
     return () => {
-      unSubscribeBuildingMaximumCapacity('123');
-      unSubscribeBuildingCurrentCapacity('buildingId');
+      unSubscribeBuildingMaximumCapacity(building.id);
+      unSubscribeBuildingCurrentCapacity(building.id);
     };
   }, []);
 
   function pinQRCodeSucceed() {
     // getQRCodeApi(route.params.buildingId,pinQRCode);
     const pinnedBuilding = {
-      building: {
-        id: 1,
-        buildingName: 'building',
-      },
-      QRCode: buildingQRCode,
+      building: building,
+      QRCode: building.qr_code_token,
     };
     pinQRCode(pinnedBuilding);
     Alert.alert('', 'Successfully Pinnned QR Code to Home');
