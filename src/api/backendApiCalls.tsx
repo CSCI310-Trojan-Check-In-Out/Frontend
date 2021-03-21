@@ -190,7 +190,7 @@ export function changeProfileImageApi(
     });
 }
 
-// StudentVisitHistory 
+// StudentVisitHistory
 // (1) Manager Account: Manager clicks into a student and can see the profile (with visit history)
 // (2) Student Account: Student clicks into visitHistory Tab and can see her own visit history
 
@@ -246,7 +246,8 @@ export function getAllStudentsApi(id: any, successCallback: Function) {
   })
     .then((res) => {
       if (res.status === 200) {
-        const students = res.data.rows;
+        const students = res.data;
+        console.log(students);
         successCallback(students);
       }
     })
@@ -339,7 +340,7 @@ export function searchVisitHistory(
   if (endTime) {
     formData.push(['leave_time', endTime]);
   }
-  
+
   const form = createFormData(formData);
   axios({
     method: 'post',
@@ -351,8 +352,7 @@ export function searchVisitHistory(
   })
     .then((res) => {
       if (res.status === 200) {
-        successCallback();
-        showMessage("here");
+        successCallback(res.data);
       }
     })
     .catch((error) => {

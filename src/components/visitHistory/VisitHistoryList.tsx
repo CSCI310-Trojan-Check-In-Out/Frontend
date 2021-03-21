@@ -9,7 +9,7 @@ export default function VisitHistoryList({historyList}) {
     <>
       <FlatList
         data={historyList}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.history_id}
         renderItem={({item, index}) => {
           return (
             <>

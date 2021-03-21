@@ -12,6 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import ProfileNavigator from './ProfileNavigator';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Context as AppContext} from './../context/AppContext';
+import VisitHistoryNavigator from './VisitHistoryNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -50,11 +51,7 @@ export default function TabNavigator() {
         <Tab.Screen name="LocationSearch" component={LocationNavigator} />
       ) : null}
 
-      {state.user?.is_admin ? (
-        <Tab.Screen name="VisitHistory" component={VisitHistory} />
-      ) : (
-        <Tab.Screen name="VisitHistory" component={VisitHistoryResult} />
-      )}
+      <Tab.Screen name="VisitHistory" component={VisitHistoryNavigator} />
 
       <Tab.Screen name="Profile" component={ProfileNavigator} />
     </Tab.Navigator>

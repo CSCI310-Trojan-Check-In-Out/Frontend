@@ -20,9 +20,10 @@ export default function VisitHistoryItem({history}) {
           borderBottomWidth: 1,
           padding: 10,
         }}>
-        <Text style={styles.name}>{history.name}</Text>
-        <Text>Check in: {history.checkIn}</Text>
-        <Text>Check out: {history.checkOut}</Text>
+        <Text style={styles.name}>{history.username}</Text>
+        <Text>Location: {history.place_name}</Text>
+        <Text>Check in: {history.enter_time}</Text>
+        <Text>Check out: {history.leave_time}</Text>
       </View>
     </>
   );

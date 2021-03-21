@@ -11,14 +11,14 @@ import {
   updateCapacityByCSV,
 } from '../../api/backendApiCalls';
 
-export default function LocationSearch() {
+export default function LocationSearch({navigation}) {
   const [buildings, setBuildings] = useState<any>([]);
   const [filteredBuildings, setFilteredBuildings] = useState<any>([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
     getAllLocationsApi(setBuildings);
-  }, []);
+  }, [navigation]);
 
   function searchBuilding(query) {
     fetch('');

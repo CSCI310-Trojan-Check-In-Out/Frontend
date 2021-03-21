@@ -1,20 +1,22 @@
-import React, {useEffect, useState,useContext} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, FlatList} from 'react-native';
 import VisitHistoryList from '../../components/visitHistory/VisitHistoryList';
 import {getUserVisitHistory} from '../../api/backendApiCalls';
 import {Context as AppContext} from '../../context/AppContext';
 
-export default function VisitHistoryResult({navigation}) {
+export default function VisitHistoryResult({route, navigation}) {
   const {state} = useContext(AppContext);
-
 
   const [history, setHistory] = useState<any>([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    getUserVisitHistory(setHistory);
-  },[]);
-
+    if (route.params.results) {
+      setHistory(route.params.results);
+    } else {
+      getUserVisitHistory(setHistory);
+    }
+  }, [navigation]);
 
   return (
     <>

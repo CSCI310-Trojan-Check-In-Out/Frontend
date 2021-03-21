@@ -18,11 +18,11 @@ export default function BuildingListItem({building}) {
 
   useEffect(() => {
     // console.log(state);
-    subscribeBuildingMaximumCapacity('123', updateMaximumCapacity);
-    subscribeBuildingCurrentCapacity('buildingId', updateCurrentCapacity);
+    subscribeBuildingMaximumCapacity(building.id, updateMaximumCapacity);
+    subscribeBuildingCurrentCapacity(building.id, updateCurrentCapacity);
     return () => {
-      unSubscribeBuildingMaximumCapacity('123');
-      unSubscribeBuildingCurrentCapacity('buildingId');
+      unSubscribeBuildingMaximumCapacity(building.id);
+      unSubscribeBuildingCurrentCapacity(building.id);
     };
   }, []);
 

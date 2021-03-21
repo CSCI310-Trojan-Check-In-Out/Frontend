@@ -13,7 +13,8 @@ import CommonStyle from '../../style/common.style';
 import SearchBar from '../../components/SearchBar';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {searchVisitHistory} from '../../api/backendApiCalls';
-export default function VisitHistory() {
+import {NavigationRouteContext} from '@react-navigation/native';
+export default function VisitHistory({navigation}) {
   const [text, setText] = useState('');
   const [startEnd, setStartEnd] = useState('');
   const [startDate, setStartDate] = useState(new Date(1900, 0, 1));
@@ -89,9 +90,6 @@ export default function VisitHistory() {
     studentId,
     major,
   ) {
-    // if (startDate > endDate) {
-    Alert.alert('', startTime.toISOString());
-    // }
     searchVisitHistory(
       {
         buildingName,
@@ -104,8 +102,8 @@ export default function VisitHistory() {
     );
   }
 
-  function searchSucceedCallback(result) {
-    console.log(result);
+  function searchSucceedCallback(results) {
+    navigation.navigate('VisitHistoryResult', {results: results});
   }
 
   return (

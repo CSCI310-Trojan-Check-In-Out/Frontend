@@ -60,7 +60,6 @@ export default function SignUp({navigation}: {navigation: any}) {
     majorData,
     passwordData,
   ) {
-    
     uploadProfilePic(imageData, emailData).then((imageUrl) => {
       signupApi(
         imageUrl,
@@ -117,7 +116,7 @@ export default function SignUp({navigation}: {navigation: any}) {
               value={uscID}
               placeholder={'USC ID'}
             />
-            <DropDownMenu setSchool={setMajor}/>
+            <DropDownMenu setSchool={setMajor} />
             <TextInput
               style={CommonStyle.inputBoxStyle}
               onChangeText={setEmail}
