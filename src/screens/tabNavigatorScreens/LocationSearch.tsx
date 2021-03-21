@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, StyleSheet, Button} from 'react-native';
+import {Text, View, StyleSheet, Button, Alert} from 'react-native';
 import SearchBar from '../../components/SearchBar';
 import BuildingList from '../../components/locationSearch/BuildingList';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import DocumentPicker from 'react-native-document-picker';
 // api
-import {getAllLocationsApi} from '../../api/backendApiCalls';
+import {
+  getAllLocationsApi,
+  updateCapacityByCSV,
+} from '../../api/backendApiCalls';
 
 export default function LocationSearch() {
   const [buildings, setBuildings] = useState<any>([]);
@@ -24,9 +27,14 @@ export default function LocationSearch() {
   const handleFilePick = async () => {
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.csv],
+        type: [DocumentPicker.types.allFiles],
       });
       console.log(res.uri, res.type, res.name, res.size);
+      if (res.type !== 'text/comma-separated-values') {
+        Alert.alert('', 'Please select CSV files');
+      } else {
+        updateCapacityByCSV(res.uri);
+      }
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -37,10 +45,7 @@ export default function LocationSearch() {
 
   return (
     <>
-      <SearchBar
-        placeholder={'Filter search results'}
-        changeText={setQuery}
-      />
+      <SearchBar placeholder={'Filter search results'} changeText={setQuery} />
       <View style={styles.buildingList}>
         <BuildingList buildings={buildings}></BuildingList>
       </View>

@@ -280,6 +280,83 @@ export function updateCapacityApi(
       showError(error);
     });
 }
+
+export function updateCapacityByCSV(CSVUri: string) {
+  var csv = {
+    uri: CSVUri,
+    type: 'text/csv',
+    name: 'capacity.csv',
+  };
+
+  const form = new FormData();
+  form.append('place-csv', csv);
+
+  axios({
+    method: 'post',
+    url: `${MANAGER_URL}/process-csv`,
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        showMessage('Successfully updated capacity');
+      }
+    })
+    .catch((error) => {
+      showError(error);
+    });
+}
+
+export function searchVisitHistory(
+  {
+    buildingName = undefined,
+    studentId = undefined,
+    major = undefined,
+    startTime = undefined,
+    endTime = undefined,
+  },
+  successCallback = Function,
+) {
+  var formData = [];
+  if (buildingName) {
+    formData.push(['buildingName', buildingName]);
+  }
+  if (studentId) {
+    formData.push(['studentId', studentId]);
+  }
+  if (major) {
+    formData.push(['major', major]);
+  }
+  if (startTime) {
+    formData.push(['enter_time', startTime]);
+  }
+  if (endTime) {
+    formData.push(['leave_time', endTime]);
+  }
+  
+  const form = createFormData(formData);
+  axios({
+    method: 'post',
+    url: `${MANAGER_URL}/search-visit-history`,
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        successCallback();
+        showMessage("here");
+      }
+    })
+    .catch((error) => {
+      // failureCallback();
+      // showError(error);
+    });
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                   Student                                  */
 /* -------------------------------------------------------------------------- */
@@ -354,4 +431,8 @@ function createFormData(data: any[][2]) {
 
 function showError(error) {
   Alert.alert('', error?.response?.data);
+}
+
+function showMessage(message: string) {
+  Alert.alert('', message);
 }
