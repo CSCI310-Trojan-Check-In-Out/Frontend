@@ -1,18 +1,24 @@
-import React, {useState,useContext} from 'react';
+import React, {useState,useEffect,useContext} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import IconButton from '../../components/IconButton';
 import ConfirmModal from '../../components/ConfirmModal';
 import {useNavigation} from '@react-navigation/native';
 import CommonStyle from '../../style/common.style';
 import {Context as AppContext} from '../../context/AppContext';
+import {getUserVisitHistory} from '../../api/backendApiCalls';
 import VisitHistoryList from '../../components/visitHistory/VisitHistoryList';
 
 export default function StudentProfile({route}) {
  
   const {state} = useContext(AppContext);
   const {image, name,uscid,major}=route.params.student;
+  const [studentHistory, setStudentHistory]=useState();
   
   const navigation = useNavigation();
+
+  useEffect(() => {
+    getUserVisitHistory(setStudentHistory);
+  },[]);
 
   return (
     <>
@@ -26,8 +32,11 @@ export default function StudentProfile({route}) {
               <Text style={styles.major}>Major: {major} </Text>
             </View>
           </View>
-          <View>
-            
+          <View style={styles.subTitleContainer}>
+              <Text style={styles.subTitle}>Visit History:</Text>
+          </View>
+          <View style={styles.historyList}>
+            <VisitHistoryList historyList={studentHistory}/>
           </View>
 
 
@@ -40,20 +49,27 @@ export default function StudentProfile({route}) {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    flex:1
   },
-  profile: {},
+  profile: {
+    marginTop:'5%',
+    flexDirection:'row',
+    justifyContent:'space-around'
+  },
   profilePicture: {
-    width: 270,
-    height: 270,
+    width: 80,
+    height: 80,
+    borderRadius: 20,
     flexDirection: 'row',
   },
   textcontainer: {
-    alignItems: 'center',
-    margin: 20,
+    marginLeft: 40,
+    marginRight:20,
+    marginBottom:20
   },
   name: {
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontSize: 25,
+    fontWeight: '600',
   },
   uscid: {
     fontSize: 20,
@@ -61,11 +77,19 @@ const styles = StyleSheet.create({
   major: {
     fontSize: 20,
   },
-  row: {
-    marginTop: 10,
-    marginBottom: 10,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'row',
+  subTitleContainer:{
+    marginTop:10,
+  },
+  subTitle:{
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  historyList: {
+    backgroundColor: '#000',
+    marginTop: '5%',
+    marginBottom: '1%',
+    marginLeft: '2%',
+    marginRight: '2%',
+    borderRadius: 20,
   },
 });

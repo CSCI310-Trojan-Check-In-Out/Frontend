@@ -190,6 +190,10 @@ export function changeProfileImageApi(
     });
 }
 
+// StudentVisitHistory 
+// (1) Manager Account: Manager clicks into a student and can see the profile (with visit history)
+// (2) Student Account: Student clicks into visitHistory Tab and can see her own visit history
+
 /* -------------------------------------------------------------------------- */
 /*                                   manager                                  */
 /* -------------------------------------------------------------------------- */

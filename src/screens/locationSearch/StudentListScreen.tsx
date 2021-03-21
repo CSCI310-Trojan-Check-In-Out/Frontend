@@ -9,6 +9,26 @@ export default function StudentListScreen({route,navigation}) {
   const [building,setBuilding] = useState(route.params.building);
   const [students, setStudents] = useState<any>([]);
 
+  /* for testing only
+  const students=[{
+    id:1,
+    image:'https://reactnative.dev/img/tiny_logo.png',
+    name:'Henry',
+    uscid:'24',
+    major:'CS',
+  },
+  {
+    id:1,
+    image:'https://reactnative.dev/img/tiny_logo.png',
+    name:'John',
+    uscid:'24',
+    major:'CS',
+  
+  }
+  
+]*/
+    
+  
   useEffect(() => {
     getAllStudentsApi(building.id, setStudents);
   }, []);
@@ -35,7 +55,7 @@ const styles = StyleSheet.create({
     paddingRight: '10%',
   },
   title: {
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
   },
