@@ -344,7 +344,7 @@ export function searchVisitHistory(
     formData.push(['leave_time', endTime]);
   }
   if (studentName) {
-    formData.push(['studentName', studentName]);
+    formData.push(['username', studentName]);
   }
 
   const form = createFormData(formData);
