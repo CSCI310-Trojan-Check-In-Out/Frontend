@@ -60,9 +60,22 @@ export default function SignUp({navigation}: {navigation: any}) {
     majorData,
     passwordData,
   ) {
-    uploadProfilePic(imageData, emailData).then((imageUrl) => {
+    if (imageData) {
+      uploadProfilePic(imageData, emailData).then((imageUrl) => {
+        signupApi(
+          imageUrl,
+          isAdminData,
+          fullNameData,
+          uscIdData,
+          emailData,
+          majorData,
+          passwordData,
+          login,
+        );
+      });
+    } else {
       signupApi(
-        imageUrl,
+        'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg',
         isAdminData,
         fullNameData,
         uscIdData,
@@ -71,7 +84,7 @@ export default function SignUp({navigation}: {navigation: any}) {
         passwordData,
         login,
       );
-    });
+    }
   }
 
   return (
@@ -96,15 +109,15 @@ export default function SignUp({navigation}: {navigation: any}) {
               height: 300,
               width: '80%',
             }}>
-            {!image ? (
-              <Text>Click To Select Image</Text>
-            ) : (
-              <Image
-                style={{width: '100%', height: '100%', borderRadius: 50}}
-                source={{uri: image}}
-                resizeMode={'cover'}
-              />
-            )}
+            <Image
+              style={{width: '100%', height: '100%', borderRadius: 50}}
+              source={{
+                uri: image
+                  ? image
+                  : 'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg',
+              }}
+              resizeMode={'cover'}
+            />
           </TouchableOpacity>
 
           {/* inputs */}

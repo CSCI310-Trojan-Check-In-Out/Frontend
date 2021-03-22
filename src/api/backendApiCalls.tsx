@@ -23,6 +23,8 @@ export function signupApi(
   successCallback,
   failureCallback = null,
 ) {
+  console.log(image);
+
   const form = createFormData([
     ['image', image],
     ['isAdmin', isAdmin ? 1 : 0],

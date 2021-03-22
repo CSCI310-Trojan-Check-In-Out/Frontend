@@ -3,7 +3,7 @@ import {emailRegexCheck, notEmpty, alertError} from './../helpers/inputHelpers';
 
 export function useSignUp() {
   const [image, setImage] = useState<string>('');
-  const [isStudent, setIsStudent] = useState<boolean>(true);
+  const [isAdmin, setIsAdmin] = useState<boolean>(true);
   const [fullName, setFullName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [uscID, setUscID] = useState<string>('');
@@ -11,23 +11,38 @@ export function useSignUp() {
   const [major, setMajor] = useState<string>('');
 
   function submitForm(successCallback: Function) {
-    if (!notEmpty([image, fullName, uscID, email, major])) {
-      alertError('field(s) cannot be empty');
-      return;
+    if (signUpCheck()) {
+      successCallback(image, isAdmin, fullName, uscID, email, major, password);
+    }
+  }
+  function signUpCheck() {
+    if (isAdmin) {
+      if (!notEmpty([email, password, fullName])) {
+        alertError('manager must enter email, password, and full name');
+        return false;
+      }
+    } else {
+      if (!notEmpty([email, password, fullName, major, uscID])) {
+        alertError(
+          'student must enter email, password, full name, major, and uscId',
+        );
+        return false;
+      }
     }
     if (!emailRegexCheck(email)) {
       alertError('must be usc email');
-      return;
+      return false;
     }
-    successCallback(image, isStudent, fullName, uscID, email, major, password);
+    return true;
   }
+
   return [
     image,
     setImage,
     password,
     setPassword,
-    isStudent,
-    setIsStudent,
+    isAdmin,
+    setIsAdmin,
     fullName,
     setFullName,
     uscID,
