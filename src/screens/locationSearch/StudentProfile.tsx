@@ -34,7 +34,6 @@ export default function StudentProfile({route}) {
       <View style={CommonStyle.outerContainerStyle}>
         <View style={styles.container}>
           <View style={styles.profile}>
-            {/* <Image style={styles.profilePicture} source={{uri: picture}} /> */}
             <View style={styles.textcontainer}>
               <Text style={styles.name}>Name: {username} </Text>
               <Text style={styles.uscid}>USCID: {usc_id} </Text>

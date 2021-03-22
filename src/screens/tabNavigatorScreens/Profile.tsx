@@ -17,7 +17,6 @@ import {Context as AppContext} from '../../context/AppContext';
 // style
 import CommonStyle from '../../style/common.style';
 
-
 export default function Profile({name, uscid, major}) {
   {
     /*id from database, different from uscid*/
@@ -144,11 +143,11 @@ export default function Profile({name, uscid, major}) {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
   },
   profile: {
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
   },
   profilePicture: {
     width: 300,

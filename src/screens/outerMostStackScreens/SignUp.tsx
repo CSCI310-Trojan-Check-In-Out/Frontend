@@ -88,6 +88,7 @@ export default function SignUp({navigation}: {navigation: any}) {
             }}
             style={{
               borderRadius: 50,
+              margin: 5,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -95,11 +96,15 @@ export default function SignUp({navigation}: {navigation: any}) {
               height: 300,
               width: '80%',
             }}>
-            <Image
-              style={{width: '100%', height: '100%', borderRadius: 50}}
-              source={{uri: image}}
-              resizeMode={'cover'}
-            />
+            {!image ? (
+              <Text>Click To Select Image</Text>
+            ) : (
+              <Image
+                style={{width: '100%', height: '100%', borderRadius: 50}}
+                source={{uri: image}}
+                resizeMode={'cover'}
+              />
+            )}
           </TouchableOpacity>
 
           {/* inputs */}
