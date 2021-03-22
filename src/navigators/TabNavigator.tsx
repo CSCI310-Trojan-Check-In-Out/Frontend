@@ -46,7 +46,7 @@ export default function TabNavigator() {
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}>
-      <Tab.Screen name="Home" component={Home} options={{tabBarBadge: 1}} />
+      <Tab.Screen name="Home" component={Home}/>
       {state.user?.is_admin ? (
         <Tab.Screen name="LocationSearch" component={LocationNavigator} />
       ) : null}

@@ -66,9 +66,9 @@ export default function UpdateCapacity({route, navigation}) {
           <Text style={styles.notification}>{message}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
+          {/* <TouchableOpacity style={styles.button}>
             <Text style={styles.textButton}>Upload CSV File</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.button}
             onPress={updateCapacitySucceed}>
@@ -111,6 +111,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   textInput: {
+    width:"100%",
+    textAlign:"center",
     fontSize: 15,
   },
   notificationContainer: {

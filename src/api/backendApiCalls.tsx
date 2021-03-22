@@ -371,7 +371,7 @@ export function checkinApi(
   failureCallback: Function,
 ) {
   const form = createFormData([['qrCodeToken', QRCode]]);
-
+  console.log(QRCode);
   axios({
     method: 'post',
     url: `${STUDENT_URL}/checkin`, //ACCOUNT_URL + 'login',
@@ -397,11 +397,28 @@ export function checkinApi(
 }
 
 export function checkoutApi(
-  userId: string,
-  buildingId: string,
+  QRCode: string,
   successCallback: Function,
-  failureCallback: Function,
-) {}
+  failureCallback: Function | null,
+) {
+  const form = createFormData([['qrCodeToken', QRCode]]);
+  axios({
+    method: 'post',
+    url: `${STUDENT_URL}/checkout`, //ACCOUNT_URL + 'login',
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        successCallback();
+      }
+    })
+    .catch((error) => {
+      showError(error);
+    });
+}
 
 export function getUserVisitHistory(successCallback: Function) {
   axios({

@@ -13,9 +13,10 @@ export default function BuildingList({buildings}) {
         renderItem={({item, index}) => {
           return (
             <>
-              <TouchableOpacity onPress={
-                ()=>{navigation.navigate('LocationDetail', {building:item})}
-              }>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('LocationDetail', {building: item});
+                }}>
                 <BuildingListItem building={item}></BuildingListItem>
               </TouchableOpacity>
             </>

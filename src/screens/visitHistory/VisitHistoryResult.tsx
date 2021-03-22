@@ -11,8 +11,8 @@ export default function VisitHistoryResult({route, navigation}) {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    if (route.params.results) {
-      setHistory(route.params.results);
+    if (route?.params?.results) {
+      setHistory(route?.params?.results);
     } else {
       getUserVisitHistory(setHistory);
     }
@@ -21,6 +21,14 @@ export default function VisitHistoryResult({route, navigation}) {
   return (
     <>
       <View style={styles.visitorList}>
+        <Text
+          style={{
+            textAlign: 'center',
+            fontSize: 20,
+            fontWeight: 'bold',
+          }}>
+          Visit History
+        </Text>
         <VisitHistoryList historyList={history} />
       </View>
     </>
@@ -47,5 +55,6 @@ const styles = StyleSheet.create({
     marginLeft: '2%',
     marginRight: '2%',
     borderRadius: 20,
+    flex: 1,
   },
 });

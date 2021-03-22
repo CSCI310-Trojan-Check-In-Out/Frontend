@@ -18,7 +18,7 @@ export default function StudentListItem({student}) {
           padding: 10,
         }}>
         <Text style={styles.name}>{student.username}</Text>
-        <Text style={styles.time}>Check In:  {student.enter_time}</Text>
+        <Text style={styles.time}>Check In: {student.enter_time}</Text>
       </View>
     </>
   );

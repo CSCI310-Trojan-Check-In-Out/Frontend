@@ -19,7 +19,7 @@ import CommonStyle from '../../../style/common.style';
 import Theme from '../../../style/theme.style';
 import QRCode from 'react-native-qrcode-svg';
 import {Context as AppContext} from '../../../context/AppContext';
-import {checkinApi} from '../../../api/backendApiCalls';
+import {checkinApi, checkoutApi} from '../../../api/backendApiCalls';
 
 export default function StudentHome({navigation}) {
   const {state, checkin, checkout} = useContext(AppContext);
@@ -54,13 +54,6 @@ export default function StudentHome({navigation}) {
 
   function acceptQRCode() {
     // TODO: dispatch
-    const payload = {
-      building: {
-        id: 1,
-        name: 'building',
-      },
-      QRCode: currentQRCode,
-    };
     checkinApi(currentQRCode, checkinSuccessCallBack, checkinFailureCallBack);
   }
 
@@ -82,7 +75,7 @@ export default function StudentHome({navigation}) {
   function handleButton() {
     if (state.checkedInBuilding) {
       // setCheckedIn(false);
-      checkout();
+      checkoutApi(state.checkedInBuilding.qr_code_token, checkout, null);
     } else {
       setScanning(!scanning);
     }
@@ -105,7 +98,15 @@ export default function StudentHome({navigation}) {
             useAlbum={false}
             isScanning={scanning}></Camera>
         ) : state.checkedInBuilding ? (
-          <Text> {state.checkedInBuilding.building.name}</Text>
+          <>
+            <Text>
+              Location: {state.checkedInBuilding.place_name}(
+              {state.checkedInBuilding.abbreviation})
+            </Text>
+            <Text> Open Time: {state.checkedInBuilding.open_time}</Text>
+            <Text> Close Time: {state.checkedInBuilding.close_time}</Text>
+            <Text> Address: {state.checkedInBuilding.place_address}</Text>
+          </>
         ) : (
           <Text>QR Code Scan Area</Text>
         )}

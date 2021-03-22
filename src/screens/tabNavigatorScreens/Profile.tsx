@@ -144,8 +144,12 @@ export default function Profile({name, uscid, major}) {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    justifyContent:'center',
   },
-  profile: {},
+  profile: {
+    alignItems: 'center',
+    justifyContent:'center',
+  },
   profilePicture: {
     width: 300,
     height: 300,

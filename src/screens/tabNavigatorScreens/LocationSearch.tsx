@@ -45,8 +45,10 @@ export default function LocationSearch({navigation}) {
 
   return (
     <>
-      <SearchBar placeholder={'Filter search results'} changeText={setQuery} />
+      {/* <SearchBar placeholder={'Filter search results'} changeText={setQuery} /> */}
+      <Text style={{textAlign:"center", fontSize:20, marginTop: 20}}>All Locations</Text>
       <View style={styles.buildingList}>
+        
         <BuildingList buildings={buildings}></BuildingList>
       </View>
       <View style={{position: 'absolute', bottom: '20%', right: '5%'}}>
