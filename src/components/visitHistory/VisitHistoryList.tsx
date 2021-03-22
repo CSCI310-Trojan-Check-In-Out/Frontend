@@ -13,12 +13,12 @@ export default function VisitHistoryList({historyList}) {
         renderItem={({item, index}) => {
           return (
             <>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('');
-                }}>
+                }}> */}
                 <VisitHistoryItem history={item} />
-              </TouchableOpacity>
+              {/* </TouchableOpacity> */}
             </>
           );
         }}

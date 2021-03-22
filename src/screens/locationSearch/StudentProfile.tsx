@@ -34,7 +34,7 @@ export default function StudentProfile({route}) {
       <View style={CommonStyle.outerContainerStyle}>
         <View style={styles.container}>
           <View style={styles.profile}>
-            <Image style={styles.profilePicture} source={{uri: picture}} />
+            {/* <Image style={styles.profilePicture} source={{uri: picture}} /> */}
             <View style={styles.textcontainer}>
               <Text style={styles.name}>Name: {username} </Text>
               <Text style={styles.uscid}>USCID: {usc_id} </Text>
@@ -88,10 +88,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   subTitle: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   historyList: {
+    flex: 1,
     marginTop: '5%',
     marginBottom: '1%',
     marginLeft: '2%',

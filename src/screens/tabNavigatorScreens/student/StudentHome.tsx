@@ -20,6 +20,7 @@ import Theme from '../../../style/theme.style';
 import QRCode from 'react-native-qrcode-svg';
 import {Context as AppContext} from '../../../context/AppContext';
 import {checkinApi, checkoutApi} from '../../../api/backendApiCalls';
+import {alertError} from '../../../helpers/inputHelpers';
 
 export default function StudentHome({navigation}) {
   const {state, checkin, checkout} = useContext(AppContext);
@@ -48,13 +49,24 @@ export default function StudentHome({navigation}) {
     if (QRCode.length > 0 && QRCode[0].format !== 'None' && !updating) {
       updating = true;
       setScanning(false);
+      
       setCurrentQRCode(QRCode[0].data);
     }
   }
 
   function acceptQRCode() {
     // TODO: dispatch
-    checkinApi(currentQRCode, checkinSuccessCallBack, checkinFailureCallBack);
+    if (state.checkedInBuilding) {
+      if (state.checkedInBuilding.qr_code_token !== currentQRCode) {
+        alertError('Wrong Building Qr Code');
+      } else {
+        checkoutApi(state.checkedInBuilding.qr_code_token, checkout, null);
+        setCurrentQRCode('');
+        setShowConfirmPopup(false);
+      }
+    } else {
+      checkinApi(currentQRCode, checkinSuccessCallBack, checkinFailureCallBack);
+    }
   }
 
   function checkinSuccessCallBack(building) {
@@ -72,10 +84,12 @@ export default function StudentHome({navigation}) {
     setCurrentQRCode('');
   }
   // logics for home button
-  function handleButton() {
-    if (state.checkedInBuilding) {
+  function handleButton(isScan = false) {
+    if (state.checkedInBuilding && !isScan) {
       // setCheckedIn(false);
       checkoutApi(state.checkedInBuilding.qr_code_token, checkout, null);
+    } else if (state.checkedInBuilding && isScan) {
+      setScanning(!scanning);
     } else {
       setScanning(!scanning);
     }
@@ -91,7 +105,7 @@ export default function StudentHome({navigation}) {
       </Text>
 
       <View style={[CommonStyle.locationBoxContainer, {margin: 30}]}>
-        {!state.checkedInBuilding && scanning ? (
+        {scanning ? (
           <Camera
             useDefaultCameraBtn={false}
             scanQRCode={scanQRCode}
@@ -123,7 +137,7 @@ export default function StudentHome({navigation}) {
       {showConfirmPopup ? (
         <ConfirmModal
           setShowModal={setShowConfirmPopup}
-          title={'Check In?'}
+          title={state.checkedInBuilding ? 'Check out?' : 'Check In?'}
           message={currentQRCode}
           accept={acceptQRCode}
           decline={declineQRCode}

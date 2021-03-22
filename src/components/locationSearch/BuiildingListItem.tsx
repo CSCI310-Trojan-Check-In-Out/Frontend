@@ -9,12 +9,16 @@ import {
   unSubscribeBuildingCurrentCapacity,
 } from '../../api/firebaseApi';
 
-export default function BuildingListItem({building}) {
+export default function BuildingListItem({building, refreshState}) {
   // const {state} = useContext(AppContext);
   const [maximumCapacity, updateMaximumCapacity] = useState(building.capacity);
   const [currentCapacity, updateCurrentCapacity] = useState(
     building.current_numbers,
   );
+
+  useEffect(() => {
+    refreshState();
+  }, [maximumCapacity, currentCapacity]);
 
   useEffect(() => {
     // console.log(state);

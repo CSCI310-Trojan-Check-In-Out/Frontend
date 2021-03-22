@@ -247,10 +247,6 @@ export default function VisitHistory({navigation}) {
           />
         </View>
       </View>
-      {/* <View style={CommonStyle.outerContainerStyle}> */}
-
-      {/* <ManagerHome withQRCode={true} /> */}
-      {/* </View> */}
     </>
   );
 }
