@@ -65,6 +65,7 @@ export default function ChangePassword({id, navigation}) {
         <View style={styles.textContainer}>
           <TextInput
             style={styles.textInput}
+            secureTextEntry={true}
             placeholder={'Current Password'}
             onChangeText={(text) => onChangeCurrentPassword(text)}
             value={currentPassword}

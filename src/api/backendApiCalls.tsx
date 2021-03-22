@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from './config';
 import {Alert} from 'react-native';
 import {Context as AppContext} from '../context/AppContext';
-
+import md5 from 'md5';
 const ACCOUNT_URL = `${config.URL_ENDPOINT}/account`;
 const MANAGER_URL = `${config.URL_ENDPOINT}/manager`;
 const STUDENT_URL = `${config.URL_ENDPOINT}/student`;
@@ -32,7 +32,7 @@ export function signupApi(
     ['uscId', uscID],
     ['email', email],
     ['major', major],
-    ['password', password],
+    ['password', md5(password)],
   ]);
 
   axios({
@@ -64,7 +64,7 @@ export function signinApi(
 ) {
   const form = createFormData([
     ['email', email],
-    ['password', password],
+    ['password', md5(password)],
   ]);
   //   const form = new FormData();
   //   form.append('a', 111);
@@ -145,8 +145,8 @@ export function changePasswordApi(
 ) {
   const form = createFormData([
     ['userId', id],
-    ['oldPassword', oldPassword],
-    ['newPassword', newPassword],
+    ['oldPassword', md5(oldPassword)],
+    ['newPassword', md5(newPassword)],
   ]);
 
   axios({
