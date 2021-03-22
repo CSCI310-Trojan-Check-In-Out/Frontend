@@ -74,6 +74,7 @@ export default function ChangePassword({id, navigation}) {
           <TextInput
             style={styles.textInput}
             placeholder={'New Password'}
+            secureTextEntry={true}
             onChangeText={(text) => onChangeNewPassword(text)}
             value={newPassword}
           />
@@ -81,6 +82,7 @@ export default function ChangePassword({id, navigation}) {
         <View style={styles.textContainer}>
           <TextInput
             style={styles.textInput}
+            secureTextEntry={true}
             placeholder={'Confirm Password'}
             onChangeText={(text) => onChangeConfirmNewPassword(text)}
             value={confirmNewPassword}
