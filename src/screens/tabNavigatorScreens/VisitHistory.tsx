@@ -92,6 +92,7 @@ export default function VisitHistory({navigation}) {
   ) {
     searchVisitHistory(
       {
+        studentName: text,
         buildingName,
         studentId,
         major,

@@ -318,6 +318,7 @@ export function updateCapacityByCSV(CSVUri: string) {
 
 export function searchVisitHistory(
   {
+    studentName = undefined,
     buildingName = undefined,
     studentId = undefined,
     major = undefined,
@@ -341,6 +342,9 @@ export function searchVisitHistory(
   }
   if (endTime) {
     formData.push(['leave_time', endTime]);
+  }
+  if (studentName) {
+    formData.push(['studentName', studentName]);
   }
 
   const form = createFormData(formData);
