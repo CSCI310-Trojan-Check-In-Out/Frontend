@@ -23,8 +23,6 @@ export function signupApi(
   successCallback,
   failureCallback = null,
 ) {
-  console.log(image);
-
   const form = createFormData([
     ['image', image],
     ['isAdmin', isAdmin ? 1 : 0],
@@ -377,7 +375,6 @@ export function checkinApi(
   failureCallback: Function,
 ) {
   const form = createFormData([['qrCodeToken', QRCode]]);
-  console.log(QRCode);
   axios({
     method: 'post',
     url: `${STUDENT_URL}/checkin`, //ACCOUNT_URL + 'login',

@@ -6,17 +6,22 @@ import {Context as AppContext} from '../../context/AppContext';
 
 export default function VisitHistoryResult({route, navigation}) {
   const {state} = useContext(AppContext);
-
   const [history, setHistory] = useState<any>([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
+    getHistory();
+  }, [navigation]);
+
+  function getHistory() {
     if (route?.params?.results) {
       setHistory(route?.params?.results);
     } else {
       getUserVisitHistory(setHistory);
     }
-  }, [navigation]);
+  }
+
+
 
   return (
     <>
@@ -29,7 +34,7 @@ export default function VisitHistoryResult({route, navigation}) {
           }}>
           Visit History
         </Text>
-        <VisitHistoryList historyList={history} />
+        <VisitHistoryList historyList={history} getHistory={getHistory} />
       </View>
     </>
   );

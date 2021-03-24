@@ -21,8 +21,8 @@ export default function TabNavigator() {
 
   return (
     <Tab.Navigator
-      lazy={true}
-      // detachInactiveScreens={true}
+      // lazy={true}
+      detachInactiveScreens={true}
       tabBarOptions={{
         style: {height: 50, padding: 5},
       }}

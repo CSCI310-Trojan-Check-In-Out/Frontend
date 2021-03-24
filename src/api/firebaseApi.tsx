@@ -1,5 +1,6 @@
 import storage from '@react-native-firebase/storage';
 import database from '@react-native-firebase/database';
+import {Alert} from 'react-native';
 
 const PROFILE_PIC_REF = 'profilePic';
 const BUILDING_REF = 'buildings';
@@ -62,3 +63,4 @@ function getBuildingCapacityRef(buildingId: string) {
 function getBuildingCheckinRef(buildingId: string) {
   return database().ref(`${BUILDING_REF}/${buildingId}/checkin`);
 }
+

@@ -37,10 +37,10 @@ export default function LocationDetail({route, navigation}) {
     subscribeBuildingMaximumCapacity(building.id, updateMaximumCapacity);
     subscribeBuildingCurrentCapacity(building.id, updateCurrentCapacity);
     return () => {
-      unSubscribeBuildingMaximumCapacity(building.id);
-      unSubscribeBuildingCurrentCapacity(building.id);
+      // unSubscribeBuildingMaximumCapacity(building.id);
+      // unSubscribeBuildingCurrentCapacity(building.id);
     };
-  }, []);
+  }, [navigation]);
 
   function pinQRCodeSucceed() {
     // getQRCodeApi(route.params.buildingId,pinQRCode);

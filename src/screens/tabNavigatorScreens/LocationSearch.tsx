@@ -17,7 +17,7 @@ export default function LocationSearch({navigation}) {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    getAllLocationsApi(setBuildings);
+    getBuildings();
   }, [navigation]);
 
   const handleFilePick = async () => {
@@ -39,6 +39,10 @@ export default function LocationSearch({navigation}) {
     }
   };
 
+  function getBuildings() {
+    getAllLocationsApi(setBuildings);
+  }
+
   return (
     <>
       {/* <SearchBar placeholder={'Filter search results'} changeText={setQuery} /> */}
@@ -46,7 +50,9 @@ export default function LocationSearch({navigation}) {
         All Locations
       </Text>
       <View style={styles.buildingList}>
-        <BuildingList buildings={buildings}></BuildingList>
+        <BuildingList
+          buildings={buildings}
+          getBuildings={getBuildings}></BuildingList>
       </View>
       <View style={{position: 'absolute', bottom: '20%', right: '5%'}}>
         <TouchableOpacity

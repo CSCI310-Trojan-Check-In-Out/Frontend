@@ -31,7 +31,7 @@ export default function StudentListScreen({route,navigation}) {
   
   useEffect(() => {
     getAllStudentsApi(building.id, setStudents);
-  }, []);
+  }, [navigation]);
 
   return (
     <>
