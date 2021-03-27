@@ -13,7 +13,9 @@ export default function VisitHistoryList({historyList, getHistory}) {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    getHistory();
+    if (getHistory) {
+      getHistory();
+    }
     wait(1000).then(() => setRefreshing(false));
   }, []);
 
