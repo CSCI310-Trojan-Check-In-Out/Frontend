@@ -65,6 +65,7 @@ export default function Login({navigation}: {navigation: any}) {
   return (
     <>
       <View
+        testID="loginScreen"
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
@@ -78,12 +79,14 @@ export default function Login({navigation}: {navigation: any}) {
         {/* inputs */}
         <View style={{width: Theme.CONTAINER_WIDTH_LARGE}}>
           <TextInput
+            testID="loginEmail"
             style={CommonStyle.inputBoxStyle}
             onChangeText={setEmail}
             value={email}
             placeholder={'USC EMAIL'}
           />
           <TextInput
+            testID="loginPassword"
             secureTextEntry={true}
             onChangeText={setPassword}
             style={CommonStyle.inputBoxStyle}
@@ -99,6 +102,7 @@ export default function Login({navigation}: {navigation: any}) {
             justifyContent: 'space-evenly',
           }}>
           <Button
+            testID="loginButton"
             title={'Sign In'}
             color={Theme.RED_PRIMARY}
             onPress={signin}
