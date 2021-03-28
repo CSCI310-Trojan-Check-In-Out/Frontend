@@ -43,7 +43,10 @@ export default function ChangePassword({id, navigation}) {
   }
 
   function handleSubmit() {
-    if (newPassword !== confirmNewPassword) {
+    if (!currentPassword||!newPassword||!confirmNewPassword){
+      Alert.alert('', 'Inputs cannot be empty.');
+    }
+    else if (newPassword !== confirmNewPassword) {
       Alert.alert('', 'Your confirm password does not match your new password');
     } else {
       changePasswordApi(
