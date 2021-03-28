@@ -35,7 +35,7 @@ export default function StudentListScreen({route,navigation}) {
 
   return (
     <>
-      <View style={styles.titleContainer}>
+      <View testID="studentListScreen" style={styles.titleContainer}>
         <Text style={styles.title}>{building.place_name}</Text>
       </View>
       <View style={styles.studentList}>

@@ -81,11 +81,12 @@ export default function LocationDetail({route, navigation}) {
               <TouchableOpacity
                 style={styles.button}
                 onPress={pinQRCodeSucceed}
-                testID="pinQRCode">
+                testID="locationDetailPinQRCode">
                 <Text style={styles.textButton}>Pin QR Code</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
+                testID="locationDetailUpdateCapacity"
                 onPress={() =>
                   navigation.navigate('UpdateCapacity', {building: building})
                 }>
@@ -93,6 +94,7 @@ export default function LocationDetail({route, navigation}) {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
+                testID="locationDetailViewStudent"
                 onPress={() =>
                   navigation.navigate('StudentListScreen', {building: building})
                 }>

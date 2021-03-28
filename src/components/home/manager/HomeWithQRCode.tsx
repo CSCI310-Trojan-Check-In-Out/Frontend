@@ -1,11 +1,10 @@
-import React, {useState,useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {removeQRCodeApi} from '../../../api/backendApiCalls';
 import {Context as AppContext} from '../../../context/AppContext';
 import QRCode from 'react-native-qrcode-svg';
 
 export default function HomeWithQRCode({pinnedBuilding}) {
-  
   const {state, removeQRCode} = useContext(AppContext);
 
   return (
@@ -17,10 +16,13 @@ export default function HomeWithQRCode({pinnedBuilding}) {
         <View style={styles.buildingNameContainer}>
           <Text style={styles.buildingName}>{pinnedBuilding.buildingName}</Text>
         </View>
-        <View style={styles.QRCodeContainer}>
+        <View testID="managerHomeQRCode" style={styles.QRCodeContainer}>
           <QRCode value={pinnedBuilding.QRCode} size={200} quietZone={10} />
         </View>
-        <TouchableOpacity style={styles.button} onPress={removeQRCode} testID='removeFromPin'>
+        <TouchableOpacity
+          testID="managerHomeRemoveQRCode"
+          style={styles.button}
+          onPress={removeQRCode}>
           <Text style={styles.textButton}>Remove From Pin</Text>
         </TouchableOpacity>
       </View>
