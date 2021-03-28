@@ -33,7 +33,7 @@ export default function BuildingListItem({building, refreshState}) {
   return (
     <>
       <View
-        testID='buildingListItem'
+        testID="buildingListItem"
         style={{
           display: 'flex',
           flexDirection: 'column',
