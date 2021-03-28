@@ -89,7 +89,9 @@ export default function Profile({name, uscid, major}) {
 
   return (
     <>
-      <View style={CommonStyle.outerContainerStyle}>
+      <View 
+      testID='Profile1'
+      style={CommonStyle.outerContainerStyle}>
         {showModal ? (
           <ConfirmModal
             setShowModal={showModal}

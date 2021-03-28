@@ -109,7 +109,7 @@ export default function VisitHistory({navigation}) {
 
   return (
     <>
-      <View>
+      <View testID='VisitHistory1'>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
             {

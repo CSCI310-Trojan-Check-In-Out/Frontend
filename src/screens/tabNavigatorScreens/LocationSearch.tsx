@@ -46,6 +46,7 @@ export default function LocationSearch({navigation}) {
   return (
     <>
       {/* <SearchBar placeholder={'Filter search results'} changeText={setQuery} /> */}
+    <View testID='LocationSearch1'>
       <Text style={{textAlign: 'center', fontSize: 20, marginTop: 20}}>
         All Locations
       </Text>
@@ -65,6 +66,7 @@ export default function LocationSearch({navigation}) {
           <AntDesign name={'addfile'} size={30}></AntDesign>
         </TouchableOpacity>
       </View>
+    </View>
     </>
   );
 }
