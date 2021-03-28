@@ -27,6 +27,7 @@ export default function TabNavigator() {
         style: {height: 50, padding: 5},
       }}
       screenOptions={({route}) => ({
+        tabBarTestID: route.name,
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
 
@@ -46,7 +47,7 @@ export default function TabNavigator() {
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}>
-      <Tab.Screen name="Home" component={Home}/>
+      <Tab.Screen name="Home" component={Home} />
       {state.user?.is_admin ? (
         <Tab.Screen name="LocationSearch" component={LocationNavigator} />
       ) : null}
