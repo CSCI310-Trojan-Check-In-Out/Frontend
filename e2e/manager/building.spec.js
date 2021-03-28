@@ -11,7 +11,7 @@ describe('Manager Building Screen', () => {
 
   it('should show building detail after tapping', async () => {
     await element(by.id('buildingListItem')).atIndex(0).tap();
-    
+    await expect(element(by.id('locationDetailQRCode'))).toBeVisible();
   });
 });
 
