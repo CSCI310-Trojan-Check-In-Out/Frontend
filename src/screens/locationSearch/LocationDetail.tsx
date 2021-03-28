@@ -54,7 +54,9 @@ export default function LocationDetail({route, navigation}) {
 
   return (
     <>
-      <View style={CommonStyle.outerContainerStyle}>
+      <View 
+      testID='locationDetail'
+      style={CommonStyle.outerContainerStyle}>
         <View
           style={isManager ? styles.titleContainer1 : styles.titleContainer2}>
           <Text style={styles.title}>{'Search Result'}</Text>
@@ -78,7 +80,8 @@ export default function LocationDetail({route, navigation}) {
             <>
               <TouchableOpacity
                 style={styles.button}
-                onPress={pinQRCodeSucceed}>
+                onPress={pinQRCodeSucceed}
+                testID='pinQRCode'>
                 <Text style={styles.textButton}>Pin QR Code</Text>
               </TouchableOpacity>
               <TouchableOpacity

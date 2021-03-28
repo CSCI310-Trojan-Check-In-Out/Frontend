@@ -27,6 +27,7 @@ export default function TabNavigator() {
         style: {height: 50, padding: 5},
       }}
       screenOptions={({route}) => ({
+        tabBarTestID:route.name,
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
 

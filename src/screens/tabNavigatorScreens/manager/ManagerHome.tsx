@@ -7,7 +7,10 @@ import CommonStyle from '../../../style/common.style';
 export default function ManagerHome({pinnedBuilding}) {
   return (
     <>
-      <View style={CommonStyle.outerContainerStyle}>
+    
+      <View 
+      testID="managerHome"
+      style={CommonStyle.outerContainerStyle}>
         {pinnedBuilding ? (
           <HomeWithQRCode pinnedBuilding={pinnedBuilding} />
         ) : (
