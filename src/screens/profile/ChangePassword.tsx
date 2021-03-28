@@ -43,7 +43,10 @@ export default function ChangePassword({id, navigation}) {
   }
 
   function handleSubmit() {
-    if (newPassword !== confirmNewPassword) {
+    if (!currentPassword||!newPassword||!confirmNewPassword){
+      Alert.alert('', 'Inputs cannot be empty.');
+    }
+    else if (newPassword !== confirmNewPassword) {
       Alert.alert('', 'Your confirm password does not match your new password');
     } else {
       changePasswordApi(
@@ -58,12 +61,14 @@ export default function ChangePassword({id, navigation}) {
 
   return (
     <>
-      <View>
+      <View testID='ChangePassword' 
+      style={{display: 'flex',flexDirection: 'column',justifyContent: 'flex-end',}}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Change Password</Text>
         </View>
         <View style={styles.textContainer}>
           <TextInput
+            testID='currentPassword'
             style={styles.textInput}
             secureTextEntry={true}
             placeholder={'Current Password'}
@@ -73,6 +78,7 @@ export default function ChangePassword({id, navigation}) {
         </View>
         <View style={styles.textContainer}>
           <TextInput
+            testID='newPassword'
             style={styles.textInput}
             placeholder={'New Password'}
             secureTextEntry={true}
@@ -82,6 +88,7 @@ export default function ChangePassword({id, navigation}) {
         </View>
         <View style={styles.textContainer}>
           <TextInput
+            testID='comfirmNewPassword'
             style={styles.textInput}
             secureTextEntry={true}
             placeholder={'Confirm Password'}
@@ -90,10 +97,11 @@ export default function ChangePassword({id, navigation}) {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <TouchableOpacity testID='changePasswordDone' style={styles.button} onPress={handleSubmit}>
             <Text style={styles.textButton}>Done</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            testID='changePasswordCancel'
             onPress={() => navigate('CANCEL')}
             style={styles.button}>
             <Text style={styles.textButton}>Cancel</Text>

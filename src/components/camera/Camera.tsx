@@ -53,7 +53,7 @@ export default function Camera({
   }
   return (
     <>
-      <View style={styles.container}>
+      <View testID='Camera' style={styles.container}>
         <RNCamera
           style={styles.preview}
           ratio={'16:9'}
@@ -90,6 +90,7 @@ export default function Camera({
                         alignSelf: 'center',
                       }}>
                       <TouchableOpacity
+                        testID='album'
                         onPress={() => openAlbum()}
                         style={styles.capture}>
                         <Text style={{fontSize: 14}}> ALBUM </Text>
@@ -105,6 +106,7 @@ export default function Camera({
                         justifyContent: 'center',
                       }}>
                       <TouchableOpacity
+                        testID='snap'
                         onPress={() => takePicture(camera)}
                         style={styles.capture}>
                         <Text style={{fontSize: 14}}> SNAP </Text>
