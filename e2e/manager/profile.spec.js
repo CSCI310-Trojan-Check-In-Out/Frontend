@@ -36,10 +36,10 @@
         await expect(element(by.id('Camera'))).toBeVisible();
     });
 
-    //it('updatePhotoSnap', async () => {
-        //await element(by.id('snap')).tap();
-        //await expect(element(by.id('Profile1'))).toBeVisible();
-    //});
+    it('updatePhotoSnap', async () => {
+        await element(by.id('snap')).tap();
+        await expect(element(by.id('profileImage'))).toBeVisible();
+    });
 
     // Change password Series
     it('changePasswordNavigation', async () => {
@@ -94,8 +94,8 @@
     async function setup() {
         await device.launchApp();
         await device.reloadReactNative();
-        await element(by.id('loginEmail')).typeText('manager@usc.edu');
-        await element(by.id('loginPassword')).typeText('2');
+        await element(by.id('loginEmail')).typeText('huan773@usc.edu');
+        await element(by.id('loginPassword')).typeText('1');
         await element(by.id('loginButton')).tap();
       }
       

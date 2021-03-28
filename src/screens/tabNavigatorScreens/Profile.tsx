@@ -89,9 +89,7 @@ export default function Profile({name, uscid, major}) {
 
   return (
     <>
-      <View 
-      testID='Profile1'
-      style={CommonStyle.outerContainerStyle}>
+      <View testID="Profile1" style={CommonStyle.outerContainerStyle}>
         {showModal ? (
           <ConfirmModal
             setShowModal={showModal}
@@ -104,7 +102,11 @@ export default function Profile({name, uscid, major}) {
 
         <View style={styles.container}>
           <View style={styles.profile}>
-            <Image style={styles.profilePicture} source={{uri: image}} />
+            <Image
+              testID="profileImage"
+              style={styles.profilePicture}
+              source={{uri: image}}
+            />
             <View style={styles.textcontainer}>
               <Text style={styles.name}>{state.user?.username}</Text>
               <Text style={styles.uscid}>USCID: {state.user?.usc_id} </Text>

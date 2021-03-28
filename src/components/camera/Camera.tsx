@@ -53,7 +53,7 @@ export default function Camera({
   }
   return (
     <>
-      <View testID='Camera' style={styles.container}>
+      <View testID="Camera" style={styles.container}>
         <RNCamera
           style={styles.preview}
           ratio={'16:9'}
@@ -88,9 +88,10 @@ export default function Camera({
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignSelf: 'center',
+                        marginBottom: 60,
                       }}>
                       <TouchableOpacity
-                        testID='album'
+                        testID="album"
                         onPress={() => openAlbum()}
                         style={styles.capture}>
                         <Text style={{fontSize: 14}}> ALBUM </Text>
@@ -106,7 +107,7 @@ export default function Camera({
                         justifyContent: 'center',
                       }}>
                       <TouchableOpacity
-                        testID='snap'
+                        testID="snap"
                         onPress={() => takePicture(camera)}
                         style={styles.capture}>
                         <Text style={{fontSize: 14}}> SNAP </Text>
