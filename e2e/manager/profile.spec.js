@@ -1,5 +1,5 @@
 
-
+/*
     before(async () => {
         await setup();
         await element(by.id('Profile')).tap();
@@ -98,4 +98,4 @@
         await element(by.id('loginPassword')).typeText('2');
         await element(by.id('loginButton')).tap();
       }
-      
+*/
