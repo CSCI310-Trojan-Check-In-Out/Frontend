@@ -25,7 +25,9 @@ export default function VisitHistoryResult({route, navigation}) {
 
   return (
     <>
-      <View style={styles.visitorList}>
+      <View 
+      testID='VisitHistoryResult'
+      style={styles.visitorList}>
         <Text
           style={{
             textAlign: 'center',

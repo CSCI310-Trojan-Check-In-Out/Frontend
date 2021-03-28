@@ -124,6 +124,7 @@ export default function VisitHistory({navigation}) {
         />
         <View style={styles.button}>
           <Button
+            testID='timeFilter'
             color={'#9D2235'}
             title="Choose Time Range"
             onPress={showTimeRangeInput}
@@ -131,9 +132,12 @@ export default function VisitHistory({navigation}) {
         </View>
 
         {showTimeRange && (
-          <View>
+          <View testID='timeInput'>
             <View style={styles.timeRangeContainer}>
-              <Text style={styles.timeRange}>
+              <Text 
+              testID='timeText'
+              accessibilityValue={{text:'From'}}
+              style={styles.timeRange}>
                 From {startDate.toISOString().split('T')[0]},{' '}
                 {startDate.toTimeString().split('G')[0]}
                 to {endDate.toISOString().split('T')[0]},{' '}
@@ -143,6 +147,7 @@ export default function VisitHistory({navigation}) {
             <View style={styles.timeRangeButtonContainer}>
               <View style={styles.button}>
                 <Button
+                  testID='startDateFilter'
                   color={'#808080'}
                   onPress={() => showDatepicker('start')}
                   title="Start Date"
@@ -150,6 +155,7 @@ export default function VisitHistory({navigation}) {
               </View>
               <View style={styles.button}>
                 <Button
+                  testID='startTimeFilter'
                   color={'#808080'}
                   onPress={() => showTimepicker('start')}
                   title="Start Time"
@@ -157,6 +163,7 @@ export default function VisitHistory({navigation}) {
               </View>
               <View style={styles.button}>
                 <Button
+                  testID='endDateFilter'
                   color={'#808080'}
                   onPress={() => showDatepicker('end')}
                   title="End Date"
@@ -164,6 +171,7 @@ export default function VisitHistory({navigation}) {
               </View>
               <View style={styles.button}>
                 <Button
+                  testID='endTimeFilter'
                   color={'#808080'}
                   onPress={() => showTimepicker('end')}
                   title="End Time"
@@ -188,12 +196,14 @@ export default function VisitHistory({navigation}) {
         )}
         <View style={styles.button}>
           <Button
+            testID='buildingFilter'
             color={'#9D2235'}
             onPress={showBuildingInput}
             title="Enter Building Name"
           />
           {showBuilding ? (
             <TextInput
+              testID='buildingInput'
               style={styles.textInput}
               placeholder={'Enter Building Name:'}
               onChangeText={(text) => onChangeBuildingName(text)}
@@ -203,12 +213,14 @@ export default function VisitHistory({navigation}) {
         </View>
         <View style={styles.button}>
           <Button
+            testID='studentIDFilter'
             color={'#9D2235'}
             onPress={showStudentIDInput}
             title="Enter Student ID"
           />
           {showStudentID ? (
             <TextInput
+              testID='studentIDInput'
               style={styles.textInput}
               placeholder={'Enter Student ID:'}
               onChangeText={(text) => onChangeStudentID(text)}
@@ -218,12 +230,14 @@ export default function VisitHistory({navigation}) {
         </View>
         <View style={styles.button}>
           <Button
+            testID='majorFilter'
             color={'#9D2235'}
             onPress={showMajorInput}
             title="Enter Major"
           />
           {showMajor ? (
             <TextInput
+              testID='majorInput'
               style={styles.textInput}
               placeholder={'Enter Major:'}
               onChangeText={(text) => onChangeMajor(text)}
@@ -233,6 +247,7 @@ export default function VisitHistory({navigation}) {
         </View>
         <View style={styles.searchButton}>
           <Button
+            testID='visitHistorySearchButton'
             color={'#FFC72C'}
             onPress={() =>
               searchStudent(

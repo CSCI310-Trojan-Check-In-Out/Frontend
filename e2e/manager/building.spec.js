@@ -1,4 +1,5 @@
-describe('Manager Building Screen', () => {
+/*
+describe('Manager Location Search', () => {
   before(async () => {
     await setup();
   });
@@ -13,11 +14,11 @@ describe('Manager Building Screen', () => {
     await element(by.id('buildingListItem')).atIndex(0).tap();
     await expect(element(by.id('locationDetailQRCode'))).toBeVisible();
   });
-
+*/
   /* -------------------------------------------------------------------------- */
   /*                               update capacity                              */
   /* -------------------------------------------------------------------------- */
-
+/*
   it('should show update capacity screen', async () => {
     await element(by.id('locationDetailUpdateCapacity')).tap();
     await expect(element(by.id('updateCapacityScreen'))).toBeVisible();
@@ -66,11 +67,12 @@ describe('Manager Building Screen', () => {
       element(by.id('Capacity successfully updated!')),
     ).toBeVisible();
   });
-
+*/
   //   /* -------------------------------------------------------------------------- */
   //   /*                                   QRCode                                   */
   //   /* -------------------------------------------------------------------------- */
 
+  /*
   it('should show QR Code after pinning to home', async () => {
     await device.pressBack();
     await device.pressBack();
@@ -109,3 +111,5 @@ async function setup() {
   await element(by.id('loginButton')).tap();
   await element(by.id('LocationSearch')).tap();
 }
+
+*/

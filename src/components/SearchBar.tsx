@@ -9,6 +9,7 @@ export default function CustomSearchBar({placeholder, query, changeText}) {
   return (
     <View>
       <SearchBar
+        testID='searchBar'
         placeholder={placeholder}
         onChangeText={changeText}
         value={query}
