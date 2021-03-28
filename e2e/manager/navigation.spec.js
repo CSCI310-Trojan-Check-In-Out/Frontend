@@ -25,6 +25,8 @@ describe('Manager Navigation', () => {
     await expect(element(by.id('Profile1'))).toBeVisible();
   });
 
+  //profile tab
+  
 
   // beforeEach(async () => {
   //   await device.reloadReactNative();
