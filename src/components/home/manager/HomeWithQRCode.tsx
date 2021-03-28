@@ -20,7 +20,7 @@ export default function HomeWithQRCode({pinnedBuilding}) {
         <View style={styles.QRCodeContainer}>
           <QRCode value={pinnedBuilding.QRCode} size={200} quietZone={10} />
         </View>
-        <TouchableOpacity style={styles.button} onPress={removeQRCode}>
+        <TouchableOpacity style={styles.button} onPress={removeQRCode} testID='removeFromPin'>
           <Text style={styles.textButton}>Remove From Pin</Text>
         </TouchableOpacity>
       </View>
