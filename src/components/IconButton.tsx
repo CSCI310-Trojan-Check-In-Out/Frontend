@@ -7,7 +7,7 @@ export default function IconButton({iconName, text,press}) {
   
   return (
     <>
-      <TouchableOpacity style={styles.background} onPress={press}>
+      <TouchableOpacity testID={iconName} style={styles.background} onPress={press}>
         <Ionicons name={iconName} size={30} style={styles.icon} />
         <View
           style={{

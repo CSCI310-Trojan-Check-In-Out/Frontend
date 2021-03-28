@@ -17,6 +17,7 @@ import Theme from '../style/theme.style';
 export default function ConfirmModal({setShowModal, title,  message, accept, decline }) {
   return (
     <>
+    <View testID={message} >
       <Modal transparent={true}>
         <View
           style={{
@@ -52,6 +53,7 @@ export default function ConfirmModal({setShowModal, title,  message, accept, dec
               }}>
               <View style={{width: '30%'}}>
                 <Button
+                  testID='No'
                   title={'No'}
                   color={Theme.RED_PRIMARY}
                   onPress={() => {
@@ -62,6 +64,7 @@ export default function ConfirmModal({setShowModal, title,  message, accept, dec
 
               <View style={{width: '30%'}}>
                 <Button
+                  testID='Yes'
                   title={'Yes'}
                   color={Theme.RED_PRIMARY}
                   onPress={() => {
@@ -73,6 +76,7 @@ export default function ConfirmModal({setShowModal, title,  message, accept, dec
           </View>
         </View>
       </Modal>
+    </View>
     </>
   );
 }
