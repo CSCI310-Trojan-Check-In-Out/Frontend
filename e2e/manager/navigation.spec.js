@@ -19,10 +19,12 @@ it('show visit history tab', async () => {
   await expect(element(by.id('VisitHistory1'))).toBeVisible();
 });
 
-it('show profile tab', async () => {
-  await element(by.id('locationDetailUpdateCapacity')).tap();
-  await expect(element(by.id('Profile1'))).toBeVisible();
-});
+  //profile tab
+  it('show profile tab', async () => {
+    await element(by.id('Profile')).tap();
+    await expect(element(by.id('Profile1'))).toBeVisible();
+  });
+
 
 // beforeEach(async () => {
 //   await device.reloadReactNative();
