@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  BackHandler
 } from 'react-native';
 import {updateCapacityApi} from '../../api/backendApiCalls';
 
@@ -17,18 +18,27 @@ export default function UpdateCapacity({route, navigation}) {
   const [message, setMessage] = useState(
     'Please enter a positive integer that is great than the current capacity!',
   );
+  const [style, setStyle]=useState(false);
+
+  function changeStyle(){
+    setStyle(true);
+  }
+
+  function restoreStyle(){
+    setStyle(false);
+  }
 
   function updateCapacity() {
     setMessage('Capacity successfully updated!');
   }
 
   function notification() {
-    setMessage('New Capacity cannot be smaller than the older one!');
+    setMessage('New Capacity cannot be smaller than the current number of people in the building!');
   }
 
   function updateCapacitySucceed() {
     if (!currentCapacity) {
-      setMessage('Capacity cannot be empty');
+      setMessage('Capacity cannot be empty!');
     } else if (
       isNaN(currentCapacity) ||
       currentCapacity <= 0 ||
@@ -51,26 +61,31 @@ export default function UpdateCapacity({route, navigation}) {
         testID="updateCapacityScreen"
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        {!style&&(
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{building.place_name}</Text>
-        </View>
+        </View>)}
         <Text style={styles.capacity}>Capacity:</Text>
         <View style={styles.textContainer}>
           <TextInput
+            testID='currentCapacity'
             style={styles.textInput}
             keyboardType="numeric"
+            onFocus={changeStyle}
+            onEndEditing={restoreStyle}
             onChangeText={setCurrentCapacity}
             value={currentCapacity}
           />
         </View>
         <View style={styles.notificationContainer}>
-          <Text style={styles.notification}>{message}</Text>
+          <Text testID={message} style={styles.notification}>{message}</Text>
         </View>
         <View style={styles.buttonContainer}>
           {/* <TouchableOpacity style={styles.button}>
             <Text style={styles.textButton}>Upload CSV File</Text>
           </TouchableOpacity> */}
           <TouchableOpacity
+            testID='currentCapacityUpdateButton'
             style={styles.button}
             onPress={updateCapacitySucceed}>
             <Text style={styles.textButton}>Update</Text>
@@ -83,7 +98,9 @@ export default function UpdateCapacity({route, navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
   },
   titleContainer: {
     alignItems: 'center',
@@ -91,6 +108,7 @@ const styles = StyleSheet.create({
     marginBottom: '20%',
     paddingLeft: '10%',
     paddingRight: '10%',
+    
   },
   title: {
     fontSize: 25,
