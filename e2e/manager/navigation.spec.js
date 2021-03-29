@@ -3,22 +3,22 @@ describe('Navigation', () => {
     await setup();
   });
 
-  it('show home tab', async () => {
+  it('should show home tab', async () => {
     await element(by.id('Home')).tap();
     await expect(element(by.id('Home'))).toBeVisible();
   });
 
-  it('show location search tab', async () => {
+  it('should show location search tab', async () => {
     await element(by.id('LocationSearch')).tap();
     await expect(element(by.id('LocationSearch1'))).toBeVisible();
   });
 
-  it('show visit history tab', async () => {
+  it('should show visit history tab', async () => {
     await element(by.id('VisitHistory')).tap();
     await expect(element(by.id('VisitHistory1'))).toBeVisible();
   });
 
-  it('show profile tab', async () => {
+  it('should show profile tab', async () => {
     await element(by.id('Profile')).tap();
     await expect(element(by.id('Profile1'))).toBeVisible();
   });
