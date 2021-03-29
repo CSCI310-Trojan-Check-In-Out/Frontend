@@ -56,7 +56,8 @@ describe('Manager Location Search', () => {
     await expect(element(by.id('Capacity cannot be empty!'))).toBeVisible();
   });
 
-  // it('should show error message after submitting capacity smaller than current capacity', async () => {
+  // can't be run when there's no data in the database
+  it('should show error message after submitting capacity smaller than current capacity', async () => {
   //   await element(by.id('currentCapacity')).clearText();
   //   await element(by.id('currentCapacity')).typeText('1');
   //   await element(by.id('currentCapacityUpdateButton')).tap();
@@ -67,7 +68,7 @@ describe('Manager Location Search', () => {
   //       ),
   //     ),
   //   ).toBeVisible();
-  // });
+   });
 
   it('should succeed after entering correct number', async () => {
     await element(by.id('currentCapacity')).typeText('110');
@@ -104,12 +105,19 @@ describe('Manager Location Search', () => {
     await expect(element(by.id('managerHomeQRCode'))).toNotExist();
   });
 
-  it('should hide QR Code after removing from home', async () => {
+  
+
+  //   /* -------------------------------------------------------------------------- */
+  //   /*                                   View Students                            */
+  //   /* -------------------------------------------------------------------------- */
+
+  it('should show a list of students in a building', async () => {
     await element(by.id('LocationSearch')).tap();
     await element(by.id('locationDetailViewStudent')).tap();
 
     await expect(element(by.id('studentListScreen'))).toExist();
   });
+
 });
 
 async function setup() {
@@ -121,3 +129,4 @@ async function setup() {
   await element(by.id('LocationSearch')).tap();
 }
 
+  
