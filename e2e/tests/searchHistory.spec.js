@@ -1,4 +1,4 @@
-describe('Manager Search History', () => {
+describe('Search History', () => {
   before(async () => {
     await setup();
   });

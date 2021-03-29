@@ -1,4 +1,4 @@
-describe('Manager Location Search', () => {
+describe('Location', () => {
   before(async () => {
     await setup();
   });
@@ -55,20 +55,6 @@ describe('Manager Location Search', () => {
     await expect(element(by.id('Capacity cannot be empty!'))).toBeVisible();
   });
 
-  // can't be run when there's no data in the database
-  it('should show error message after submitting capacity smaller than current capacity', async () => {
-  //   await element(by.id('currentCapacity')).clearText();
-  //   await element(by.id('currentCapacity')).typeText('1');
-  //   await element(by.id('currentCapacityUpdateButton')).tap();
-  //   await expect(
-  //     element(
-  //       by.id(
-  //         'New Capacity cannot be smaller than the current number of people in the building!',
-  //       ),
-  //     ),
-  //   ).toBeVisible();
-   });
-
   it('should succeed after entering correct number', async () => {
     await element(by.id('currentCapacity')).typeText('110');
     await element(by.id('currentCapacityUpdateButton')).tap();
@@ -84,14 +70,6 @@ describe('Manager Location Search', () => {
   
   it('should show QR Code after pinning to home', async () => {
     await device.pressBack();
-    await device.pressBack();
-    await element(by.id('locationDetailPinQRCode')).tap();
-    await element(by.text('OK')).tap();
-    await element(by.id('Home')).tap();
-    await expect(element(by.id('managerHomeQRCode'))).toBeVisible();
-  });
-
-  it('should remove QR Code after removing from home', async () => {
     await device.pressBack();
     await element(by.id('locationDetailPinQRCode')).tap();
     await element(by.text('OK')).tap();
