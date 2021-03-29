@@ -89,7 +89,7 @@ export default function SignUp({navigation}: {navigation: any}) {
 
   return (
     <>
-      <ScrollView style={{flex: 1, height: '100%'}}>
+      <ScrollView testID="signUpScrollView" style={{flex: 1, height: '100%'}}>
         <SafeAreaView style={CommonStyle.outerContainerStyle}>
           {/* title */}
           <Text style={CommonStyle.title}>Connect Your USC Account</Text>
@@ -123,12 +123,14 @@ export default function SignUp({navigation}: {navigation: any}) {
           {/* inputs */}
           <View style={{width: Theme.CONTAINER_WIDTH_LARGE}}>
             <TextInput
+                testID="signUpFullNameTextInput"
               style={CommonStyle.inputBoxStyle}
               onChangeText={setFullName}
               value={fullName}
               placeholder={'FULL NAME'}
             />
             <TextInput
+                testID="signUpUSCIDTextInput"
               style={CommonStyle.inputBoxStyle}
               onChangeText={setUscID}
               value={uscID}
@@ -136,12 +138,14 @@ export default function SignUp({navigation}: {navigation: any}) {
             />
             <DropDownMenu setSchool={setMajor} />
             <TextInput
+                testID="signUpUSCEmailTextInput"
               style={CommonStyle.inputBoxStyle}
               onChangeText={setEmail}
               value={email}
               placeholder={'USC EMAIL'}
             />
             <TextInput
+                testID="signUpPasswordTextInput"
               style={CommonStyle.inputBoxStyle}
               secureTextEntry={true}
               onChangeText={setPassword}
@@ -168,13 +172,15 @@ export default function SignUp({navigation}: {navigation: any}) {
               }}>
               <View>
                 <TouchableOpacity
-                  onPress={() => setIsAdmin(false)}
+                    testID="signUpStudentRadioButton"
+                    onPress={() => setIsAdmin(false)}
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
                   }}>
                   <Ionicons
+                      testID="signUpStudentRadioButtonIcon"
                     name={
                       isAdmin ? 'radio-button-off-sharp' : 'radio-button-on'
                     }
@@ -208,6 +214,7 @@ export default function SignUp({navigation}: {navigation: any}) {
               justifyContent: 'space-evenly',
             }}>
             <Button
+                testID="signUpDoneButton"
               title={'Done'}
               color={Theme.RED_PRIMARY}
               onPress={() => {

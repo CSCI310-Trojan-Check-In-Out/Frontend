@@ -109,6 +109,7 @@ export default function Login({navigation}: {navigation: any}) {
           />
 
           <Button
+              testID="signUpButton"
             title={'Sign Up'}
             color={Theme.YELLOW_PRIMARY}
             onPress={() => {
