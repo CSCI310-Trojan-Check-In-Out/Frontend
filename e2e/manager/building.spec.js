@@ -1,4 +1,4 @@
-/*
+
 describe('Manager Location Search', () => {
   before(async () => {
     await setup();
@@ -14,17 +14,26 @@ describe('Manager Location Search', () => {
     await element(by.id('buildingListItem')).atIndex(0).tap();
     await expect(element(by.id('locationDetailQRCode'))).toBeVisible();
   });
-*/
+
   /* -------------------------------------------------------------------------- */
   /*                               update capacity                              */
   /* -------------------------------------------------------------------------- */
-/*
+
   it('should show update capacity screen', async () => {
     await element(by.id('locationDetailUpdateCapacity')).tap();
     await expect(element(by.id('updateCapacityScreen'))).toBeVisible();
   });
 
+  it('should show error message after entering string', async () => {
+    await element(by.id('currentCapacity')).typeText('hello');
+    await element(by.id('currentCapacityUpdateButton')).tap();
+    await expect(
+      element(by.id('Please enter a positive integer!')),
+    ).toBeVisible();
+  });
+
   it('should show error message after entering negative number', async () => {
+    await element(by.id('currentCapacity')).clearText();
     await element(by.id('currentCapacity')).typeText('-1');
     await element(by.id('currentCapacityUpdateButton')).tap();
     await expect(
@@ -67,12 +76,12 @@ describe('Manager Location Search', () => {
       element(by.id('Capacity successfully updated!')),
     ).toBeVisible();
   });
-*/
+
   //   /* -------------------------------------------------------------------------- */
   //   /*                                   QRCode                                   */
   //   /* -------------------------------------------------------------------------- */
 
-  /*
+  
   it('should show QR Code after pinning to home', async () => {
     await device.pressBack();
     await device.pressBack();
@@ -112,4 +121,3 @@ async function setup() {
   await element(by.id('LocationSearch')).tap();
 }
 
-*/

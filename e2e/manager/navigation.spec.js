@@ -1,4 +1,4 @@
-describe('Manager Navigation', () => {
+describe('Navigation', () => {
   before(async () => {
     await setup();
   });

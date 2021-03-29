@@ -1,4 +1,4 @@
-/*
+
 describe('Manager Profile', () => {
   before(async () => {
     await setup();
@@ -95,4 +95,3 @@ async function setup() {
   await element(by.id('loginButton')).tap();
 }
 
-*/
