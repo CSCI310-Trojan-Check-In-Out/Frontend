@@ -1,4 +1,3 @@
-
 describe('Profile', () => {
   before(async () => {
     await setup();
@@ -20,13 +19,11 @@ describe('Profile', () => {
   });
 
   it('should show log in screen after clicking yes for delete account pop-up', async () => {
-    /*
-    await setup1();
+    await setupRegister();
     await element(by.id('Profile')).tap();
     await element(by.id('close-outline')).tap();
     await element(by.id('Yes')).tap();
-    await expect(element(by.id('Profile1'))).toBeVisible();
-    */
+    await expect(element(by.id('loginScreen'))).toBeVisible();
   });
 
   it('should show Camera after clicking update photo', async () => {
@@ -50,7 +47,7 @@ describe('Profile', () => {
   });
 
   it('should go back to profile after clicking cancel in change password screen', async () => {
-    await element(by.id('currentPassword')).typeText('2');
+    await element(by.id('currentPassword')).typeText('1');
     await element(by.id('newPassword')).typeText('2');
     await element(by.id('comfirmNewPassword')).typeText('2');
     await element(by.id('changePasswordCancel')).tap();
@@ -59,7 +56,7 @@ describe('Profile', () => {
 
   it('should show error after entering wrong original password', async () => {
     await element(by.id('key-outline')).tap();
-    await element(by.id('currentPassword')).typeText('1');
+    await element(by.id('currentPassword')).typeText('3');
     await element(by.id('newPassword')).typeText('2');
     await element(by.id('comfirmNewPassword')).typeText('2');
     await element(by.id('changePasswordDone')).tap();
@@ -79,7 +76,7 @@ describe('Profile', () => {
   });
 
   it('should show error after entering un-matched new password and confirm new password', async () => {
-    await element(by.id('currentPassword')).typeText('2');
+    await element(by.id('currentPassword')).typeText('1');
     await element(by.id('newPassword')).clearText();
     await element(by.id('newPassword')).typeText('2');
     await element(by.id('comfirmNewPassword')).clearText();
@@ -92,8 +89,25 @@ describe('Profile', () => {
 async function setup() {
   await device.launchApp();
   await device.reloadReactNative();
-  await element(by.id('loginEmail')).typeText('manager@usc.edu');
-  await element(by.id('loginPassword')).typeText('2');
+  await element(by.id('loginEmail')).typeText('admin@usc.edu');
+  await element(by.id('loginPassword')).typeText('1');
   await element(by.id('loginButton')).tap();
 }
 
+async function setupRegister() {
+  await device.launchApp();
+  await device.reloadReactNative();
+  await element(by.id('signUpButton')).tap();
+  // Enter fullname, uscID, but no email
+  await element(by.id('signUpFullNameTextInput')).typeText('manager');
+  await device.pressBack();
+  await element(by.id('signUpUSCIDTextInput')).typeText('testingID1');
+  await device.pressBack();
+  await element(by.id('signUpUSCEmailTextInput')).typeText('manager1@usc.edu');
+  await device.pressBack();
+  await element(by.id('signUpPasswordTextInput')).typeText('1');
+  await device.pressBack();
+  await element(by.id('signUpManagerRadioButton')).tap();
+  await element(by.id('signUpDoneButton')).tap();
+  await element(by.id('Profile')).tap();
+}

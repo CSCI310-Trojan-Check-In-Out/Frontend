@@ -95,7 +95,7 @@ export default function StudentHome({navigation}) {
     }
   }
   return (
-    <View style={CommonStyle.outerContainerStyle}>
+    <View testID="studentHome" style={CommonStyle.outerContainerStyle}>
       {/* <Modal /> */}
       {/*  title */}
       <Text style={CommonStyle.title}>

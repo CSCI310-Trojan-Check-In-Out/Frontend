@@ -20,5 +20,5 @@ export function notEmpty(inputs: string[]) {
 }
 
 export function alertError(message: string) {
-  Alert.alert('', message);
+  Alert.alert('Error', message);
 }
