@@ -1,5 +1,5 @@
 
-describe('Manager Profile', () => {
+describe('Profile', () => {
   before(async () => {
     await setup();
     await element(by.id('Profile')).tap();
