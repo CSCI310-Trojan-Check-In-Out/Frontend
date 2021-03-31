@@ -14,6 +14,8 @@ import SearchBar from '../../components/SearchBar';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {searchVisitHistory} from '../../api/backendApiCalls';
 import {NavigationRouteContext} from '@react-navigation/native';
+import DropDownMenu from '../../components/DropDownMenu';
+
 export default function VisitHistory({navigation}) {
   const [text, setText] = useState('');
   const [startEnd, setStartEnd] = useState('');
@@ -117,11 +119,30 @@ export default function VisitHistory({navigation}) {
             }
           </Text>
         </View>
-        <SearchBar
-          placeholder={'Enter student name:'}
-          query={text}
-          changeText={setText}
-        />
+        <View style={styles.searchContainer}>
+          <SearchBar
+            placeholder={'Enter student name:'}
+            query={text}
+            changeText={setText}
+          />
+          <View style={styles.searchButton}>
+            <Button
+              testID='visitHistorySearchButton'
+              color={'#FFC72C'}
+              onPress={() =>
+                searchStudent(
+                  text,
+                  startDate,
+                  endDate,
+                  buildingName,
+                  studentID,
+                  major,
+                )
+              }
+              title="Search"
+            />
+          </View>
+        </View>
         <View style={styles.button}>
           <Button
             testID='timeFilter'
@@ -235,33 +256,10 @@ export default function VisitHistory({navigation}) {
             onPress={showMajorInput}
             title="Enter Major"
           />
-          {showMajor ? (
-            <TextInput
-              testID='majorInput'
-              style={styles.textInput}
-              placeholder={'Enter Major:'}
-              onChangeText={(text) => onChangeMajor(text)}
-              value={major}
-            />
+        </View>
+        {showMajor ? (
+          <DropDownMenu setValue={onChangeMajor}/>
           ) : null}
-        </View>
-        <View style={styles.searchButton}>
-          <Button
-            testID='visitHistorySearchButton'
-            color={'#FFC72C'}
-            onPress={() =>
-              searchStudent(
-                text,
-                startDate,
-                endDate,
-                buildingName,
-                studentID,
-                major,
-              )
-            }
-            title="Search"
-          />
-        </View>
       </View>
     </>
   );
@@ -278,6 +276,21 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     textAlign: 'center',
+  },
+  searchContainer:{
+    height:50,
+    flexDirection:'row',
+    alignItems:'center',
+    marginBottom:'5%',
+    marginTop:'5%',
+    justifyContent:'center',
+  },
+  searchButton: {
+    marginTop: '1%',
+    marginBottom: '1%',
+    marginLeft: '2%',
+    marginRight: '2%',
+    borderRadius: 20,
   },
   timeRangeContainer: {
     marginTop: '1%',
@@ -309,11 +322,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingLeft: '5%',
   },
-  searchButton: {
-    marginTop: '20%',
-    marginBottom: '1%',
-    marginLeft: '2%',
-    marginRight: '2%',
-    borderRadius: 20,
+  dropDownMenu:{
+    
   },
 });

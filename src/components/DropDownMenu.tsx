@@ -4,7 +4,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import CommonStyle from '../style/common.style';
 import Theme from '../style/theme.style';
 
-export default function DropDownMenu({setSchool}) {
+export default function DropDownMenu({setValue}) {
     
     
     return (
@@ -33,7 +33,7 @@ export default function DropDownMenu({setSchool}) {
         style={CommonStyle.inputBoxStyle}
         itemStyle={{alignItems: 'center'}}
         dropDownStyle={{backgroundColor: '#fafafa'}}
-        onChangeItem={item => setSchool(item.value)}
+        onChangeItem={item => setValue(item.value)}
         />
             
         </>

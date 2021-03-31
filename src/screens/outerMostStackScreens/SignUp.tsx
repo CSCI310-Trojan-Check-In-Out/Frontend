@@ -136,7 +136,7 @@ export default function SignUp({navigation}: {navigation: any}) {
               value={uscID}
               placeholder={'USC ID'}
             />
-            <DropDownMenu setSchool={setMajor} />
+            <DropDownMenu setValue={setMajor} />
             <TextInput
               testID="signUpUSCEmailTextInput"
               style={CommonStyle.inputBoxStyle}

@@ -112,6 +112,7 @@ export default function Profile({ name, uscid, major}) {
               <Text style={styles.name}>{state.user?.username}</Text>
               <Text style={styles.uscid}>USCID: {state.user?.usc_id} </Text>
               <Text style={styles.major}>Major: {state.user?.major} </Text>
+              <Text style={styles.checkedin}>Currently Checking in: N/A</Text>
             </View>
           </View>
           <View style={styles.row}>
@@ -154,8 +155,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   profilePicture: {
-    width: 300,
-    height: 300,
+    width: 280,
+    height: 280,
     borderRadius: 50,
     flexDirection: 'row',
   },
@@ -172,6 +173,10 @@ const styles = StyleSheet.create({
   },
   major: {
     fontSize: 15,
+  },
+  checkedin:{
+    fontSize: 15,
+    textAlign:'center',
   },
   row: {
     marginTop: 10,

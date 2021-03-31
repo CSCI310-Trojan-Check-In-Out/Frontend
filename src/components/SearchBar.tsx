@@ -20,6 +20,7 @@ export default function CustomSearchBar({placeholder, query, changeText}) {
           borderBottomColor: colors.grey4,
           borderTopColor: colors.grey4,
           marginBottom:'2%',
+          width:300,
         }}
       />
     </View>
