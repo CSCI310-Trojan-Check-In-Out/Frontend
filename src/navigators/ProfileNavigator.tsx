@@ -1,6 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import ChangePassword from '../screens/profile/ChangePassword'
+import ChangePassword from '../screens/profile/ChangePassword';
+import ProfilePicture from '../screens/profile/ProfilePicture';
 
 import Profile from '../screens/tabNavigatorScreens/Profile';
 
@@ -18,6 +19,11 @@ export default function ProfileNavigator() {
         options={{headerShown: false}}
         name="ChangePassword"
         component={ChangePassword}
+      />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="ProfilePicture"
+        component={ProfilePicture}
       />
     </Stack.Navigator>
   );

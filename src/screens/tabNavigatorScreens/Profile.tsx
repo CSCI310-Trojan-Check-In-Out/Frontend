@@ -17,7 +17,7 @@ import {Context as AppContext} from '../../context/AppContext';
 // style
 import CommonStyle from '../../style/common.style';
 
-export default function Profile({name, uscid, major}) {
+export default function Profile({ name, uscid, major}) {
   {
     /*id from database, different from uscid*/
   }
@@ -47,6 +47,7 @@ export default function Profile({name, uscid, major}) {
     }
   }, [image]);
 
+
   function decline() {
     setPurpose('');
     setShowModal(false);
@@ -75,7 +76,7 @@ export default function Profile({name, uscid, major}) {
   function press(purpose: string) {
     setPurpose(purpose);
     if (purpose === 'updatePhoto') {
-      navigation.navigate('PhotoSelect', {setImage});
+      navigation.navigate('ProfilePicture', {setImage});
     } else if (purpose === 'logOut') {
       setModalMessage('Do you want to log out?');
       setShowModal(true);
