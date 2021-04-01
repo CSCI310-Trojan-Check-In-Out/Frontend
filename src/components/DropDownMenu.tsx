@@ -29,10 +29,10 @@ export default function DropDownMenu({setValue}) {
         {label: 'Pre-professional Emphases', value:'Pre-professional Emphases',textStyle:{textAlign:'center'} },
         ]}
         placeholder="Plase Select a School"
-        containerStyle={{width:'100%',height:70}}
+        containerStyle={{width:'100%',height:70,alignItems:'center',}}
         style={CommonStyle.inputBoxStyle}
         itemStyle={{alignItems: 'center'}}
-        dropDownStyle={{backgroundColor: '#fafafa'}}
+        dropDownStyle={styles.dropDown}
         onChangeItem={item => setValue(item.value)}
         />
             
@@ -41,6 +41,9 @@ export default function DropDownMenu({setValue}) {
     }
 
   const styles = StyleSheet.create({
-
+    dropDown:{
+      backgroundColor: '#fafafa',
+      width:'95%',
+    }
   });
   

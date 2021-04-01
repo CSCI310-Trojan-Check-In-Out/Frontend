@@ -147,7 +147,7 @@ export default function VisitHistory({navigation}) {
           <Button
             testID='timeFilter'
             color={'#9D2235'}
-            title="Choose Time Range"
+            title="Select Time Range"
             onPress={showTimeRangeInput}
           />
         </View>
@@ -220,13 +220,13 @@ export default function VisitHistory({navigation}) {
             testID='buildingFilter'
             color={'#9D2235'}
             onPress={showBuildingInput}
-            title="Enter Building Name"
+            title="Select Building"
           />
           {showBuilding ? (
             <TextInput
               testID='buildingInput'
               style={styles.textInput}
-              placeholder={'Enter Building Name:'}
+              placeholder={'Select Building:'}
               onChangeText={(text) => onChangeBuildingName(text)}
               value={buildingName}
             />
@@ -254,7 +254,7 @@ export default function VisitHistory({navigation}) {
             testID='majorFilter'
             color={'#9D2235'}
             onPress={showMajorInput}
-            title="Enter Major"
+            title="Select Major"
           />
         </View>
         {showMajor ? (
