@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, FlatList, RefreshControl, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import VisitHistoryItem from './VisitHistoryItem';
+import StudentProfile from '../../screens/locationSearch/StudentProfile';
 
-export default function VisitHistoryList({historyList, getHistory}) {
+export default function VisitHistoryList({historyList}) {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
 
@@ -32,12 +33,12 @@ export default function VisitHistoryList({historyList, getHistory}) {
           renderItem={({item, index}) => {
             return (
               <>
-                {/* <TouchableOpacity
+               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('');
-                }}> */}
+                  navigation.navigate('StudentProfile', {item});
+                }}>
                 <VisitHistoryItem history={item} />
-                {/* </TouchableOpacity> */}
+                </TouchableOpacity> 
               </>
             );
           }}
