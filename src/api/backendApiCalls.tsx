@@ -33,6 +33,21 @@ export function signupApi(
     ['password', md5(password)],
   ]);
 
+  if(uscID.length < 10){
+    showErrorString("Error", "Your USC ID must contain 10 digits.");
+    return;
+  }
+
+  if(password.length < 4){
+    showErrorString("Error", "You password must contain at least four digits or characters.");
+    return;
+  }
+
+  if(fullName.length<4){
+    showErrorString("Error", "Your full name must contain at least four characters");
+    return;
+  }
+
   axios({
     method: 'post',
     url: `${ACCOUNT_URL}/register`, //ACCOUNT_URL + 'login',
@@ -451,6 +466,10 @@ function createFormData(data: any[][2]) {
     formData.append(item[0], item[1]);
   });
   return formData;
+}
+
+function showErrorString(title, message){
+  Alert.alert(title, message);
 }
 
 function showError(error) {
