@@ -12,7 +12,6 @@ describe('Search History', () => {
     await expect(element(by.id('buildingInput'))).toBeVisible();
     await expect(element(by.id('studentIDInput'))).toBeVisible();
     await expect(element(by.id('majorInput'))).toBeVisible();
-
   });
 
   it('should show search results after searching', async () => {
@@ -29,31 +28,7 @@ describe('Search History', () => {
     await element(by.id('majorFilter')).tap();
     await element(by.id('visitHistorySearchButton')).tap();
     await expect(element(by.id('VisitHistoryResult'))).toBeVisible();
-
   });
-  
-  /*
-  it('should show change time text after changing time stamps ', async () => {
-    await device.pressBack();
-    await element(by.id('buildingFilter')).tap();
-    await element(by.id('studentIDFilter')).tap();
-    await element(by.id('majorFilter')).tap();
-    
-    await element(by.id('startDateFilter')).tap();
-    await element(by.text('OK')).tap();
-    await element(by.id('startTimeFilter')).tap();
-    await element(by.text('OK')).tap();
-    await element(by.id('endDateFilter')).tap();
-    await element(by.text('OK')).tap();
-    await element(by.id('endTimeFilter')).tap();
-    await element(by.text('OK')).tap();
-
-    await expect(element(by.id('timeText'))).toBeVisible();
-
-  });
-*/
-  
-
 });
 
 async function setup() {
