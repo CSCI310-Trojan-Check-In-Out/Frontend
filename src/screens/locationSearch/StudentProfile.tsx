@@ -14,6 +14,7 @@ import VisitHistoryList from '../../components/visitHistory/VisitHistoryList';
 export default function StudentProfile({route}) {
   const {state} = useContext(AppContext);
   const {picture, username, usc_id, major} = route.params.student;
+  const {history}=route.params.item; //subject to change (handling request from visitHistory tab)
   const [studentHistory, setStudentHistory] = useState();
 
   const navigation = useNavigation();

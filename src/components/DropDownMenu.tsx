@@ -4,7 +4,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import CommonStyle from '../style/common.style';
 import Theme from '../style/theme.style';
 
-export default function DropDownMenu({setSchool}) {
+export default function DropDownMenu({setValue}) {
     
     
     return (
@@ -29,11 +29,11 @@ export default function DropDownMenu({setSchool}) {
         {label: 'Pre-professional Emphases', value:'Pre-professional Emphases',textStyle:{textAlign:'center'} },
         ]}
         placeholder="Plase Select a School"
-        containerStyle={{width:'100%',}}
+        containerStyle={{width:'100%',height:70,alignItems:'center',}}
         style={CommonStyle.inputBoxStyle}
         itemStyle={{alignItems: 'center'}}
-        dropDownStyle={{backgroundColor: '#fafafa'}}
-        onChangeItem={item => setSchool(item.value)}
+        dropDownStyle={styles.dropDown}
+        onChangeItem={item => setValue(item.value)}
         />
             
         </>
@@ -41,6 +41,9 @@ export default function DropDownMenu({setSchool}) {
     }
 
   const styles = StyleSheet.create({
-
+    dropDown:{
+      backgroundColor: '#fafafa',
+      width:'95%',
+    }
   });
   

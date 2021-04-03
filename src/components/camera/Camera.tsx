@@ -108,7 +108,8 @@ export default function Camera({
                       }}>
                       <TouchableOpacity
                         testID="snap"
-                        onPress={() => takePicture(camera)}
+                        onPress={() =>takePicture(camera)}
+                       
                         style={styles.capture}>
                         <Text style={{fontSize: 14}}> SNAP </Text>
                       </TouchableOpacity>

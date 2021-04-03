@@ -17,7 +17,7 @@ import {Context as AppContext} from '../../context/AppContext';
 // style
 import CommonStyle from '../../style/common.style';
 
-export default function Profile({name, uscid, major}) {
+export default function Profile({ name, uscid, major}) {
   {
     /*id from database, different from uscid*/
   }
@@ -47,6 +47,7 @@ export default function Profile({name, uscid, major}) {
     }
   }, [image]);
 
+
   function decline() {
     setPurpose('');
     setShowModal(false);
@@ -75,7 +76,7 @@ export default function Profile({name, uscid, major}) {
   function press(purpose: string) {
     setPurpose(purpose);
     if (purpose === 'updatePhoto') {
-      navigation.navigate('PhotoSelect', {setImage});
+      navigation.navigate('ProfilePicture', {setImage});
     } else if (purpose === 'logOut') {
       setModalMessage('Do you want to log out?');
       setShowModal(true);
@@ -111,6 +112,7 @@ export default function Profile({name, uscid, major}) {
               <Text style={styles.name}>{state.user?.username}</Text>
               <Text style={styles.uscid}>USCID: {state.user?.usc_id} </Text>
               <Text style={styles.major}>Major: {state.user?.major} </Text>
+              <Text style={styles.checkedin}>Currently Checking in: N/A</Text>
             </View>
           </View>
           <View style={styles.row}>
@@ -153,8 +155,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   profilePicture: {
-    width: 300,
-    height: 300,
+    width: 280,
+    height: 280,
     borderRadius: 50,
     flexDirection: 'row',
   },
@@ -171,6 +173,10 @@ const styles = StyleSheet.create({
   },
   major: {
     fontSize: 15,
+  },
+  checkedin:{
+    fontSize: 15,
+    textAlign:'center',
   },
   row: {
     marginTop: 10,

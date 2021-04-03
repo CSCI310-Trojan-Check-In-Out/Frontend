@@ -71,8 +71,6 @@ export default function UpdateCapacity({route, navigation}) {
             testID='currentCapacity'
             style={styles.textInput}
             keyboardType="numeric"
-            onFocus={changeStyle}
-            onEndEditing={restoreStyle}
             onChangeText={setCurrentCapacity}
             value={currentCapacity}
           />
@@ -142,6 +140,7 @@ const styles = StyleSheet.create({
   },
   notification: {
     color: 'red',
+    textAlign:'center',
   },
   buttonContainer: {
     alignItems: 'center',
