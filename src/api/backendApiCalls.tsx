@@ -423,6 +423,28 @@ export function checkoutApi(
     });
 }
 
+export function getUserUnfinishedHistory(successCallback: Function) {
+  axios({
+    method: 'get',
+    url: `${STUDENT_URL}/unfinishedHistory`,
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        const historyList = res.data;
+        console.log(historyList);
+        if (historyList.length !== 0) {
+          console.log(historyList.length);
+          successCallback(historyList[0]);
+        }
+        
+      }
+    })
+    .catch((error) => {
+      const message = error.response.data;
+      console.log(message);
+    });
+}
+
 export function getUserVisitHistory(successCallback: Function) {
   axios({
     method: 'post',

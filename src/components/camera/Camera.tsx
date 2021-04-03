@@ -3,7 +3,10 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {useNavigation} from '@react-navigation/native';
 
-import ImagePicker from 'react-native-image-picker';
+import {
+  ImageLibraryOptions,
+  launchImageLibrary,
+} from 'react-native-image-picker';
 
 interface Props extends PropsWithChildren<any> {
   useDefaultCameraBtn?: boolean;
@@ -32,19 +35,12 @@ export default function Camera({
   };
 
   function openAlbum() {
-    const options = {
-      title: 'Load Photo',
-      customButtons: [
-        {name: 'button_id_1', title: 'CustomButton 1'},
-        {name: 'button_id_2', title: 'CustomButton 2'},
-      ],
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
+    const options: ImageLibraryOptions = {
+      mediaType: 'photo',
+      quality: 0.5,
     };
-    ImagePicker.launchImageLibrary(options, (response) => {
-      // setLoading(false);
+
+    launchImageLibrary(options, (response) => {
       if (response.uri && setImage) {
         setImage(response.uri);
         navigation.goBack();
@@ -108,8 +104,7 @@ export default function Camera({
                       }}>
                       <TouchableOpacity
                         testID="snap"
-                        onPress={() =>takePicture(camera)}
-                       
+                        onPress={() => takePicture(camera)}
                         style={styles.capture}>
                         <Text style={{fontSize: 14}}> SNAP </Text>
                       </TouchableOpacity>

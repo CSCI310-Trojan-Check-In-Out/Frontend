@@ -17,7 +17,7 @@ import {Context as AppContext} from '../../context/AppContext';
 // style
 import CommonStyle from '../../style/common.style';
 
-export default function Profile({ name, uscid, major}) {
+export default function Profile({name, uscid, major}) {
   {
     /*id from database, different from uscid*/
   }
@@ -46,7 +46,6 @@ export default function Profile({ name, uscid, major}) {
       });
     }
   }, [image]);
-
 
   function decline() {
     setPurpose('');
@@ -112,7 +111,10 @@ export default function Profile({ name, uscid, major}) {
               <Text style={styles.name}>{state.user?.username}</Text>
               <Text style={styles.uscid}>USCID: {state.user?.usc_id} </Text>
               <Text style={styles.major}>Major: {state.user?.major} </Text>
-              <Text style={styles.checkedin}>Currently Checking in: N/A</Text>
+              <Text style={styles.checkedin}>
+                Currently Checking in:{' '}
+                {state.checkedInBuilding?.place_name ?? 'N/A'}
+              </Text>
             </View>
           </View>
           <View style={styles.row}>
@@ -174,9 +176,9 @@ const styles = StyleSheet.create({
   major: {
     fontSize: 15,
   },
-  checkedin:{
+  checkedin: {
     fontSize: 15,
-    textAlign:'center',
+    textAlign: 'center',
   },
   row: {
     marginTop: 10,

@@ -19,7 +19,11 @@ import CommonStyle from '../../../style/common.style';
 import Theme from '../../../style/theme.style';
 import QRCode from 'react-native-qrcode-svg';
 import {Context as AppContext} from '../../../context/AppContext';
-import {checkinApi, checkoutApi} from '../../../api/backendApiCalls';
+import {
+  checkinApi,
+  checkoutApi,
+  getUserUnfinishedHistory,
+} from '../../../api/backendApiCalls';
 import {alertError} from '../../../helpers/inputHelpers';
 
 export default function StudentHome({navigation}) {
@@ -39,6 +43,10 @@ export default function StudentHome({navigation}) {
   }, [navigation]);
 
   useEffect(() => {
+    getUserUnfinishedHistory(checkinSuccessCallBack);
+  }, []);
+
+  useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     if (currentQRCode) {
       setShowConfirmPopup(true);
@@ -49,7 +57,7 @@ export default function StudentHome({navigation}) {
     if (QRCode.length > 0 && QRCode[0].format !== 'None' && !updating) {
       updating = true;
       setScanning(false);
-      
+
       setCurrentQRCode(QRCode[0].data);
     }
   }
@@ -87,7 +95,8 @@ export default function StudentHome({navigation}) {
   function handleButton(isScan = false) {
     if (state.checkedInBuilding && !isScan) {
       // setCheckedIn(false);
-      checkoutApi(state.checkedInBuilding.qr_code_token, checkout, null);
+      setShowConfirmPopup(true);
+      setCurrentQRCode(state.checkedInBuilding.qr_code_token);
     } else if (state.checkedInBuilding && isScan) {
       setScanning(!scanning);
     } else {
@@ -137,7 +146,11 @@ export default function StudentHome({navigation}) {
       {showConfirmPopup ? (
         <ConfirmModal
           setShowModal={setShowConfirmPopup}
-          title={state.checkedInBuilding ? 'Check out?' : 'Check In?'}
+          title={
+            state.checkedInBuilding
+              ? 'Do you want to check out?'
+              : 'Do you want to check in?'
+          }
           message={currentQRCode}
           accept={acceptQRCode}
           decline={declineQRCode}
