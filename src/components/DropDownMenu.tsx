@@ -28,7 +28,7 @@ export default function DropDownMenu({setValue}) {
         {label: 'Price School of Public Policy', value:'Price School of Public Policy',textStyle:{textAlign:'center'}},
         {label: 'Pre-professional Emphases', value:'Pre-professional Emphases',textStyle:{textAlign:'center'} },
         ]}
-        placeholder="Plase Select a School"
+        placeholder="Please select a school"
         containerStyle={{width:'100%',height:70,alignItems:'center',}}
         style={CommonStyle.inputBoxStyle}
         itemStyle={{alignItems: 'center'}}
