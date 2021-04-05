@@ -13,19 +13,31 @@ import VisitHistoryList from '../../components/visitHistory/VisitHistoryList';
 
 export default function StudentProfile({route}) {
   const {state} = useContext(AppContext);
-  const {picture, username, usc_id, major} = route.params.student;
-  const {history}=route.params.item; //subject to change (handling request from visitHistory tab)
+  
+  function comeFrom(){
+    if (route.params.from==='studentList'){
+      return route.params.student;
+    }
+    else{
+      return route.params.history;
+    }
+  }
+  const {first_name, last_name, usc_id, major} = comeFrom();
+  
+ 
   const [studentHistory, setStudentHistory] = useState();
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (route.params.student) {
+    // manager visiting student profile from locationSearch, and from visitHistory
+    if (route.params.student||route.params.item) {
       searchVisitHistory(
         {studentId: route.params.student.usc_id},
         setStudentHistory,
       );
     } else {
+      // student visit her own visitHistory
       getUserVisitHistory(setStudentHistory);
     }
   }, []);
@@ -36,7 +48,7 @@ export default function StudentProfile({route}) {
         <View style={styles.container}>
           <View style={styles.profile}>
             <View style={styles.textcontainer}>
-              <Text style={styles.name}>Name: {username} </Text>
+              <Text style={styles.name}>Name: {first_name} {last_name} </Text>
               <Text style={styles.uscid}>USCID: {usc_id} </Text>
               <Text style={styles.major}>Major: {major} </Text>
             </View>

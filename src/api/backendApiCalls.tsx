@@ -79,8 +79,6 @@ export function signinApi(
     ['email', email],
     ['password', md5(password)],
   ]);
-  //   const form = new FormData();
-  //   form.append('a', 111);
 
   axios({
     method: 'post',
@@ -92,6 +90,7 @@ export function signinApi(
   })
     .then((res) => {
       if (res.status === 200) {
+        console.log('sign in success');
         const userData = res.data;
         successCallback(userData);
       }

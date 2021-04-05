@@ -35,7 +35,7 @@ export default function VisitHistoryList({historyList}) {
               <>
                <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('StudentProfile', {item});
+                  navigation.navigate('StudentProfile', {history:item, from:'visitHistoryList'});
                 }}>
                 <VisitHistoryItem history={item} />
                 </TouchableOpacity> 

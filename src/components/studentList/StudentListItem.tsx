@@ -19,6 +19,7 @@ export default function StudentListItem({student}) {
         }}>
         <Text style={styles.name}>{student.username}</Text>
         <Text style={styles.time}>Check In: {student.enter_time}</Text>
+        {console.log(student)}
       </View>
     </>
   );
