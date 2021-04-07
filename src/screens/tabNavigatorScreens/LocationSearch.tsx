@@ -40,7 +40,7 @@ export default function LocationSearch({navigation}) {
   };
 
   function getBuildings() {
-    getAllLocationsApi(setBuildings);
+    getAllLocationsApi('locationSearch',setBuildings);
   }
 
   return (

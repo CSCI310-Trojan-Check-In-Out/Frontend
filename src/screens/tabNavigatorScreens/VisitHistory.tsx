@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect,useCallback} from 'react';
 import {
   StyleSheet,
   Button,
@@ -12,11 +12,30 @@ import ManagerHome from './manager/ManagerHome';
 import CommonStyle from '../../style/common.style';
 import SearchBar from '../../components/SearchBar';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {searchVisitHistory} from '../../api/backendApiCalls';
+import {getAllLocationsApi,searchVisitHistory} from '../../api/backendApiCalls';
 import {NavigationRouteContext} from '@react-navigation/native';
 import DropDownMenu from '../../components/DropDownMenu';
 
 export default function VisitHistory({navigation}) {
+  const schools=[
+    {label: 'Dornsife College of Letters, Arts and Sciences', value: 'Dornsife College of Letters, Arts and Sciences',textStyle:{textAlign:'center'}},
+    {label: 'USC School of Architecture', value: 'USC School of Architecture',textStyle:{textAlign:'center'}},
+    {label: 'Roski School of Art and Design', value: 'Roski School of Art and Design',textStyle:{textAlign:'center'}},
+    {label: 'Iovine and Young Academy for Arts, Technology and the Business of Innovation', value: 'Iovine and Young Academy for Arts, Technology and the Business of Innovation',textStyle:{textAlign:'center'}},
+    {label: 'Marshall School of Business', value: 'Marshall School of Business',textStyle:{textAlign:'center'}},
+    {label: 'Viterbi School of Engineering', value: 'Viterbi School of Engineering',textStyle:{textAlign:'center'} },
+    {label: 'USC School of Cinematic Arts', value:'USC School of Cinematic Arts',textStyle:{textAlign:'center'} },
+    {label: 'Annenberg School for Communication and Journalism', value:'Annenberg School for Communication and Journalism',textStyle:{textAlign:'center'} },
+    {label: 'Kaufman School of Dance', value:'Kaufman School of Dance',textStyle:{textAlign:'center'} },
+    {label: 'USC School of Dramatic Arts', value:'USC School of Dramatic Arts',textStyle:{textAlign:'center'} },
+    {label: 'Davis School of Gerontology', value:'Davis School of Gerontology',textStyle:{textAlign:'center'} },
+    {label: 'Keck School of Medicine', value:'Keck School of Medicine',textStyle:{textAlign:'center'} },
+    {label: 'Thornton School of Music', value:'Thornton School of Music',textStyle:{textAlign:'center'} },
+    {label: 'Chan Division of Occupational Science and Occupational Therapy', value:'Chan Division of Occupational Science and Occupational Therapy' ,textStyle:{textAlign:'center'}},
+    {label: 'Price School of Public Policy', value:'Price School of Public Policy',textStyle:{textAlign:'center'}},
+    {label: 'Pre-professional Emphases', value:'Pre-professional Emphases',textStyle:{textAlign:'center'} },
+    ];
+
   const [text, setText] = useState('');
   const [startEnd, setStartEnd] = useState('');
   const [startDate, setStartDate] = useState(new Date(1900, 0, 1));
@@ -29,7 +48,8 @@ export default function VisitHistory({navigation}) {
   const [showStudentID, setShowStudentID] = useState(false);
   const [showMajor, setShowMajor] = useState(false);
 
-  const [buildingName, onChangeBuildingName] = useState('');
+  const [buildings, setBuildings] = useState<any>([]);
+  const [building, onChangeBuilding]=useState('');
   const [studentID, onChangeStudentID] = useState('');
   const [major, onChangeMajor] = useState('');
 
@@ -88,14 +108,14 @@ export default function VisitHistory({navigation}) {
     text,
     startTime,
     endTime,
-    buildingName,
+    building,
     studentId,
     major,
   ) {
     searchVisitHistory(
       {
         studentName: text,
-        buildingName,
+        buildingName:building,
         studentId,
         major,
         startTime: startTime.toISOString(),
@@ -108,6 +128,15 @@ export default function VisitHistory({navigation}) {
   function searchSucceedCallback(results) {
     navigation.navigate('VisitHistoryResult', {results: results});
   }
+
+  useEffect(() => {
+    getBuildings();
+  }, [navigation]);
+
+  function getBuildings(){
+    getAllLocationsApi('visitHistory', setBuildings); 
+  }
+
 
   return (
     <>
@@ -134,7 +163,7 @@ export default function VisitHistory({navigation}) {
                   text,
                   startDate,
                   endDate,
-                  buildingName,
+                  building,
                   studentID,
                   major,
                 )
@@ -142,6 +171,23 @@ export default function VisitHistory({navigation}) {
               title="Search"
             />
           </View>
+        </View>
+        <View style={styles.button}>
+          <Button
+            testID='studentIDFilter'
+            color={'#9D2235'}
+            onPress={showStudentIDInput}
+            title="Enter Student ID"
+          />
+          {showStudentID ? (
+            <TextInput
+              testID='studentIDInput'
+              style={styles.textInput}
+              placeholder={'Enter Student ID:'}
+              onChangeText={(text) => onChangeStudentID(text)}
+              value={studentID}
+            />
+          ) : null}
         </View>
         <View style={styles.button}>
           <Button
@@ -215,6 +261,7 @@ export default function VisitHistory({navigation}) {
             }
           />
         )}
+        
         <View style={styles.button}>
           <Button
             testID='buildingFilter'
@@ -222,33 +269,14 @@ export default function VisitHistory({navigation}) {
             onPress={showBuildingInput}
             title="Select Building"
           />
-          {showBuilding ? (
-            <TextInput
-              testID='buildingInput'
-              style={styles.textInput}
-              placeholder={'Select Building:'}
-              onChangeText={(text) => onChangeBuildingName(text)}
-              value={buildingName}
-            />
-          ) : null}
         </View>
-        <View style={styles.button}>
-          <Button
-            testID='studentIDFilter'
-            color={'#9D2235'}
-            onPress={showStudentIDInput}
-            title="Enter Student ID"
-          />
-          {showStudentID ? (
-            <TextInput
-              testID='studentIDInput'
-              style={styles.textInput}
-              placeholder={'Enter Student ID:'}
-              onChangeText={(text) => onChangeStudentID(text)}
-              value={studentID}
-            />
-          ) : null}
-        </View>
+        {showBuilding ? (
+          <View style={styles.dropdownContainer}>
+            <DropDownMenu items={buildings} 
+            placeholder={'Please Select a Building'} setValue={onChangeBuilding}/>
+          </View>) : null}
+        
+        
         <View style={styles.button}>
           <Button
             testID='majorFilter'
@@ -258,8 +286,10 @@ export default function VisitHistory({navigation}) {
           />
         </View>
         {showMajor ? (
-          <DropDownMenu setValue={onChangeMajor}/>
-          ) : null}
+          <View style={styles.dropdownContainer}>
+           <DropDownMenu items={schools} 
+            placeholder={'Please Select a School'} setValue={onChangeMajor}/>
+          </View>) : null}
       </View>
     </>
   );
@@ -322,7 +352,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingLeft: '5%',
   },
-  dropDownMenu:{
-    
-  },
+  dropdownContainer:{
+    height:200,
+  }
 });

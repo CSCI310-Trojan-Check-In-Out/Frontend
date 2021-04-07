@@ -235,7 +235,7 @@ export function getQRCodeApi(buildingId: any, successCallback: Function) {
     });
 }
 
-export function getAllLocationsApi(successCallback: Function) {
+export function getAllLocationsApi(from: String, successCallback: Function) {
   axios({
     method: 'post',
     url: `${MANAGER_URL}/list-all-buildings`,
@@ -243,7 +243,20 @@ export function getAllLocationsApi(successCallback: Function) {
     .then((res) => {
       if (res.status === 200) {
         const buildings = res.data;
-        successCallback(buildings);
+        if (from==='visitHistory'){
+          const buildingModified=[];
+          buildings.map(building=>{
+            buildingModified.push(
+              {label:building.place_name,
+              value:building.place_name,
+              textStyle:{textAlign:'center'}
+              })
+         });
+         successCallback(buildingModified);
+        }
+        else{
+          successCallback(buildings);
+        }
       }
     })
     .catch((error) => {
