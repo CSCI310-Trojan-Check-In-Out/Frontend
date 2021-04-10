@@ -52,8 +52,10 @@ export default function SignUp({navigation}: {navigation: any}) {
     setPassword,
     isAdmin,
     setIsAdmin,
-    fullName,
-    setFullName,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     uscID,
     setUscID,
     email,
@@ -74,7 +76,8 @@ export default function SignUp({navigation}: {navigation: any}) {
   function submissionSucceedCallback(
     imageData,
     isAdminData,
-    fullNameData,
+    firstNameData,
+    lastNameData,
     uscIdData,
     emailData,
     majorData,
@@ -85,7 +88,8 @@ export default function SignUp({navigation}: {navigation: any}) {
         signupApi(
           imageUrl,
           isAdminData,
-          fullNameData,
+          firstNameData,
+          lastNameData,
           uscIdData,
           emailData,
           majorData,
@@ -97,7 +101,8 @@ export default function SignUp({navigation}: {navigation: any}) {
       signupApi(
         'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg',
         isAdminData,
-        fullNameData,
+        firstNameData,
+        lastNameData,
         uscIdData,
         emailData,
         majorData,
@@ -143,12 +148,19 @@ export default function SignUp({navigation}: {navigation: any}) {
           {/* inputs */}
           <View style={{width: Theme.CONTAINER_WIDTH_LARGE}}>
             <TextInput
-              testID="signUpFullNameTextInput"
+              testID="signUpFirstNameTextInput"
               style={CommonStyle.inputBoxStyle}
-              onChangeText={setFullName}
-              value={fullName}
-              placeholder={'FULL NAME'}
+              onChangeText={setFirstName}
+              value={firstName}
+              placeholder={'FIRST NAME'}
             />
+              <TextInput
+                  testID="signUpLastNameTextInput"
+                  style={CommonStyle.inputBoxStyle}
+                  onChangeText={setLastName}
+                  value={lastName}
+                  placeholder={'LAST NAME'}
+              />
             <TextInput
               testID="signUpUSCIDTextInput"
               style={CommonStyle.inputBoxStyle}

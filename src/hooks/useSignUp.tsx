@@ -4,7 +4,8 @@ import {emailRegexCheck, notEmpty, alertError} from './../helpers/inputHelpers';
 export function useSignUp() {
   const [image, setImage] = useState<string>('');
   const [isAdmin, setIsAdmin] = useState<boolean>(true);
-  const [fullName, setFullName] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [uscID, setUscID] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -12,17 +13,17 @@ export function useSignUp() {
 
   function submitForm(successCallback: Function) {
     if (signUpCheck()) {
-      successCallback(image, isAdmin, fullName, uscID, email, major, password);
+      successCallback(image, isAdmin, firstName, lastName, uscID, email, major, password);
     }
   }
   function signUpCheck() {
     if (isAdmin) {
-      if (!notEmpty([email, password, fullName])) {
+      if (!notEmpty([email, password, firstName, lastName])) {
         alertError('manager must enter email, password, and full name');
         return false;
       }
     } else {
-      if (!notEmpty([email, password, fullName, major, uscID])) {
+      if (!notEmpty([email, password, firstName, lastName, major, uscID])) {
         alertError(
           'student must enter email, password, full name, major, and uscId',
         );
@@ -43,8 +44,10 @@ export function useSignUp() {
     setPassword,
     isAdmin,
     setIsAdmin,
-    fullName,
-    setFullName,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     uscID,
     setUscID,
     email,

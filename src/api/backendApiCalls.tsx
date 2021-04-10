@@ -15,7 +15,8 @@ const STUDENT_URL = `${config.URL_ENDPOINT}/student`;
 export function signupApi(
   image,
   isAdmin,
-  fullName,
+  firstName,
+  lastName,
   uscID,
   email,
   major,
@@ -26,15 +27,17 @@ export function signupApi(
   const form = createFormData([
     ['image', image],
     ['isAdmin', isAdmin ? 1 : 0],
-    ['fullName', fullName],
+    ['firstName', firstName],
+    ['lastName', lastName],
     ['uscId', uscID],
     ['email', email],
     ['major', major],
     ['password', md5(password)],
   ]);
 
-  if(uscID.length < 10){
-    showErrorString("Error", "Your USC ID must contain 10 digits.");
+  if(uscID.length != 10){
+    showErrorString("Error", "Your USC ID must be 10 digits.");
+    console.log(uscID.length);
     return;
   }
 
@@ -43,7 +46,7 @@ export function signupApi(
     return;
   }
 
-  if(fullName.length<4){
+  if((firstName.length + lastName.length) < 4){
     showErrorString("Error", "Your full name must contain at least four characters");
     return;
   }
