@@ -1,10 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, FlatList, RefreshControl, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  RefreshControl,
+  ScrollView,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import VisitHistoryItem from './VisitHistoryItem';
 import StudentProfile from '../../screens/locationSearch/StudentProfile';
 
-export default function VisitHistoryList({historyList}) {
+export default function VisitHistoryList({historyList, getHistory}) {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
 
@@ -20,6 +28,14 @@ export default function VisitHistoryList({historyList}) {
     wait(1000).then(() => setRefreshing(false));
   }, []);
 
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      if (getHistory) {
+        getHistory();
+      }
+    });
+  }, []);
+
   return (
     <>
       <ScrollView
@@ -33,12 +49,18 @@ export default function VisitHistoryList({historyList}) {
           renderItem={({item, index}) => {
             return (
               <>
-               <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('StudentProfile', {history:item, from:'visitHistoryList'});
-                }}>
-                <VisitHistoryItem history={item} />
-                </TouchableOpacity> 
+                <TouchableOpacity
+                  style={{flex: 1}}
+                  onPress={() => {
+                    if (item.full_name) {
+                      navigation.navigate('StudentProfile', {
+                        history: item,
+                        from: 'visitHistoryList',
+                      });
+                    }
+                  }}>
+                  <VisitHistoryItem history={item} />
+                </TouchableOpacity>
               </>
             );
           }}

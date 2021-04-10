@@ -13,27 +13,32 @@ import VisitHistoryList from '../../components/visitHistory/VisitHistoryList';
 
 export default function StudentProfile({route}) {
   const {state} = useContext(AppContext);
-  
-  function comeFrom(){
-    if (route.params.from==='studentList'){
+
+  function comeFrom() {
+    console.log(route.params);
+    if (route.params.from === 'studentList') {
       return route.params.student;
-    }
-    else{
+    } else {
       return route.params.history;
     }
   }
-  const {first_name, last_name, usc_id, major} = comeFrom();
-  
- 
+  const {first_name, last_name, usc_id, major, is_deleted} = comeFrom();
+
   const [studentHistory, setStudentHistory] = useState();
 
   const navigation = useNavigation();
 
   useEffect(() => {
     // manager visiting student profile from locationSearch, and from visitHistory
-    if (route.params.student||route.params.item) {
+    if (route.params.student || route.params.item) {
       searchVisitHistory(
-        {studentId: route.params.student.usc_id},
+        {userId: route.params.student.account_id},
+        setStudentHistory,
+      );
+      // search history route : manager
+    } else if (route.params.history) {
+      searchVisitHistory(
+        {userId: route.params.history.account_id},
         setStudentHistory,
       );
     } else {
@@ -48,9 +53,17 @@ export default function StudentProfile({route}) {
         <View style={styles.container}>
           <View style={styles.profile}>
             <View style={styles.textcontainer}>
-              <Text style={styles.name}>Name: {first_name} {last_name} </Text>
-              <Text style={styles.uscid}>USCID: {usc_id} </Text>
+              <Text style={styles.name}>
+                Name: {first_name} {last_name}{' '}
+              </Text>
+              {usc_id ? (
+                <Text style={styles.uscid}>USCID: {usc_id} </Text>
+              ) : null}
+
               <Text style={styles.major}>Major: {major} </Text>
+              {is_deleted === 1 ? (
+                <Text style={styles.uscid}>Account has been deleted</Text>
+              ) : null}
             </View>
           </View>
           <View style={styles.subTitleContainer}>

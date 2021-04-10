@@ -59,7 +59,6 @@ export function signupApi(
     .then((res) => {
       if (res.status === 200) {
         const userData = res.data;
-        console.log(userData);
         successCallback(userData);
       }
     })
@@ -90,7 +89,6 @@ export function signinApi(
   })
     .then((res) => {
       if (res.status === 200) {
-        console.log('sign in success');
         const userData = res.data;
         successCallback(userData);
       }
@@ -313,7 +311,7 @@ export function updateCapacityApi(
     });
 }
 
-export function updateCapacityByCSV(CSVUri: string) {
+export function updateCapacityByCSV(CSVUri: string, successCallback: Function) {
   var csv = {
     uri: CSVUri,
     type: 'text/csv',
@@ -334,6 +332,7 @@ export function updateCapacityByCSV(CSVUri: string) {
     .then((res) => {
       if (res.status === 200) {
         showMessage('Successfully updated capacity');
+        successCallback();
       }
     })
     .catch((error) => {
@@ -349,8 +348,9 @@ export function searchVisitHistory(
     major = undefined,
     startTime = undefined,
     endTime = undefined,
+    userId = undefined,
   },
-  successCallback = Function,
+  successCallback: Function,
 ) {
   var formData = [];
   if (buildingName) {
@@ -370,6 +370,9 @@ export function searchVisitHistory(
   }
   if (studentName) {
     formData.push(['username', studentName]);
+  }
+  if (userId) {
+    formData.push(['userId', userId]);
   }
 
   const form = createFormData(formData);
@@ -458,9 +461,7 @@ export function getUserUnfinishedHistory(successCallback: Function) {
     .then((res) => {
       if (res.status === 200) {
         const historyList = res.data;
-        console.log(historyList);
         if (historyList.length !== 0) {
-          console.log(historyList.length);
           successCallback(historyList[0]);
         }
         
@@ -480,7 +481,6 @@ export function getUserVisitHistory(successCallback: Function) {
     .then((res) => {
       if (res.status === 200) {
         const historyList = res.data;
-        console.log(res.data);
         successCallback(historyList);
       }
     })

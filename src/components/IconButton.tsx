@@ -1,19 +1,26 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Pressable} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Pressable,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-
-export default function IconButton({iconName, text,press}) {
-  
+export default function IconButton({iconName, text, press}) {
   return (
     <>
-      <TouchableOpacity testID={iconName} style={styles.background} onPress={press}>
+      <TouchableOpacity
+        testID={iconName}
+        style={styles.background}
+        onPress={press}>
         <Ionicons name={iconName} size={30} style={styles.icon} />
         <View
           style={{
             display: 'flex',
             width: '50%',
-            marginLeft: 10
+            marginLeft: 10,
           }}>
           <Text style={styles.text}>{text}</Text>
         </View>

@@ -15,12 +15,15 @@ export default function VisitHistoryItem({history}) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-            alignContent: 'center',
+          alignContent: 'center',
           borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+          margin: 10,
           borderBottomWidth: 1,
           padding: 10,
         }}>
-        <Text style={styles.name}>{history.username}</Text>
+        {history.full_name ? (
+          <Text style={styles.name}>{history.full_name}</Text>
+        ) : null}
         <Text>Location: {history.place_name}</Text>
         <Text>Check in: {history.enter_time}</Text>
         <Text>Check out: {history.leave_time}</Text>
@@ -30,9 +33,9 @@ export default function VisitHistoryItem({history}) {
 }
 
 const styles = StyleSheet.create({
-    name:{
-        fontSize: 15,
-        fontWeight: 'bold',
-        color: '#000',
-    }
+  name: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#000',
+  },
 });

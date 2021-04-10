@@ -52,6 +52,17 @@ export function unSubscribeBuildingCurrentCapacity(buildingId: string) {
   ref.off();
 }
 
+export function subscribeBuildingCurrentStudent(
+  buildingId: string,
+  onChangeCallback: Function,
+) {
+  const ref = getBuildingCheckinRef(buildingId);
+  ref.on('value', (snapshot) => {
+    // onChangeCallback(snapshot.val());
+    onChangeCallback();
+  });
+}
+
 /* -------------------------------------------------------------------------- */
 /*                       firebase endpoints route getter                      */
 /* -------------------------------------------------------------------------- */
@@ -63,4 +74,3 @@ function getBuildingCapacityRef(buildingId: string) {
 function getBuildingCheckinRef(buildingId: string) {
   return database().ref(`${BUILDING_REF}/${buildingId}/checkin`);
 }
-

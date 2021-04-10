@@ -4,9 +4,10 @@ import StudentList from '../../components/studentList/StudentList';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 // api
 import {getAllStudentsApi} from '../../api/backendApiCalls';
+import {subscribeBuildingCurrentStudent} from '../../api/firebaseApi';
 
-export default function StudentListScreen({route,navigation}) {
-  const [building,setBuilding] = useState(route.params.building);
+export default function StudentListScreen({route, navigation}) {
+  const [building, setBuilding] = useState(route.params.building);
   const [students, setStudents] = useState<any>([]);
 
   /* for testing only
@@ -27,9 +28,11 @@ export default function StudentListScreen({route,navigation}) {
   }
   
 ]*/
-    
-  
+
   useEffect(() => {
+    subscribeBuildingCurrentStudent(building.id, () => {
+      getAllStudentsApi(building.id, setStudents);
+    });
     getAllStudentsApi(building.id, setStudents);
   }, [navigation]);
 
@@ -39,9 +42,8 @@ export default function StudentListScreen({route,navigation}) {
         <Text style={styles.title}>{building.place_name}</Text>
       </View>
       <View style={styles.studentList}>
-        <StudentList students={students}/>
+        <StudentList students={students} />
       </View>
-      
     </>
   );
 }

@@ -25,11 +25,10 @@ export default function LocationSearch({navigation}) {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       });
-      console.log(res.uri, res.type, res.name, res.size);
       if (res.type !== 'text/comma-separated-values') {
         Alert.alert('', 'Please select CSV files');
       } else {
-        updateCapacityByCSV(res.uri);
+        updateCapacityByCSV(res.uri, getBuildings);
       }
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {

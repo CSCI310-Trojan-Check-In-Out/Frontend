@@ -108,7 +108,7 @@ export default function Profile({name, uscid, major}) {
               source={{uri: image}}
             />
             <View style={styles.textcontainer}>
-              <Text style={styles.name}>{state.user?.username}</Text>
+              <Text style={styles.name}>{state.user?.full_name}</Text>
               <Text style={styles.uscid}>USCID: {state.user?.usc_id} </Text>
               <Text style={styles.major}>Major: {state.user?.major} </Text>
               <Text style={styles.checkedin}>
