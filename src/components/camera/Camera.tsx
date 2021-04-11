@@ -21,6 +21,7 @@ export default function Camera({
   isScanning = false,
   useAlbum = true,
   setImage = null,
+  from = null,
 }: Props) {
   const navigation = useNavigation();
 
@@ -30,7 +31,14 @@ export default function Camera({
     if (setImage) {
       setImage(data.uri);
     }
-    navigation.goBack();
+    
+    if (from==='profilePicture'){
+      navigation.navigate('Profile');
+    }
+    else {
+      navigation.goBack();
+    }
+    
     return true;
   };
 
@@ -43,7 +51,12 @@ export default function Camera({
     launchImageLibrary(options, (response) => {
       if (response.uri && setImage) {
         setImage(response.uri);
-        navigation.goBack();
+        if (from==='profilePicture'){
+          navigation.navigate('Profile');
+        }
+        else {
+          navigation.goBack();
+        }
       }
     });
   }

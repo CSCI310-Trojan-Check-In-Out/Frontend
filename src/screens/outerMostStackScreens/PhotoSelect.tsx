@@ -11,11 +11,11 @@ import {
 import Camera from '../../components/camera/Camera';
 
 export default function PhotoSelect({route, navigation}) {
-  const {setImage} = route.params;
+  const {setImage,from} = route.params;
 
   return (
     <>
-      <Camera setImage={setImage} />
+      <Camera setImage={setImage} from={from} />
     </>
   );
 }

@@ -27,18 +27,25 @@ const {setImage}=route.params;
             style={styles.textInput}
             placeholder={'Please enter your picture URL'}
             onChangeText={(text) => onChangeCurrentURL(text)}
-            onEndEditing={()=>{
-                setImage(currentURL);
-                navigation.navigate('Profile')}}
             value={currentURL}
           />
         </View>
         <View style={styles.buttonContainer}>
-            <IconButton
-              iconName={'camera-outline'}
-              text={'Upload Photo'}
-              press={() => navigation.navigate('PhotoSelect',{setImage})}
-            />
+          <TouchableOpacity
+            testID='profilePictureSubmitURLButton'
+            style={styles.button}
+            onPress={()=>{
+              setImage(currentURL);
+              navigation.navigate('Profile')}}>
+            <Text style={styles.textButton}>Submit URL</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            testID='profilePictureUploadPhotoButton'
+            style={styles.button}
+            onPress={() => navigation.navigate('PhotoSelect',
+            {setImage, from: 'profilePicture'})}>
+            <Text style={styles.textButton}>Upload Photo</Text>
+          </TouchableOpacity>
         </View>
 
       </View>
@@ -79,10 +86,22 @@ const styles = StyleSheet.create({
       paddingLeft: '5%',
     },
     buttonContainer: {
+      marginTop:'10%',
       alignItems: 'center',
-      height: '30%',
+      height: 200,
       justifyContent: 'space-evenly',
-      marginTop: '5%',
+    },
+    button: {
+      backgroundColor: '#9D2235',
+      width: '60%',
+      height: '30%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 20,
+    },
+    textButton: {
+      color: '#fff',
+      fontSize: 20,
     },
   });
   

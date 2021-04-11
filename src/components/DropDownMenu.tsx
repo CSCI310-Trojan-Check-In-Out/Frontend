@@ -13,7 +13,7 @@ export default function DropDownMenu({items, placeholder, setValue}) {
         items={items}
         placeholder={placeholder}
         containerStyle={{width:'100%',height:70,alignItems:'center',}}
-        style={CommonStyle.inputBoxStyle}
+        style={styles.inputBoxStyle}
         itemStyle={{alignItems: 'center'}}
         dropDownStyle={styles.dropDown}
         onChangeItem={item => setValue(item.value)}
@@ -24,6 +24,13 @@ export default function DropDownMenu({items, placeholder, setValue}) {
     }
 
   const styles = StyleSheet.create({
+    inputBoxStyle:{
+      borderRadius: 30,
+      paddingHorizontal: 20,
+      height: 50,
+      backgroundColor: 'rgba(220, 220, 220, 1)',
+      margin: 10,
+    },
     dropDown:{
       backgroundColor: '#fafafa',
       width:'95%',

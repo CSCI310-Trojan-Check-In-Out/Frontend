@@ -122,6 +122,7 @@ export default function SignUp({navigation}: {navigation: any}) {
             onPress={() => {
               navigation.navigate('PhotoSelect', {
                 setImage: setImage,
+                from: 'signUp'
               });
             }}
             style={{

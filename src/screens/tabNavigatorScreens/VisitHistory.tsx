@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import ManagerHome from './manager/ManagerHome';
 import CommonStyle from '../../style/common.style';
+import {ScrollView} from 'react-native-gesture-handler';
 import SearchBar from '../../components/SearchBar';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {getAllLocationsApi,searchVisitHistory} from '../../api/backendApiCalls';
@@ -140,7 +141,8 @@ export default function VisitHistory({navigation}) {
 
   return (
     <>
-      <View testID='VisitHistory1'>
+      <ScrollView testID='VisitHistory1' style={
+        {flex: 1, height: '100%'}}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
             {
@@ -271,9 +273,9 @@ export default function VisitHistory({navigation}) {
           />
         </View>
         {showBuilding ? (
-          <View style={styles.dropdownContainer}>
+          <View style={styles.dropdownContainer1}>
             <DropDownMenu items={buildings} 
-            placeholder={'Please Select a Building'} setValue={onChangeBuilding}/>
+            placeholder={building===''? 'Please Select a Building':building} setValue={onChangeBuilding}/>
           </View>) : null}
         
         
@@ -286,11 +288,11 @@ export default function VisitHistory({navigation}) {
           />
         </View>
         {showMajor ? (
-          <View style={styles.dropdownContainer}>
+          <View style={styles.dropdownContainer2}>
            <DropDownMenu items={schools} 
-            placeholder={'Please Select a School'} setValue={onChangeMajor}/>
+            placeholder={major===''? 'Please Select a School': major} setValue={onChangeMajor}/>
           </View>) : null}
-      </View>
+      </ScrollView>
     </>
   );
 }
@@ -347,12 +349,18 @@ const styles = StyleSheet.create({
     marginLeft: '2%',
     marginRight: '2%',
     borderRadius: 20,
+    zIndex:1,
   },
   textInput: {
     fontSize: 15,
     paddingLeft: '5%',
   },
-  dropdownContainer:{
+  dropdownContainer1:{
     height:200,
+    zIndex:2,
+  },
+  dropdownContainer2:{
+    height:200,
+    zIndex:1,
   }
 });
