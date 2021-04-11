@@ -40,6 +40,8 @@ export default function VisitHistory({navigation}) {
 
   const [text, setText] = useState('');
   const [startEnd, setStartEnd] = useState('');
+  const [dateTime, setDateTime]=useState('');
+  const [rerender, setRerender]=useState(0);
   const [startDate, setStartDate] = useState(new Date(1970, 0, 1));
   const [endDate, setEndDate] = useState(new Date(2100, 11, 31));
   const [mode, setMode] = useState('date');
@@ -55,16 +57,38 @@ export default function VisitHistory({navigation}) {
   const [studentID, onChangeStudentID] = useState('');
   const [major, onChangeMajor] = useState('');
 
-  function onChange(event, selectedDate, startEnd) {
+  function onChange(event, selectedDate, startEnd, dateTime) {
     setShow(false);
-
+    setRerender(0);
+    const currentDate = selectedDate || startDate;
     if (startEnd === 'start') {
-      const currentDate = selectedDate || startDate;
-      setStartDate(currentDate);
-    } else {
-      const currentDate = selectedDate || endDate;
-      setEndDate(currentDate);
+      
+      if (dateTime==='date'){
+        startDate.setFullYear(currentDate.getFullYear());
+        startDate.setMonth(currentDate.getMonth());
+        startDate.setDate(currentDate.getDate());
+      }
+      else{
+        startDate.setHours(currentDate.getHours());
+        startDate.setMinutes(currentDate.getMinutes());
+        startDate.setSeconds(currentDate.getSeconds());
+
+      }
+    } 
+    else {
+      if (dateTime==='date'){
+        endDate.setFullYear(currentDate.getFullYear());
+        endDate.setMonth(currentDate.getMonth());
+        endDate.setDate(currentDate.getDate());
+      }
+      else{
+        endDate.setHours(currentDate.getHours());
+        endDate.setMinutes(currentDate.getMinutes());
+        endDate.setSeconds(currentDate.getSeconds());
+      }
+      
     }
+    setRerender(1);
   };
 
   function reset(){
@@ -80,8 +104,10 @@ export default function VisitHistory({navigation}) {
   function showDatepicker(startEnd: string) {
     if (startEnd === 'start') {
       setStartEnd('start');
+      setDateTime('date');
     } else {
       setStartEnd('end');
+      setDateTime('date');
     }
     showMode('date');
   }
@@ -89,8 +115,10 @@ export default function VisitHistory({navigation}) {
   function showTimepicker(startEnd: string) {
     if (startEnd === 'start') {
       setStartEnd('start');
+      setDateTime('time');
     } else {
       setStartEnd('end');
+      setDateTime('time');
     }
     showMode('time');
   }
@@ -273,7 +301,7 @@ export default function VisitHistory({navigation}) {
             is24Hour={true}
             display="default"
             onChange={(event, selectedDate) =>
-              onChange(event, selectedDate, startEnd)
+              onChange(event, selectedDate, startEnd, dateTime)
             }
           />
         )}
