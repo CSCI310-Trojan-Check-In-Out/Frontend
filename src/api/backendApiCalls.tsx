@@ -246,6 +246,12 @@ export function getAllLocationsApi(from: String, successCallback: Function) {
         const buildings = res.data;
         if (from==='visitHistory'){
           const buildingModified=[];
+          buildingModified.push(
+            {label:'Please Select a Building',
+            value:'',
+            textStyle:{textAlign:'center'}
+            }
+          )
           buildings.map(building=>{
             buildingModified.push(
               {label:building.place_name,

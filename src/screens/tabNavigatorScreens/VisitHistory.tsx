@@ -19,6 +19,7 @@ import DropDownMenu from '../../components/DropDownMenu';
 
 export default function VisitHistory({navigation}) {
   const schools=[
+    {label:'Please Select a School',value:'', textStyle:{textAlign:'center'}},
     {label: 'Dornsife College of Letters, Arts and Sciences', value: 'Dornsife College of Letters, Arts and Sciences',textStyle:{textAlign:'center'}},
     {label: 'USC School of Architecture', value: 'USC School of Architecture',textStyle:{textAlign:'center'}},
     {label: 'Roski School of Art and Design', value: 'Roski School of Art and Design',textStyle:{textAlign:'center'}},
