@@ -40,7 +40,7 @@ export default function VisitHistory({navigation}) {
 
   const [text, setText] = useState('');
   const [startEnd, setStartEnd] = useState('');
-  const [startDate, setStartDate] = useState(new Date(1900, 0, 1));
+  const [startDate, setStartDate] = useState(new Date(1970, 0, 1));
   const [endDate, setEndDate] = useState(new Date(2100, 11, 31));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -65,7 +65,12 @@ export default function VisitHistory({navigation}) {
       const currentDate = selectedDate || endDate;
       setEndDate(currentDate);
     }
-  }
+  };
+
+  function reset(){
+    setStartDate(new Date(1970, 0, 1));
+    setEndDate(new Date(2100, 11, 31));
+  };
 
   const showMode = (currentMode) => {
     setShow(true);
@@ -248,6 +253,14 @@ export default function VisitHistory({navigation}) {
                 />
               </View>
             </View>
+            <View style={styles.resetButton}>
+                <Button
+                  testID='resetTimeFilter'
+                  color={'#808080'}
+                  onPress={reset}
+                  title="Reset Time"
+                />
+              </View>
           </View>
         )}
 
@@ -274,7 +287,7 @@ export default function VisitHistory({navigation}) {
           />
         </View>
         {showBuilding ? (
-          <View style={styles.dropdownContainer1}>
+          <View style={styles.dropdownContainer}>
             <DropDownMenu items={buildings} 
             placeholder={building===''? 'Please Select a Building':building} setValue={onChangeBuilding}/>
           </View>) : null}
@@ -289,7 +302,7 @@ export default function VisitHistory({navigation}) {
           />
         </View>
         {showMajor ? (
-          <View style={styles.dropdownContainer2}>
+          <View style={styles.dropdownContainer}>
            <DropDownMenu items={schools} 
             placeholder={major===''? 'Please Select a School': major} setValue={onChangeMajor}/>
           </View>) : null}
@@ -350,18 +363,17 @@ const styles = StyleSheet.create({
     marginLeft: '2%',
     marginRight: '2%',
     borderRadius: 20,
-    zIndex:1,
+  },
+  resetButton:{
+    marginBottom: '2%',
+    marginLeft: '30%',
+    marginRight: '30%',
   },
   textInput: {
     fontSize: 15,
     paddingLeft: '5%',
   },
-  dropdownContainer1:{
+  dropdownContainer:{
     height:200,
-    zIndex:2,
-  },
-  dropdownContainer2:{
-    height:200,
-    zIndex:1,
   }
 });

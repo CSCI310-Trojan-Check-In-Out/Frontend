@@ -45,7 +45,7 @@ export default function LocationDetail({route, navigation}) {
   function pinQRCodeSucceed() {
     // getQRCodeApi(route.params.buildingId,pinQRCode);
     const pinnedBuilding = {
-      building: building,
+      buildingName: building.place_name,
       QRCode: building.qr_code_token,
     };
     pinQRCode(pinnedBuilding);
