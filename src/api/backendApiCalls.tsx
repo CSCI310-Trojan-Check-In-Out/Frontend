@@ -271,6 +271,60 @@ export function getAllLocationsApi(from: String, successCallback: Function) {
     });
 }
 
+export function addBuildingApi(
+  buildingName:string, 
+  abbreviation:string,
+  maximumCapacity:number, 
+  address:string,
+  successCallback1:Function, 
+  successCallback2:Function,
+  failureCallback:Function) {
+  
+  const form = createFormData([
+    ['place_name', buildingName],
+    ['abbreviation', abbreviation],
+    ['capacity', maximumCapacity],
+    ['place_address', address]]);
+  
+  axios({
+    method: 'post',
+    data: form,
+    url: `${MANAGER_URL}/add-building`,
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        const building = res.data[0];
+        const buildings=res.data[1];
+        successCallback1(building);
+        successCallback2(buildings);
+      }
+    })
+    .catch((error) => {
+      failureCallback();
+      showError(error);
+    });
+}
+
+export function removeBuildingApi(id: any, successCallback: Function) {
+ 
+  const form = createFormData([['placeId', id]]);
+  
+  axios({
+    method: 'post',
+    data: form,
+    url: `${MANAGER_URL}/remove-building`,
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        const buildings = res.data;
+        successCallback(buildings);
+      }
+    })
+    .catch((error) => {
+      showError(error);
+    });
+}
+
 export function getAllStudentsApi(id: any, successCallback: Function) {
   const form = createFormData([['placeId', id]]);
   axios({
@@ -281,7 +335,6 @@ export function getAllStudentsApi(id: any, successCallback: Function) {
     .then((res) => {
       if (res.status === 200) {
         const students = res.data;
-        console.log(students);
         successCallback(students);
       }
     })

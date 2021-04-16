@@ -43,7 +43,7 @@ export default function BuildingListItem({building, refreshState}) {
           padding: 10,
         }}>
         <Text>
-          {building.place_name} ({building.abbreviation})
+          {building.place_name} {building.abbreviation? `(${building.abbreviation})`:'' }
         </Text>
         <Text>
           Capacity: {currentCapacity} / {maximumCapacity}

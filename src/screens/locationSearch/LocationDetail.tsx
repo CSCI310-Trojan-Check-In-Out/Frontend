@@ -7,13 +7,12 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
 import CommonStyle from '../../style/common.style';
-import {useNavigation} from '@react-navigation/native';
-import UpdateCapacity from './UpdateCapacity';
 import {getQRCodeApi} from '../../api/backendApiCalls';
 import {Context as AppContext} from '../../context/AppContext';
 import QRCode from 'react-native-qrcode-svg';
+import ConfirmModal from '../../components/ConfirmModal';
+import {removeBuildingApi} from '../../api/backendApiCalls';
 import {
   subscribeBuildingCurrentCapacity,
   subscribeBuildingMaximumCapacity,
@@ -26,6 +25,11 @@ export default function LocationDetail({route, navigation}) {
   const [building, setBuilding] = useState(route.params.building);
   const [buildingQRCode, setQRCode] = useState<string>('111');
   const [isManager, setIsManager] = useState(true);
+
+  const [purpose, setPurpose] = React.useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalMessage, setModalMessage] = useState();
 
   const [maximumCapacity, updateMaximumCapacity] = useState(building.capacity);
   const [currentCapacity, updateCurrentCapacity] = useState(
@@ -42,6 +46,25 @@ export default function LocationDetail({route, navigation}) {
     };
   }, [navigation]);
 
+  function decline() {
+    setPurpose('');
+    setShowModal(false);
+  }
+
+  function accept() {
+    switch (purpose) {
+      case 'removeBuilding':
+        {
+          removeBuildingApi(building.id, route.params.setBuildings);
+          navigation.navigate('LocationSearch');
+        }
+      default:
+        break;
+    }
+    setPurpose('');
+    setShowModal(false);
+  }
+
   function pinQRCodeSucceed() {
     // getQRCodeApi(route.params.buildingId,pinQRCode);
     const pinnedBuilding = {
@@ -55,6 +78,15 @@ export default function LocationDetail({route, navigation}) {
   return (
     <>
       <View testID="locationDetail" style={CommonStyle.outerContainerStyle}>
+        {showModal ? (
+          <ConfirmModal
+            setShowModal={showModal}
+            title={modalTitle}
+            message={modalMessage}
+            decline={() => decline()}
+            accept={() => accept()}
+          />
+        ) : null}
         <View
           style={isManager ? styles.titleContainer1 : styles.titleContainer2}>
           <Text style={styles.title}>{'Search Result'}</Text>
@@ -75,9 +107,10 @@ export default function LocationDetail({route, navigation}) {
             ) : null}
           </View>
         </View>
-        <View style={styles.buttonContainer}>
+        
           {isManager ? (
             <>
+            <View style={styles.buttonRowContainer}>
               <TouchableOpacity
                 style={styles.button}
                 onPress={pinQRCodeSucceed}
@@ -92,6 +125,8 @@ export default function LocationDetail({route, navigation}) {
                 }>
                 <Text style={styles.textButton}>Update Capacity</Text>
               </TouchableOpacity>
+            </View>
+            <View style={styles.buttonRowContainer}>
               <TouchableOpacity
                 style={styles.button}
                 testID="locationDetailViewStudent"
@@ -100,14 +135,28 @@ export default function LocationDetail({route, navigation}) {
                 }>
                 <Text style={styles.textButton}>View Students</Text>
               </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                testID="locationDetailRemoveBuilding"
+                onPress={() =>
+                  {
+                    setPurpose('removeBuilding');
+                    setModalMessage('Do you want to remove this building?');
+                    setShowModal(true);
+                  }
+                }>
+                <Text style={styles.textButton}>Remove Building</Text>
+              </TouchableOpacity>
+            </View>
             </>
           ) : (
+          <View style={styles.buttonRowContainer}>
             <TouchableOpacity style={styles.button}>
               <Text style={styles.textButton}>Check in</Text>
             </TouchableOpacity>
+          </View>
           )}
         </View>
-      </View>
     </>
   );
 }
@@ -115,7 +164,7 @@ export default function LocationDetail({route, navigation}) {
 const styles = StyleSheet.create({
   titleContainer1: {
     alignItems: 'center',
-    marginTop: '3%',
+    marginTop: '1%',
     marginLeft: '2%',
     marginRight: '2%',
     marginBottom: '5%',
@@ -156,15 +205,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
-  buttonContainer: {
+  buttonRowContainer: {
+    marginTop: 25,
+    marginBottom: 10,
+    justifyContent: 'space-around',
     alignItems: 'center',
-    height: '30%',
-    justifyContent: 'space-evenly',
+    flexDirection: 'row',
   },
   button: {
     backgroundColor: '#9D2235',
-    width: 180,
-    height: 50,
+    width: 160,
+    height: 60,
+    marginLeft:7,
+    marginRight:7,
     padding: '2%',
     justifyContent: 'center',
     alignItems: 'center',

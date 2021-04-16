@@ -220,6 +220,7 @@ export default function VisitHistory({navigation}) {
               testID='studentIDInput'
               style={styles.textInput}
               placeholder={'Enter Student ID:'}
+              keyboardType={'numeric'}
               onChangeText={(text) => onChangeStudentID(text)}
               value={studentID}
             />

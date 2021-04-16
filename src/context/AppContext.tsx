@@ -6,6 +6,7 @@ import {
   DELETE_ACCOUNT,
   PIN_QRCODE,
   REMOVE_QRCODE,
+  GET_BUILDINGS,
   CHECK_IN,
   CHECK_OUT,
   CHANGE_PROFILE_PIC,
@@ -47,6 +48,8 @@ const eventReducer = (state = initialState, action) => {
       return {...state, pinnedBuilding: action.payload};
     case REMOVE_QRCODE:
       return {...state, pinnedBuilding: action.payload};
+    case GET_BUILDINGS:
+      return {...state, buildings:action.payload};
     case CHECK_IN:
       return {...state, checkedInBuilding: action.payload};
     case CHECK_OUT:
@@ -119,6 +122,17 @@ const removeQRCode = (dispatch) => async () => {
   }
 };
 
+const getBuildings=(dispatch)=>async(payload)=>{
+  try {
+    dispatch({
+      type: GET_BUILDINGS,
+      payload: payload,
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
 const checkin = (dispatch) => async (payload) => {
   try {
     dispatch({
@@ -160,6 +174,7 @@ export const {Provider, Context} = CreateAppContext(
     deleteAccount,
     pinQRCode,
     removeQRCode,
+    getBuildings,
     checkin,
     checkout,
     changeProfileImage,

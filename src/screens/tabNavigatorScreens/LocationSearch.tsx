@@ -52,9 +52,10 @@ export default function LocationSearch({navigation}) {
       <View style={styles.buildingList}>
         <BuildingList
           buildings={buildings}
+          setBuildings={setBuildings}
           getBuildings={getBuildings}></BuildingList>
       </View>
-      <View style={{position: 'absolute', bottom: '20%', right: '5%'}}>
+      <View style={{position: 'absolute', bottom: '10%', right: '5%'}}>
         <TouchableOpacity
           onPress={handleFilePick}
           style={{
@@ -63,6 +64,17 @@ export default function LocationSearch({navigation}) {
             borderRadius: 50,
           }}>
           <AntDesign name={'addfile'} size={30}></AntDesign>
+        </TouchableOpacity>
+      </View>
+      <View style={{position: 'absolute', bottom: '20%', right: '5%'}}>
+        <TouchableOpacity
+          onPress={()=>navigation.navigate("AddLocation",{setBuildings})}
+          style={{
+            backgroundColor: 'rgba(0,0,0,0.2)',
+            padding: 15,
+            borderRadius: 50,
+          }}>
+          <AntDesign name={'plus'} size={30}></AntDesign>
         </TouchableOpacity>
       </View>
     </View>

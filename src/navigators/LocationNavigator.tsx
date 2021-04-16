@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ChangePassword from '../screens/profile/ChangePassword';
 import LocationSearch from '../screens/tabNavigatorScreens/LocationSearch';
 import Profile from '../screens/tabNavigatorScreens/Profile';
+import AddLocation from '../screens/locationSearch/AddLocation';
 import LocationDetail from '../screens/locationSearch/LocationDetail';
 import UpdateCapacity from '../screens/locationSearch/UpdateCapacity';
 import StudentListScreen from '../screens/locationSearch/StudentListScreen';
@@ -27,10 +28,16 @@ export default function LocationNavigator() {
 
       <Stack.Screen
         options={{headerShown: false}}
+        name="AddLocation"
+        component={AddLocation}
+      />  
+
+      <Stack.Screen
+        options={{headerShown: false}}
         name="UpdateCapacity"
         component={UpdateCapacity}
       />
-
+      
       <Stack.Screen
         options={{headerShown: false}}
         name="StudentListScreen"

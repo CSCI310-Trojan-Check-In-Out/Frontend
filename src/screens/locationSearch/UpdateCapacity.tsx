@@ -46,6 +46,7 @@ export default function UpdateCapacity({route, navigation}) {
     ) {
       setMessage('Please enter a positive integer!');
     } else {
+      //console.log(building);
       updateCapacityApi(
         route.params.building.id,
         currentCapacity,
