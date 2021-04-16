@@ -15,6 +15,7 @@ export default function StudentList({students}) {
             <>
               <TouchableOpacity
                 onPress={() => {
+                  console.log(item);
                   navigation.navigate('StudentProfile',{student:item, from:'studentList'}); 
                 }}>
                 <StudentListItem student={item}></StudentListItem>

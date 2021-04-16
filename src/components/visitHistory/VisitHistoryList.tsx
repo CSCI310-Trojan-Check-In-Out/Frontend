@@ -49,6 +49,7 @@ export default function VisitHistoryList({historyList, getHistory}) {
           renderItem={({item, index}) => {
             return (
               <>
+              {getHistory? 
                 <TouchableOpacity
                   style={{flex: 1}}
                   onPress={() => {
@@ -60,7 +61,11 @@ export default function VisitHistoryList({historyList, getHistory}) {
                     }
                   }}>
                   <VisitHistoryItem history={item} />
-                </TouchableOpacity>
+                </TouchableOpacity> : 
+                <View style={{flex: 1}}>
+                  <VisitHistoryItem history={item} />
+                </View>}
+                
               </>
             );
           }}
