@@ -55,7 +55,7 @@ export default function LocationDetail({route, navigation}) {
     switch (purpose) {
       case 'removeBuilding':
         {
-          removeBuildingApi(building.id, route.params.setBuildings);
+          removeBuildingApi(building.id, setBuilding);
           navigation.navigate('LocationSearch');
         }
       default:

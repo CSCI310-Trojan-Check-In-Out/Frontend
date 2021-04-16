@@ -276,8 +276,7 @@ export function addBuildingApi(
   abbreviation:string,
   maximumCapacity:number, 
   address:string,
-  successCallback1:Function, 
-  successCallback2:Function,
+  successCallback:Function, 
   failureCallback:Function) {
   
   const form = createFormData([
@@ -293,10 +292,8 @@ export function addBuildingApi(
   })
     .then((res) => {
       if (res.status === 200) {
-        const building = res.data[0];
-        const buildings=res.data[1];
-        successCallback1(building);
-        successCallback2(buildings);
+        const building = res.data;
+        successCallback(building);
       }
     })
     .catch((error) => {
@@ -316,8 +313,8 @@ export function removeBuildingApi(id: any, successCallback: Function) {
   })
     .then((res) => {
       if (res.status === 200) {
-        const buildings = res.data;
-        successCallback(buildings);
+        const building = res.data;
+        successCallback(building);
       }
     })
     .catch((error) => {

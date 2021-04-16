@@ -12,7 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import List from '../../components/List';
 import {ScrollView} from 'react-native-gesture-handler';
 
-export default function BuildingList({buildings, setBuildings,getBuildings}) {
+export default function BuildingList({buildings, getBuildings}) {
   const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
   const [refresh, setRefresh] = useState(false);
@@ -47,7 +47,7 @@ export default function BuildingList({buildings, setBuildings,getBuildings}) {
               <>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('LocationDetail', {building: item, setBuildings});
+                    navigation.navigate('LocationDetail', {building: item});
                   }}>
                   <BuildingListItem
                     building={item}

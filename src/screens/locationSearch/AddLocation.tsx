@@ -41,7 +41,7 @@ export default function AddLocation({route, navigation}) {
     }
     else{
       addBuildingApi(buildingName, abbreviation,maximumCapacity, address,
-        setBuilding, route.params.setBuildings,  notification);
+        setBuilding, notification);
       
       navigation.navigate('LocationDetail',{building});
     }

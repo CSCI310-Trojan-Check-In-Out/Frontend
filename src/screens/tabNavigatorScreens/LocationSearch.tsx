@@ -52,7 +52,6 @@ export default function LocationSearch({navigation}) {
       <View style={styles.buildingList}>
         <BuildingList
           buildings={buildings}
-          setBuildings={setBuildings}
           getBuildings={getBuildings}></BuildingList>
       </View>
       <View style={{position: 'absolute', bottom: '10%', right: '5%'}}>
