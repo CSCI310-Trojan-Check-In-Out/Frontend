@@ -84,13 +84,14 @@ export default function StudentProfile({route}) {
             <View style={styles.pictureButton}>
               <Image style={styles.profilePicture} 
               source={{uri:'https://reactnative.dev/img/tiny_logo.png'}}/>
-              <View style={styles.button}>
+              {is_deleted=== 0?(
+                <View style={styles.button}>
                 <Button
                 color={'#9D2235'}
                 onPress={()=>press()}
                 title="Kick"
                 />
-              </View>
+              </View>):null}
             </View>
             <View style={styles.textcontainer}>
               <Text style={styles.name}>
@@ -104,7 +105,7 @@ export default function StudentProfile({route}) {
               <Text style={styles.checkedin}>
                   Currently Checking in:{''}
               </Text>
-              {is_deleted === 0 ? (
+              {is_deleted === 1 ? (
                 <Text style={styles.deleted}>(Account Deleted)</Text>
               ) : null}
             </View>
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
 
   },
   pictureButton:{
-    justifyContent:'space-around',
+    justifyContent:'flex-start',
     alignItems:'center',
   },
   button:{
