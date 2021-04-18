@@ -290,8 +290,8 @@ export function addBuildingApi(
     ['abbreviation', abbreviation],
     ['capacity', maximumCapacity],
     ['place_address', address],
-    ['startTime', startTime],
-    ['endTime', endTime],
+    ['open_time', startTime],
+    ['close_time', endTime],
   ]);
 
   axios({
