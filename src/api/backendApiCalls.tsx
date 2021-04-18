@@ -35,19 +35,25 @@ export function signupApi(
     ['password', md5(password)],
   ]);
 
-  if(uscID.length != 10){
-    showErrorString("Error", "Your USC ID must be 10 digits.");
+  if (uscID.length != 10) {
+    showErrorString('Error', 'Your USC ID must be 10 digits.');
     console.log(uscID.length);
     return;
   }
 
-  if(password.length < 4){
-    showErrorString("Error", "You password must contain at least four digits or characters.");
+  if (password.length < 4) {
+    showErrorString(
+      'Error',
+      'You password must contain at least four digits or characters.',
+    );
     return;
   }
 
-  if((firstName.length + lastName.length) < 4){
-    showErrorString("Error", "Your full name must contain at least four characters");
+  if (firstName.length + lastName.length < 4) {
+    showErrorString(
+      'Error',
+      'Your full name must contain at least four characters',
+    );
     return;
   }
 
@@ -244,24 +250,22 @@ export function getAllLocationsApi(from: String, successCallback: Function) {
     .then((res) => {
       if (res.status === 200) {
         const buildings = res.data;
-        if (from==='visitHistory'){
-          const buildingModified=[];
-          buildingModified.push(
-            {label:'Please Select a Building',
-            value:'',
-            textStyle:{textAlign:'center'}
-            }
-          )
-          buildings.map(building=>{
-            buildingModified.push(
-              {label:building.place_name,
-              value:building.place_name,
-              textStyle:{textAlign:'center'}
-              })
-         });
-         successCallback(buildingModified);
-        }
-        else{
+        if (from === 'visitHistory') {
+          const buildingModified = [];
+          buildingModified.push({
+            label: 'Please Select a Building',
+            value: '',
+            textStyle: {textAlign: 'center'},
+          });
+          buildings.map((building) => {
+            buildingModified.push({
+              label: building.place_name,
+              value: building.place_name,
+              textStyle: {textAlign: 'center'},
+            });
+          });
+          successCallback(buildingModified);
+        } else {
           successCallback(buildings);
         }
       }
@@ -272,19 +276,24 @@ export function getAllLocationsApi(from: String, successCallback: Function) {
 }
 
 export function addBuildingApi(
-  buildingName:string, 
-  abbreviation:string,
-  maximumCapacity:number, 
-  address:string,
-  successCallback:Function, 
-  failureCallback:Function) {
-  
+  buildingName: string,
+  abbreviation: string,
+  maximumCapacity: number,
+  address: string,
+  startTime: string,
+  endTime: string,
+  successCallback: Function,
+  failureCallback: Function,
+) {
   const form = createFormData([
     ['place_name', buildingName],
     ['abbreviation', abbreviation],
     ['capacity', maximumCapacity],
-    ['place_address', address]]);
-  
+    ['place_address', address],
+    ['startTime', startTime],
+    ['endTime', endTime],
+  ]);
+
   axios({
     method: 'post',
     data: form,
@@ -303,9 +312,8 @@ export function addBuildingApi(
 }
 
 export function removeBuildingApi(id: any, successCallback: Function) {
- 
   const form = createFormData([['placeId', id]]);
-  
+
   axios({
     method: 'post',
     data: form,
@@ -523,7 +531,6 @@ export function getUserUnfinishedHistory(successCallback: Function) {
         if (historyList.length !== 0) {
           successCallback(historyList[0]);
         }
-        
       }
     })
     .catch((error) => {
@@ -561,7 +568,7 @@ function createFormData(data: any[][2]) {
   return formData;
 }
 
-function showErrorString(title, message){
+function showErrorString(title, message) {
   Alert.alert(title, message);
 }
 

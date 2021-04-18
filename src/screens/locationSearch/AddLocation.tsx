@@ -52,6 +52,8 @@ export default function AddLocation({route, navigation}) {
         abbreviation,
         maximumCapacity,
         address,
+        startTime,
+        endTime,
         setBuilding,
         notification,
       );
