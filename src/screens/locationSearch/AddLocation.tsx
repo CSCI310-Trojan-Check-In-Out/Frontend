@@ -22,8 +22,11 @@ export default function AddLocation({route, navigation}) {
   const [abbreviation, setAbbreviation] = useState<string>('');
   const [maximumCapacity, setMaximumCapacity] = useState<number>();
   const [address, setAddress] = useState<string>('');
-  const [startTime, setStartTime] = useState<any>();
-  const [endTime, setEndTime] = useState<any>();
+  const [startTime, setStartTime] = useState<any>(new Date());
+  const [displayStartTime, setDisplayStartTime] = useState<any>();
+  const [endTime, setEndTime] = useState<any>(new Date());
+  const [displayEndTime, setDisplayEndTime] = useState<any>();
+
   const [showStartTime, setShowStartTime] = useState<boolean>(false);
   const [showEndTime, setShowEndTime] = useState<boolean>(false);
 
@@ -52,8 +55,8 @@ export default function AddLocation({route, navigation}) {
         abbreviation,
         maximumCapacity,
         address,
-        startTime,
-        endTime,
+        displayStartTime,
+        displayEndTime,
         setBuilding,
         notification,
       );
@@ -70,12 +73,19 @@ export default function AddLocation({route, navigation}) {
     }
 
     if (showStartTime) {
+      console.log("start")
       setShowStartTime(false);
-      if (date) setStartTime(date.toTimeString());
+      if (date) {
+        setStartTime(date);
+        setDisplayStartTime(date.toTimeString());
+      }
     }
-    if (showEndTime) {
+    else if (showEndTime) {
       setShowEndTime(false);
-      if (date) setEndTime(date.toTimeString());
+      if (date) {
+        setEndTime(date);
+        setDisplayEndTime(date.toTimeString());
+      }
     }
   }
 
@@ -140,15 +150,17 @@ export default function AddLocation({route, navigation}) {
           </View>
 
           <View style={styles.textContainer}>
-            <TouchableOpacity onPress={() => setShowEndTime(true)}>
+            <TouchableOpacity onPress={() => setShowStartTime(true)}>
               <Text style={styles.textInput}>
-                {startTime ? startTime : 'Click to select start time'}
+                {displayStartTime
+                  ? displayStartTime
+                  : 'Click to select start time'}
               </Text>
             </TouchableOpacity>
             {showStartTime && (
               <DateTimePicker
                 testID="dateTimePicker"
-                value={new Date()}
+                value={new Date(startTime)}
                 mode={'time'}
                 is24Hour={true}
                 display="default"
@@ -158,16 +170,16 @@ export default function AddLocation({route, navigation}) {
           </View>
 
           <View style={styles.textContainer}>
-            <TouchableOpacity onPress={() => setShowStartTime(true)}>
+            <TouchableOpacity onPress={() => setShowEndTime(true)}>
               <Text style={styles.textInput}>
-                {endTime ? endTime : 'Click to select end time'}
+                {displayEndTime ? displayEndTime : 'Click to select end time'}
               </Text>
             </TouchableOpacity>
 
             {showEndTime && (
               <DateTimePicker
                 testID="dateTimePicker"
-                value={new Date()}
+                value={new Date(endTime)}
                 mode={'time'}
                 is24Hour={true}
                 display="default"
