@@ -11,7 +11,7 @@ export default function VisitHistoryResult({route, navigation}) {
 
   useEffect(() => {
     getHistory();
-  }, [navigation]);
+  }, [navigation, state.checkedInBuilding]);
 
   function getHistory() {
     if (route?.params?.results) {
@@ -21,13 +21,9 @@ export default function VisitHistoryResult({route, navigation}) {
     }
   }
 
-
-
   return (
     <>
-      <View 
-      testID='VisitHistoryResult'
-      style={styles.visitorList}>
+      <View testID="VisitHistoryResult" style={styles.visitorList}>
         <Text
           style={{
             textAlign: 'center',

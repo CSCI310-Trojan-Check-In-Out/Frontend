@@ -63,6 +63,56 @@ export function subscribeBuildingCurrentStudent(
   });
 }
 
+// TODO: can be optimized in the first render
+// for now, it will fetch N times for the first load
+export function subscribeBuildingChanges(onChangeCallback: Function) {
+  const ref = getBuildingRootRef();
+  ref.on('child_added', (snapshot) => {
+    console.log('added');
+    console.log(snapshot.val());
+    if (snapshot.val().capacity) {
+      console.log('called fetch building');
+      onChangeCallback();
+    }
+  });
+
+  ref.on('child_removed', (snapshot) => {
+    console.log('removed');
+    console.log(snapshot.val());
+    if (snapshot.val().capacity) {
+      console.log('called fetch building');
+      onChangeCallback();
+    }
+  });
+}
+
+export function unSubscribBuildingChanges() {
+  const ref = getBuildingRootRef();
+  ref.off();
+}
+
+export function subscribeUserCheckin(
+  userId: string,
+  buildingId: string,
+  onChangeCallback: Function,
+) {
+  const ref = getBuildingCheckinRef(buildingId);
+  ref.on('child_removed', (snapshot) => {
+    console.log('removed');
+    console.log(snapshot.val());
+    const child = snapshot.val();
+    if (child.id && child.id == userId) {
+      console.log('kicked');
+      onChangeCallback();
+    }
+  });
+}
+
+export function unSubscribeUserCheckin(buildingId: string) {
+  const ref = getBuildingCheckinRef(buildingId);
+  ref.off();
+}
+
 /* -------------------------------------------------------------------------- */
 /*                       firebase endpoints route getter                      */
 /* -------------------------------------------------------------------------- */
@@ -73,4 +123,8 @@ function getBuildingCapacityRef(buildingId: string) {
 
 function getBuildingCheckinRef(buildingId: string) {
   return database().ref(`${BUILDING_REF}/${buildingId}/checkin`);
+}
+
+function getBuildingRootRef() {
+  return database().ref(`${BUILDING_REF}`);
 }

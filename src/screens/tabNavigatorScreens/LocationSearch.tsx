@@ -11,12 +11,15 @@ import {
   updateCapacityByCSV,
 } from '../../api/backendApiCalls';
 
+import {subscribeBuildingChanges} from '../../api/firebaseApi';
+
 export default function LocationSearch({navigation}) {
   const [buildings, setBuildings] = useState<any>([]);
   const [filteredBuildings, setFilteredBuildings] = useState<any>([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
+    subscribeBuildingChanges(getBuildings);
     getBuildings();
   }, [navigation]);
 
@@ -39,44 +42,44 @@ export default function LocationSearch({navigation}) {
   };
 
   function getBuildings() {
-    getAllLocationsApi('locationSearch',setBuildings);
+    getAllLocationsApi('locationSearch', setBuildings);
   }
 
   return (
     <>
       {/* <SearchBar placeholder={'Filter search results'} changeText={setQuery} /> */}
-    <View testID='LocationSearch1'>
-      <Text style={{textAlign: 'center', fontSize: 20, marginTop: 20}}>
-        All Locations
-      </Text>
-      <View style={styles.buildingList}>
-        <BuildingList
-          buildings={buildings}
-          getBuildings={getBuildings}></BuildingList>
+      <View testID="LocationSearch1">
+        <Text style={{textAlign: 'center', fontSize: 20, marginTop: 20}}>
+          All Locations
+        </Text>
+        <View style={styles.buildingList}>
+          <BuildingList
+            buildings={buildings}
+            getBuildings={getBuildings}></BuildingList>
+        </View>
+        <View style={{position: 'absolute', bottom: '10%', right: '5%'}}>
+          <TouchableOpacity
+            onPress={handleFilePick}
+            style={{
+              backgroundColor: 'rgba(0,0,0,0.2)',
+              padding: 15,
+              borderRadius: 50,
+            }}>
+            <AntDesign name={'addfile'} size={30}></AntDesign>
+          </TouchableOpacity>
+        </View>
+        <View style={{position: 'absolute', bottom: '20%', right: '5%'}}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('AddLocation', {setBuildings})}
+            style={{
+              backgroundColor: 'rgba(0,0,0,0.2)',
+              padding: 15,
+              borderRadius: 50,
+            }}>
+            <AntDesign name={'plus'} size={30}></AntDesign>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={{position: 'absolute', bottom: '10%', right: '5%'}}>
-        <TouchableOpacity
-          onPress={handleFilePick}
-          style={{
-            backgroundColor: 'rgba(0,0,0,0.2)',
-            padding: 15,
-            borderRadius: 50,
-          }}>
-          <AntDesign name={'addfile'} size={30}></AntDesign>
-        </TouchableOpacity>
-      </View>
-      <View style={{position: 'absolute', bottom: '20%', right: '5%'}}>
-        <TouchableOpacity
-          onPress={()=>navigation.navigate("AddLocation",{setBuildings})}
-          style={{
-            backgroundColor: 'rgba(0,0,0,0.2)',
-            padding: 15,
-            borderRadius: 50,
-          }}>
-          <AntDesign name={'plus'} size={30}></AntDesign>
-        </TouchableOpacity>
-      </View>
-    </View>
     </>
   );
 }

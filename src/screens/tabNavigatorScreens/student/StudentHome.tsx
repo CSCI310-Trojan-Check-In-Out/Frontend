@@ -24,6 +24,10 @@ import {
   checkoutApi,
   getUserUnfinishedHistory,
 } from '../../../api/backendApiCalls';
+import {
+  subscribeUserCheckin,
+  unSubscribeUserCheckin,
+} from '../../../api/firebaseApi';
 import {alertError} from '../../../helpers/inputHelpers';
 
 export default function StudentHome({navigation}) {
@@ -47,6 +51,17 @@ export default function StudentHome({navigation}) {
   }, []);
 
   useEffect(() => {
+    if (state.checkedInBuilding) {
+      // listen to kick
+      subscribeUserCheckin(
+        state.user.id,
+        state.checkedInBuilding.id,
+        kickStudent,
+      );
+    }
+  }, [state.checkedInBuilding]);
+
+  useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     if (currentQRCode) {
       setShowConfirmPopup(true);
@@ -62,12 +77,21 @@ export default function StudentHome({navigation}) {
     }
   }
 
+  function kickStudent() {
+    alertError('You have been kicked out of the building');
+    unSubscribeUserCheckin(state.checkedInBuilding.id);
+    checkout();
+    setCurrentQRCode('');
+    setShowConfirmPopup(false);
+  }
+
   function acceptQRCode() {
     // TODO: dispatch
     if (state.checkedInBuilding) {
       if (state.checkedInBuilding.qr_code_token !== currentQRCode) {
         alertError('Wrong Building Qr Code');
       } else {
+        unSubscribeUserCheckin(state.checkedInBuilding.id);
         checkoutApi(state.checkedInBuilding.qr_code_token, checkout, null);
         setCurrentQRCode('');
         setShowConfirmPopup(false);
