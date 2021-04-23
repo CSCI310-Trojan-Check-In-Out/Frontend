@@ -8,6 +8,7 @@ import {Context as AppContext} from '../../context/AppContext';
 import {
   getUserVisitHistory,
   searchVisitHistory,
+  kickStudentApi,
 } from '../../api/backendApiCalls';
 import VisitHistoryList from '../../components/visitHistory/VisitHistoryList';
 
@@ -15,7 +16,7 @@ export default function StudentProfile({route}) {
   const {state} = useContext(AppContext);
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
-  const [modalMessage, setModalMessage] =useState();
+  const [modalMessage, setModalMessage] = useState();
 
   function comeFrom() {
     console.log(route.params);
@@ -50,10 +51,9 @@ export default function StudentProfile({route}) {
     }
   }, []);
 
-  function press() {
+  function kickStudent() {
     setModalMessage('Do you want to kick out the student?');
     setShowModal(true);
-    
   }
 
   function decline() {
@@ -61,15 +61,24 @@ export default function StudentProfile({route}) {
   }
 
   function accept() {
-
     setShowModal(false);
+    kickStudentApi(
+      route.params.student.account_id,
+      () => {
+        searchVisitHistory(
+          {userId: route.params.student.account_id},
+          setStudentHistory,
+        );
+        
+      },
+      () => {},
+    );
   }
-
 
   return (
     <>
       <View style={CommonStyle.outerContainerStyle}>
-      {showModal ? (
+        {showModal ? (
           <ConfirmModal
             setShowModal={showModal}
             title={modalTitle}
@@ -82,16 +91,19 @@ export default function StudentProfile({route}) {
         <View style={styles.container}>
           <View style={styles.profile}>
             <View style={styles.pictureButton}>
-              <Image style={styles.profilePicture} 
-              source={{uri:'https://reactnative.dev/img/tiny_logo.png'}}/>
-              {is_deleted=== 0?(
+              <Image
+                style={styles.profilePicture}
+                source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+              />
+              {is_deleted === 0 ? (
                 <View style={styles.button}>
-                <Button
-                color={'#9D2235'}
-                onPress={()=>press()}
-                title="Kick"
-                />
-              </View>):null}
+                  <Button
+                    color={'#9D2235'}
+                    onPress={() => kickStudent()}
+                    title="Kick"
+                  />
+                </View>
+              ) : null}
             </View>
             <View style={styles.textcontainer}>
               <Text style={styles.name}>
@@ -102,15 +114,13 @@ export default function StudentProfile({route}) {
               ) : null}
 
               <Text style={styles.major}>Major: {major} </Text>
-              <Text style={styles.checkedin}>
-                  Currently Checking in:{''}
-              </Text>
+              <Text style={styles.checkedin}>Currently Checking in:{''}</Text>
               {is_deleted === 1 ? (
                 <Text style={styles.deleted}>(Account Deleted)</Text>
               ) : null}
             </View>
           </View>
-          
+
           <View style={styles.subTitleContainer}>
             <Text style={styles.subTitle}>Visit History:</Text>
           </View>
@@ -129,23 +139,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profile: {
-    width:'80%',
+    width: '80%',
     marginTop: '3%',
     flexDirection: 'row',
     justifyContent: 'space-around',
-
   },
-  pictureButton:{
-    justifyContent:'flex-start',
-    alignItems:'center',
+  pictureButton: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
-  button:{
+  button: {
     marginTop: '10%',
     marginBottom: '1%',
     marginLeft: '2%',
     marginRight: '2%',
     borderRadius: 20,
-    width:70
+    width: 70,
   },
   profilePicture: {
     width: 80,
@@ -154,7 +163,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textcontainer: {
-    width:'60%',
+    width: '60%',
     marginLeft: 40,
     marginRight: 20,
     marginBottom: 20,
@@ -168,12 +177,12 @@ const styles = StyleSheet.create({
   major: {
     fontSize: 18,
   },
-  checkedin:{
-    fontSize:18,
+  checkedin: {
+    fontSize: 18,
   },
-  deleted:{
-    marginTop:'5%',
-    fontSize:18,
+  deleted: {
+    marginTop: '5%',
+    fontSize: 18,
   },
   subTitleContainer: {
     marginTop: 20,

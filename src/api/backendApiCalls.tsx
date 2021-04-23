@@ -103,7 +103,7 @@ export function signinApi(
       }
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
       failureCallback();
       showError(error);
     });
@@ -465,7 +465,33 @@ export function searchVisitHistory(
     })
     .catch((error) => {
       // failureCallback();
-      // showError(error);
+      showError(error);
+    });
+}
+
+export function kickStudentApi(
+  id: string,
+  successCallback: Function,
+  failureCallback: Function,
+) {
+  const form = createFormData([['id', id]]);
+
+  axios({
+    method: 'post',
+    url: `${MANAGER_URL}/kickout-student`,
+    data: form,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        showMessage('Successfully kick student!');
+        successCallback();
+      }
+    })
+    .catch((error) => {
+      showError(error);
     });
 }
 
