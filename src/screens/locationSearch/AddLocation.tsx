@@ -32,26 +32,26 @@ export default function AddLocation({route, navigation}) {
 
   const [message, setMessage] = useState('');
 
-  function notification() {
+  function notificationFailure() {
     setMessage(
-      'New Capacity cannot be smaller than the current number of people in the building!',
+      `There is an error in adding building`
     );
+  }
+  function addBuildingSuccess() {
+    Alert.alert("Building is successfully added!");
+    navigation.navigate('LocationSearch');
   }
 
   function addBuiding() {
     if (!buildingName || !maximumCapacity) {
       setMessage('Buidling name and capacity cannot be empty!');
-    }
-    else if(!startTime || !endTime){
+    } else if (!startTime || !endTime) {
       setMessage('Start time and end time cannot be empty!');
-    }
-    else if(!abbreviation){
+    } else if (!abbreviation) {
       setMessage('Abbreviation cannot be empty!');
-    }
-    else if(!address){
+    } else if (!address) {
       setMessage('Address cannot be empty!');
-    }
-    else if (
+    } else if (
       isNaN(maximumCapacity) ||
       maximumCapacity <= 0 ||
       Math.floor(maximumCapacity) != maximumCapacity
@@ -65,11 +65,11 @@ export default function AddLocation({route, navigation}) {
         address,
         displayStartTime,
         displayEndTime,
-        setBuilding,
-        notification,
+        addBuildingSuccess,
+        notificationFailure,
       );
 
-      navigation.navigate('LocationDetail', {building});
+      
     }
   }
 
@@ -81,18 +81,17 @@ export default function AddLocation({route, navigation}) {
     }
 
     if (showStartTime) {
-      console.log("start")
+      console.log('start');
       setShowStartTime(false);
       if (date) {
         setStartTime(date);
-        setDisplayStartTime('Start time: ' + date.toTimeString().slice(0, 5));
+        setDisplayStartTime(date.toTimeString().slice(0, 5));
       }
-    }
-    else if (showEndTime) {
+    } else if (showEndTime) {
       setShowEndTime(false);
       if (date) {
         setEndTime(date);
-        setDisplayEndTime('End time: ' + date.toTimeString().slice(0, 5));
+        setDisplayEndTime(date.toTimeString().slice(0, 5));
       }
     }
   }
@@ -156,7 +155,7 @@ export default function AddLocation({route, navigation}) {
             <TouchableOpacity onPress={() => setShowStartTime(true)}>
               <Text style={styles.textInput}>
                 {displayStartTime
-                  ? displayStartTime
+                  ? 'Start Time: ' + displayStartTime
                   : 'Click to select start time'}
               </Text>
             </TouchableOpacity>
@@ -175,7 +174,9 @@ export default function AddLocation({route, navigation}) {
           <View style={styles.textContainer}>
             <TouchableOpacity onPress={() => setShowEndTime(true)}>
               <Text style={styles.textInput}>
-                {displayEndTime ? displayEndTime : 'Click to select end time'}
+                {displayEndTime
+                  ? 'End Time: ' + displayEndTime
+                  : 'Click to select end time'}
               </Text>
             </TouchableOpacity>
 
@@ -236,7 +237,6 @@ const styles = StyleSheet.create({
   notification: {
     color: 'red',
     textAlign: 'center',
-
   },
   textContainer: {
     alignItems: 'center',

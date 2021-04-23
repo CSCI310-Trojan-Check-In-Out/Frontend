@@ -1,6 +1,7 @@
 const localhost = false;
 // nate
-const LOCAL_IP_ADDRESS = 'http://192.168.1.165';
+// const LOCAL_IP_ADDRESS = 'http://192.168.1.165';
+const LOCAL_IP_ADDRESS = 'http://127.0.0.1';
 // henry
 // const LOCAL_IP_ADDRESS = 'http://192.168.56.1';
 const PORT = '80';

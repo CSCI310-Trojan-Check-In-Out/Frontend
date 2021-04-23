@@ -103,6 +103,7 @@ export function signinApi(
       }
     })
     .catch((error) => {
+      console.log(error)
       failureCallback();
       showError(error);
     });
@@ -293,15 +294,21 @@ export function addBuildingApi(
     ['open_time', startTime],
     ['close_time', endTime],
   ]);
-
+  // console.log(buildingName);
+  // console.log(abbreviation);
+  // console.log(maximumCapacity);
+  // console.log(address);
+  // console.log(startTime);
+  // console.log(endTime);
   axios({
     method: 'post',
     data: form,
-    url: `${MANAGER_URL}/add-building`,
+    url: `${MANAGER_URL}/add-place`,
   })
     .then((res) => {
       if (res.status === 200) {
         const building = res.data;
+        console.log(building);
         successCallback(building);
       }
     })
