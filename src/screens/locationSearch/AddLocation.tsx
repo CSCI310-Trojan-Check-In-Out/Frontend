@@ -22,17 +22,15 @@ export default function AddLocation({route, navigation}) {
   const [abbreviation, setAbbreviation] = useState<string>('');
   const [maximumCapacity, setMaximumCapacity] = useState<number>();
   const [address, setAddress] = useState<string>('');
-  const [startTime, setStartTime] = useState<any>(new Date());
+  const [startTime, setStartTime] = useState<any>(null);
   const [displayStartTime, setDisplayStartTime] = useState<any>();
-  const [endTime, setEndTime] = useState<any>(new Date());
+  const [endTime, setEndTime] = useState<any>(null);
   const [displayEndTime, setDisplayEndTime] = useState<any>();
 
   const [showStartTime, setShowStartTime] = useState<boolean>(false);
   const [showEndTime, setShowEndTime] = useState<boolean>(false);
 
-  const [message, setMessage] = useState(
-    'Buidling name and capacity are required.',
-  );
+  const [message, setMessage] = useState('');
 
   function notification() {
     setMessage(
@@ -43,7 +41,17 @@ export default function AddLocation({route, navigation}) {
   function addBuiding() {
     if (!buildingName || !maximumCapacity) {
       setMessage('Buidling name and capacity cannot be empty!');
-    } else if (
+    }
+    else if(!startTime || !endTime){
+      setMessage('Start time and end time cannot be empty!');
+    }
+    else if(!abbreviation){
+      setMessage('Abbreviation cannot be empty!');
+    }
+    else if(!address){
+      setMessage('Address cannot be empty!');
+    }
+    else if (
       isNaN(maximumCapacity) ||
       maximumCapacity <= 0 ||
       Math.floor(maximumCapacity) != maximumCapacity
@@ -77,14 +85,14 @@ export default function AddLocation({route, navigation}) {
       setShowStartTime(false);
       if (date) {
         setStartTime(date);
-        setDisplayStartTime(date.toTimeString());
+        setDisplayStartTime('Start time: ' + date.toTimeString().slice(0, 5));
       }
     }
     else if (showEndTime) {
       setShowEndTime(false);
       if (date) {
         setEndTime(date);
-        setDisplayEndTime(date.toTimeString());
+        setDisplayEndTime('End time: ' + date.toTimeString().slice(0, 5));
       }
     }
   }
@@ -104,11 +112,6 @@ export default function AddLocation({route, navigation}) {
           }}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Add Building</Text>
-          </View>
-          <View style={styles.notificationContainer}>
-            <Text testID={message} style={styles.notification}>
-              {message}
-            </Text>
           </View>
           <View style={styles.textContainer}>
             <TextInput
@@ -188,6 +191,12 @@ export default function AddLocation({route, navigation}) {
             )}
           </View>
 
+          <View style={styles.notificationContainer}>
+            <Text testID={message} style={styles.notification}>
+              {message}
+            </Text>
+          </View>
+
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               testID="addLocationAdd"
@@ -211,8 +220,8 @@ export default function AddLocation({route, navigation}) {
 const styles = StyleSheet.create({
   titleContainer: {
     alignItems: 'center',
-    marginTop: '20%',
-    marginBottom: '10%',
+    marginTop: '5%',
+    marginBottom: '5%',
   },
   title: {
     fontSize: 35,
@@ -227,6 +236,7 @@ const styles = StyleSheet.create({
   notification: {
     color: 'red',
     textAlign: 'center',
+
   },
   textContainer: {
     alignItems: 'center',
@@ -251,12 +261,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 200,
     justifyContent: 'space-evenly',
-    marginTop: '5%',
+    marginTop: '1%',
   },
   button: {
     backgroundColor: '#9D2235',
     width: '60%',
-    height: '30%',
+    height: '25%',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
