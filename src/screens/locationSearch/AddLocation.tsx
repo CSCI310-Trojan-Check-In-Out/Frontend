@@ -46,7 +46,7 @@ export default function AddLocation({route, navigation}) {
     if (!buildingName || !maximumCapacity) {
       setMessage('Buidling name and capacity cannot be empty!');
     } else if (!startTime || !endTime) {
-      setMessage('Start time and end time cannot be empty!');
+      setMessage('Open time and close time cannot be empty!');
     } else if (!abbreviation) {
       setMessage('Abbreviation cannot be empty!');
     } else if (!address) {
@@ -162,7 +162,7 @@ export default function AddLocation({route, navigation}) {
             <TouchableOpacity onPress={() => setShowStartTime(true)}>
               <Text style={styles.textInput}>
                 {displayStartTime
-                  ? 'Start Time: ' + displayStartTime
+                  ? 'Open Time: ' + displayStartTime
                   : 'Click to select start time'}
               </Text>
             </TouchableOpacity>
@@ -182,7 +182,7 @@ export default function AddLocation({route, navigation}) {
             <TouchableOpacity onPress={() => setShowEndTime(true)}>
               <Text style={styles.textInput}>
                 {displayEndTime
-                  ? 'End Time: ' + displayEndTime
+                  ? 'Close Time: ' + displayEndTime
                   : 'Click to select end time'}
               </Text>
             </TouchableOpacity>
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    color:'#949494',
+    color:'#969696',
     width: '100%',
   },
   buttonContainer: {
