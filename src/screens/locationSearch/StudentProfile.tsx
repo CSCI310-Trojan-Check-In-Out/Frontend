@@ -121,7 +121,7 @@ export default function StudentProfile({route}) {
               ) : null}
 
               <Text style={styles.major}>Major: {major} </Text>
-              <Text style={styles.checkedin}>Currently Checking in:{''}</Text>
+              {/* <Text style={styles.checkedin}>Currently Checking in:{''}</Text> */}
               {is_deleted === 1 ? (
                 <Text style={styles.deleted}>(Account Deleted)</Text>
               ) : null}
