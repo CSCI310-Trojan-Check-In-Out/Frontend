@@ -324,7 +324,7 @@ export function removeBuildingApi(id: any, successCallback: Function) {
   axios({
     method: 'post',
     data: form,
-    url: `${MANAGER_URL}/remove-building`,
+    url: `${MANAGER_URL}/remove-place`,
   })
     .then((res) => {
       if (res.status === 200) {

@@ -53,11 +53,12 @@ export default function LocationDetail({route, navigation}) {
 
   function accept() {
     switch (purpose) {
-      case 'removeBuilding':
-        {
-          removeBuildingApi(building.id, setBuilding);
+      case 'removeBuilding': {
+        removeBuildingApi(building.id, () => {
+          Alert.alert('Building is removed successfully!');
           navigation.navigate('LocationSearch');
-        }
+        });
+      }
       default:
         break;
     }
@@ -107,9 +108,9 @@ export default function LocationDetail({route, navigation}) {
             ) : null}
           </View>
         </View>
-        
-          {isManager ? (
-            <>
+
+        {isManager ? (
+          <>
             <View style={styles.buttonRowContainer}>
               <TouchableOpacity
                 style={styles.button}
@@ -138,25 +139,23 @@ export default function LocationDetail({route, navigation}) {
               <TouchableOpacity
                 style={styles.button}
                 testID="locationDetailRemoveBuilding"
-                onPress={() =>
-                  {
-                    setPurpose('removeBuilding');
-                    setModalMessage('Do you want to remove this building?');
-                    setShowModal(true);
-                  }
-                }>
+                onPress={() => {
+                  setPurpose('removeBuilding');
+                  setModalMessage('Do you want to remove this building?');
+                  setShowModal(true);
+                }}>
                 <Text style={styles.textButton}>Remove Building</Text>
               </TouchableOpacity>
             </View>
-            </>
-          ) : (
+          </>
+        ) : (
           <View style={styles.buttonRowContainer}>
             <TouchableOpacity style={styles.button}>
               <Text style={styles.textButton}>Check in</Text>
             </TouchableOpacity>
           </View>
-          )}
-        </View>
+        )}
+      </View>
     </>
   );
 }
@@ -216,8 +215,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#9D2235',
     width: 160,
     height: 60,
-    marginLeft:7,
-    marginRight:7,
+    marginLeft: 7,
+    marginRight: 7,
     padding: '2%',
     justifyContent: 'center',
     alignItems: 'center',

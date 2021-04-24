@@ -17,7 +17,7 @@ export default function StudentProfile({route}) {
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalMessage, setModalMessage] = useState();
-
+  const [userId, setUserId] = useState<any>('');
   function comeFrom() {
     console.log(route.params);
     if (route.params.from === 'studentList') {
@@ -26,26 +26,37 @@ export default function StudentProfile({route}) {
       return route.params.history;
     }
   }
-  const {first_name, last_name, usc_id, major, is_deleted} = comeFrom();
+  const {
+    first_name,
+    last_name,
+    usc_id,
+    major,
+    is_deleted,
+    account_picture,
+  } = comeFrom();
 
   const [studentHistory, setStudentHistory] = useState();
 
   const navigation = useNavigation();
 
   useEffect(() => {
+    console.log(comeFrom());
     // manager visiting student profile from locationSearch, and from visitHistory
     if (route.params.student || route.params.item) {
+      setUserId(route.params.student.account_id);
       searchVisitHistory(
         {userId: route.params.student.account_id},
         setStudentHistory,
       );
       // search history route : manager
     } else if (route.params.history) {
+      setUserId(route.params.history.account_id);
       searchVisitHistory(
         {userId: route.params.history.account_id},
         setStudentHistory,
       );
     } else {
+      setUserId(state.user.id);
       // student visit her own visitHistory
       getUserVisitHistory(setStudentHistory);
     }
@@ -63,13 +74,9 @@ export default function StudentProfile({route}) {
   function accept() {
     setShowModal(false);
     kickStudentApi(
-      route.params.student.account_id,
+      userId,
       () => {
-        searchVisitHistory(
-          {userId: route.params.student.account_id},
-          setStudentHistory,
-        );
-        
+        searchVisitHistory({userId}, setStudentHistory);
       },
       () => {},
     );
@@ -93,7 +100,7 @@ export default function StudentProfile({route}) {
             <View style={styles.pictureButton}>
               <Image
                 style={styles.profilePicture}
-                source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+                source={{uri: account_picture ?? ''}}
               />
               {is_deleted === 0 ? (
                 <View style={styles.button}>
