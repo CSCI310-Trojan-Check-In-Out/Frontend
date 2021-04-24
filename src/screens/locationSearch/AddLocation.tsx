@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    color:'grey',
+    color:'#949494',
     width: '100%',
   },
   buttonContainer: {
