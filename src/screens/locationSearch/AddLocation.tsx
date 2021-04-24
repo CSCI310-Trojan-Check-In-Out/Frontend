@@ -30,7 +30,7 @@ export default function AddLocation({route, navigation}) {
   const [showStartTime, setShowStartTime] = useState<boolean>(false);
   const [showEndTime, setShowEndTime] = useState<boolean>(false);
 
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('Please fill out all the entries!');
 
   function notificationFailure() {
     setMessage(
@@ -112,6 +112,13 @@ export default function AddLocation({route, navigation}) {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Add Building</Text>
           </View>
+
+          <View style={styles.notificationContainer}>
+            <Text testID={message} style={styles.notification}>
+              {message}
+            </Text>
+          </View>
+
           <View style={styles.textContainer}>
             <TextInput
               testID="addLocationBuildingName"
@@ -192,12 +199,6 @@ export default function AddLocation({route, navigation}) {
             )}
           </View>
 
-          <View style={styles.notificationContainer}>
-            <Text testID={message} style={styles.notification}>
-              {message}
-            </Text>
-          </View>
-
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               testID="addLocationAdd"
@@ -240,12 +241,14 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#fff',
     marginLeft: '10%',
     marginRight: '10%',
     marginTop: '3%',
     marginBottom: '3%',
     borderRadius: 20,
+    height:50,
   },
   textInput: {
     fontSize: 15,
@@ -254,7 +257,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    // backgroundColor:"black",
+    color:'grey',
     width: '100%',
   },
   buttonContainer: {
