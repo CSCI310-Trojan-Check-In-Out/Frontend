@@ -35,7 +35,7 @@ export function signupApi(
     ['password', md5(password)],
   ]);
 
-  if (uscID.length != 10) {
+  if (!isAdmin && uscID.length != 10) {
     showErrorString('Error', 'Your USC ID must be 10 digits.');
     console.log(uscID.length);
     return;
