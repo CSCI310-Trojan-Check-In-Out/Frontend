@@ -31,7 +31,7 @@ export default function StudentProfile({route}) {
     last_name,
     usc_id,
     major,
-    is_deleted,
+    account_is_deleted,
     account_picture,
   } = comeFrom();
 
@@ -102,7 +102,7 @@ export default function StudentProfile({route}) {
                 style={styles.profilePicture}
                 source={{uri: account_picture ?? ''}}
               />
-              {is_deleted === 0 ? (
+              {account_is_deleted === 0 ? (
                 <View style={styles.button}>
                   <Button
                     color={'#9D2235'}
@@ -122,7 +122,7 @@ export default function StudentProfile({route}) {
 
               <Text style={styles.major}>Major: {major} </Text>
               {/* <Text style={styles.checkedin}>Currently Checking in:{''}</Text> */}
-              {is_deleted === 1 ? (
+              {account_is_deleted === 1 ? (
                 <Text style={styles.deleted}>(Account Deleted)</Text>
               ) : null}
             </View>

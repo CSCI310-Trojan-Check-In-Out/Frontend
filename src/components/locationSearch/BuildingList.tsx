@@ -47,7 +47,10 @@ export default function BuildingList({buildings, getBuildings}) {
               <>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('LocationDetail', {building: item});
+                    console.log(item);
+                    if (item.is_deleted === 0) {
+                      navigation.navigate('LocationDetail', {building: item});
+                    }
                   }}>
                   <BuildingListItem
                     building={item}

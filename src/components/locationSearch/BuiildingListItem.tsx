@@ -22,8 +22,11 @@ export default function BuildingListItem({building, refreshState}) {
 
   useEffect(() => {
     // console.log(state);
-    subscribeBuildingMaximumCapacity(building.id, updateMaximumCapacity);
-    subscribeBuildingCurrentCapacity(building.id, updateCurrentCapacity);
+    if (building.is_deleted === 0) {
+      subscribeBuildingMaximumCapacity(building.id, updateMaximumCapacity);
+      subscribeBuildingCurrentCapacity(building.id, updateCurrentCapacity);
+    }
+
     return () => {
       // unSubscribeBuildingMaximumCapacity(building.id);
       // unSubscribeBuildingCurrentCapacity(building.id);
@@ -34,19 +37,27 @@ export default function BuildingListItem({building, refreshState}) {
     <>
       <View
         testID="buildingListItem"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-          borderBottomWidth: 1,
-          padding: 10,
-        }}>
+        style={[
+          {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+            borderBottomWidth: 1,
+            padding: 10,
+          },
+          building.is_deleted === 1
+            ? {backgroundColor: 'rgba(0, 0, 0, 0.1)'}
+            : null,
+        ]}>
         <Text>
-          {building.place_name} {building.abbreviation? `(${building.abbreviation})`:'' }
+          {building.place_name}{' '}
+          {building.abbreviation ? `(${building.abbreviation})` : ''}
         </Text>
         <Text>
-          Capacity: {currentCapacity} / {maximumCapacity}
+          {building.is_deleted === 0
+            ? `Capacity: ${currentCapacity} / ${maximumCapacity}`
+            : 'Deleted'}
         </Text>
       </View>
     </>

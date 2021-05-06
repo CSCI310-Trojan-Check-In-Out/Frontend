@@ -49,23 +49,24 @@ export default function VisitHistoryList({historyList, getHistory}) {
           renderItem={({item, index}) => {
             return (
               <>
-              {getHistory? 
-                <TouchableOpacity
-                  style={{flex: 1}}
-                  onPress={() => {
-                    if (item.full_name) {
-                      navigation.navigate('StudentProfile', {
-                        history: item,
-                        from: 'visitHistoryList',
-                      });
-                    }
-                  }}>
-                  <VisitHistoryItem history={item} />
-                </TouchableOpacity> : 
-                <View style={{flex: 1}}>
-                  <VisitHistoryItem history={item} />
-                </View>}
-                
+                {getHistory ? (
+                  <TouchableOpacity
+                    style={{flex: 1}}
+                    onPress={() => {
+                      if (item.full_name) {
+                        navigation.navigate('StudentProfile', {
+                          history: item,
+                          from: 'visitHistoryList',
+                        });
+                      }
+                    }}>
+                    <VisitHistoryItem history={item} />
+                  </TouchableOpacity>
+                ) : (
+                  <View style={{flex: 1}}>
+                    <VisitHistoryItem history={item} />
+                  </View>
+                )}
               </>
             );
           }}
