@@ -34,6 +34,10 @@ export default function Profile({name, uscid, major}) {
   const navigation = useNavigation();
 
   useEffect(() => {
+    console.log('profile image', state.user);
+  }, []);
+
+  useEffect(() => {
     if (!state.user) {
       navigation.navigate('Login');
     }
@@ -41,9 +45,13 @@ export default function Profile({name, uscid, major}) {
 
   useEffect(() => {
     if (image !== state.user?.picture) {
-      uploadProfilePic(image, state?.user?.email).then((url) => {
-        changeProfileImageApi(url, changeProfileImage);
-      });
+      if (image.startsWith('file')) {
+        uploadProfilePic(image, state?.user?.email).then((url) => {
+          changeProfileImageApi(url, changeProfileImage);
+        });
+      } else {
+        changeProfileImageApi(image, changeProfileImage);
+      }
     }
   }, [image]);
 
@@ -110,14 +118,15 @@ export default function Profile({name, uscid, major}) {
             <View style={styles.textcontainer}>
               <Text style={styles.name}>{state.user?.full_name}</Text>
               <Text style={styles.uscid}>USCID: {state.user?.usc_id} </Text>
-              {state.user?.is_admin?null:(
-              <>
-                <Text style={styles.major}>Major: {state.user?.major} </Text>
-                <Text style={styles.checkedin}>
-                  Currently Checking in:{' '}
-                  {state.checkedInBuilding?.place_name ?? 'N/A'}
-                </Text>
-              </>)}
+              {state.user?.is_admin ? null : (
+                <>
+                  <Text style={styles.major}>Major: {state.user?.major} </Text>
+                  <Text style={styles.checkedin}>
+                    Currently Checking in:{' '}
+                    {state.checkedInBuilding?.place_name ?? 'N/A'}
+                  </Text>
+                </>
+              )}
             </View>
           </View>
           <View style={styles.row}>
